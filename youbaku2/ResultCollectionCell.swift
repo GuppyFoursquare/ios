@@ -13,5 +13,5 @@ class ResultCollectionCell: UICollectionViewCell {
     @IBOutlet var secondLabel: UILabel!
     @IBOutlet var ratingLabel: UILabel!
     @IBOutlet var imageView: UIImageView!
-    
+    var request: Request?
 }

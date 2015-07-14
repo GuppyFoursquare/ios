@@ -1,0 +1,123 @@
+
+/* Class = "UIBarButtonItem"; title = " "; ObjectID = "0as-Gf-6Re"; */
+"0as-Gf-6Re.title" = " ";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "17f-5i-P7N"; */
+"17f-5i-P7N.text" = "Label";
+
+/* Class = "UITextField"; text = "30"; ObjectID = "4B3-E9-WW4"; */
+"4B3-E9-WW4.text" = "30";
+
+/* Class = "UILabel"; text = "100 m"; ObjectID = "58r-3V-uIS"; */
+"58r-3V-uIS.text" = "100 m";
+
+/* Class = "UITextField"; placeholder = "  type a keyword"; ObjectID = "8Th-cM-PYZ"; */
+"8Th-cM-PYZ.placeholder" = "  anahtar kelime yazın";
+
+/* Class = "UILabel"; text = "Label For text"; ObjectID = "8ZA-Vr-FUe"; */
+"8ZA-Vr-FUe.text" = "Label For text";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "8mS-nm-UYI"; */
+"8mS-nm-UYI.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "AFl-iR-2Yi"; */
+"AFl-iR-2Yi.text" = "Label";
+
+/* Class = "UILabel"; text = "PHOTO GALLERY"; ObjectID = "DZw-HZ-f8c"; */
+"DZw-HZ-f8c.text" = "FOTOĞRAFLAR";
+
+/* Class = "UILabel"; text = "KEYWORD"; ObjectID = "Di4-kl-M0q"; */
+"Di4-kl-M0q.text" = "ANAHTAR KELİME";
+
+/* Class = "UILabel"; text = "NAME"; ObjectID = "FXd-cS-Ftu"; */
+"FXd-cS-Ftu.text" = "İSİM";
+
+/* Class = "UILabel"; text = "NUMBER OF BEST PLACES"; ObjectID = "H8Z-lF-Yb6"; */
+"H8Z-lF-Yb6.text" = "GÖSTERİLECEK MEKAN SAYISI";
+
+/* Class = "UILabel"; text = "  Sort by rating"; ObjectID = "Hit-ad-psV"; */
+"Hit-ad-psV.text" = "  Puana göre sırala";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "Ktc-d1-iCz"; */
+"Ktc-d1-iCz.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "REVIEWS"; ObjectID = "Lac-SD-QiM"; */
+"Lac-SD-QiM.text" = "YORUMLAR";
+
+/* Class = "UILabel"; text = "ADDRESS"; ObjectID = "NGq-bF-gf6"; */
+"NGq-bF-gf6.text" = "ADRES";
+
+/* Class = "UIBarButtonItem"; title = "Filter"; ObjectID = "OgP-E5-ibh"; */
+"OgP-E5-ibh.title" = "Filtrele";
+
+/* Class = "UILabel"; text = "  Open now"; ObjectID = "RxU-5E-eBv"; */
+"RxU-5E-eBv.text" = "  Şu an açık";
+
+/* Class = "UITextField"; text = "40"; ObjectID = "SHc-yA-Jhe"; */
+"SHc-yA-Jhe.text" = "40";
+
+/* Class = "UITextField"; text = "10"; ObjectID = "XZo-4q-7cf"; */
+"XZo-4q-7cf.text" = "10";
+
+/* Class = "UINavigationItem"; title = "YOUBAKU"; ObjectID = "Z0M-QB-F0h"; */
+"Z0M-QB-F0h.title" = "YOUBAKU";
+
+/* Class = "UILabel"; text = "  Sort by distance"; ObjectID = "Zlw-uh-wZd"; */
+"Zlw-uh-wZd.text" = "  Uzaklığa göre sırala";
+
+/* Class = "UILabel"; text = "DISTANCE: "; ObjectID = "b6N-oW-yd4"; */
+"b6N-oW-yd4.text" = "MESAFE: ";
+
+/* Class = "UILabel"; text = "5.0 km"; ObjectID = "dL6-mC-Vde"; */
+"dL6-mC-Vde.text" = "5.0 km";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "ebo-8b-5n2"; */
+"ebo-8b-5n2.normalTitle" = "Button";
+
+/* Class = "UITextField"; text = "50"; ObjectID = "g0b-IQ-QqB"; */
+"g0b-IQ-QqB.text" = "50";
+
+/* Class = "UIButton"; normalTitle = "Check-In"; ObjectID = "iAX-GJ-JTZ"; */
+"iAX-GJ-JTZ.normalTitle" = "Check-In";
+
+/* Class = "UIBarButtonItem"; title = " "; ObjectID = "pId-Zi-Doo"; */
+"pId-Zi-Doo.title" = " ";
+
+/* Class = "UIBarButtonItem"; title = "Cancel"; ObjectID = "q4r-N7-ltd"; */
+"q4r-N7-ltd.title" = "İptal";
+
+/* Class = "UILabel"; text = "Rating:"; ObjectID = "qTp-bh-E0c"; */
+"qTp-bh-E0c.text" = "Puan:";
+
+/* Class = "UILabel"; text = "  Sort by likes"; ObjectID = "qgz-im-x3y"; */
+"qgz-im-x3y.text" = "  Beğenilere göre sırala";
+
+/* Class = "UIButton"; normalTitle = "Comment"; ObjectID = "rJe-jM-Ced"; */
+"rJe-jM-Ced.normalTitle" = "Yorum yap";
+
+/* Class = "UILabel"; text = "SORT BY:"; ObjectID = "rnh-LF-XpB"; */
+"rnh-LF-XpB.text" = "SIRALA: ";
+
+/* Class = "UIBarButtonItem"; title = " "; ObjectID = "sVx-Q8-Ycc"; */
+"sVx-Q8-Ycc.title" = " ";
+
+/* Class = "UIButton"; normalTitle = "Like"; ObjectID = "sbr-B1-UTt"; */
+"sbr-B1-UTt.normalTitle" = "Beğen";
+
+/* Class = "UILabel"; text = "PLACE FILTERS"; ObjectID = "snU-TI-hp6"; */
+"snU-TI-hp6.text" = "MEKAN FİLTRELERİ";
+
+/* Class = "UILabel"; text = "  Popular places"; ObjectID = "uX5-6a-5aj"; */
+"uX5-6a-5aj.text" = "  Popüler mekanlar";
+
+/* Class = "UIBarButtonItem"; title = "Filter"; ObjectID = "ui8-IZ-lIC"; */
+"ui8-IZ-lIC.title" = "Filtrele";
+
+/* Class = "UINavigationItem"; title = "Title"; ObjectID = "vYG-vi-hUd"; */
+"vYG-vi-hUd.title" = "Title";
+
+/* Class = "UILabel"; text = "10.0/10"; ObjectID = "wMM-f6-z0y"; */
+"wMM-f6-z0y.text" = "10.0/10";
+
+/* Class = "UITextField"; text = "20"; ObjectID = "wOH-Id-UIv"; */
+"wOH-Id-UIv.text" = "20";

@@ -15,6 +15,33 @@ class ResultViewController2: UICollectionViewController {
     var places = [Place]()
     var places2 = NSMutableOrderedSet()
     var subCatId:String!
+    var animationImageView:UIImageView!
+    var animating = false;
+    var circleView:CircleView!
+    override func viewDidLoad() {
+        animate()
+        request(YouNetworking.Router.Places(subCatId)).responseJSON() {
+            (_, _, JSON, error) in
+            if error == nil {
+                // 4
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
+                    // 5, 6, 7
+                    let photoInfos = ((JSON as! NSDictionary).valueForKey("content") as! [NSDictionary]).map { Place( id: $0["plc_id"] as! String, name: $0["plc_name"] as! String, image: $0["plc_header_image"] as! String, address: $0["plc_address"] as! String, rating: $0["plc_address"] as! String) }
+                    
+                    let lastItem = self.places.count
+                    self.places = photoInfos
+                    
+                    let indexPaths = (lastItem..<self.places.count).map { NSIndexPath(forItem: $0, inSection: 0) }
+                    
+                    // 11
+                    dispatch_async(dispatch_get_main_queue()) {
+                        self.collectionView!.insertItemsAtIndexPaths(indexPaths)
+                        self.stopAnimation()
+                    }
+                }
+            }
+        }
+    }
     override func viewWillAppear(animated: Bool) {
         
         /*
@@ -36,29 +63,69 @@ class ResultViewController2: UICollectionViewController {
         }
         */
         
-        request(YouNetworking.Router.Places(subCatId)).responseJSON() {
-            (_, _, JSON, error) in
-            if error == nil {
-                // 4
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
-                    // 5, 6, 7
-                    let photoInfos = ((JSON as! NSDictionary).valueForKey("content") as! [NSDictionary]).map { Place( id: $0["plc_id"] as! String, name: $0["plc_name"] as! String, image: $0["plc_header_image"] as! String, address: $0["plc_address"] as! String, rating: $0["plc_address"] as! String) }
-                    
-                    let lastItem = self.places.count
-                    self.places = photoInfos
-                    
-                    let indexPaths = (lastItem..<self.places.count).map { NSIndexPath(forItem: $0, inSection: 0) }
-                    
-                    // 11
-                    dispatch_async(dispatch_get_main_queue()) {
-                        self.collectionView!.insertItemsAtIndexPaths(indexPaths)
-                    }
+    }
+    
+    func stopAnimation(){
+        animating = false;
+    }
+    func animate(){
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        
+        if(animating == false)
+        {
+            circleView = CircleView(frame: CGRectMake(0, 0, screenSize.width, screenSize.height))
+            animationImageView = UIImageView()
+            animationImageView.frame = CGRect(x: 0, y: 0, width: screenSize.width, height: screenSize.height)
+            animationImageView.backgroundColor = UIColor.whiteColor()
+            circleView = CircleView(frame: CGRectMake(0, 0, screenSize.width, screenSize.height))
+            animationImageView.addSubview(circleView)
+            view.addSubview(animationImageView)
+        }
+        animating = true
+        
+        
+        
+        let duration = 0.5
+        let delay = 0.0
+        let options = UIViewKeyframeAnimationOptions.CalculationModeLinear
+        
+        let fullRotation = CGFloat(M_PI * 2)
+        
+        UIView.animateKeyframesWithDuration(duration, delay: delay, options: options, animations: {
+            UIView.addKeyframeWithRelativeStartTime(0, relativeDuration: 1/2, animations: {
+                
+                self.circleView.transform = CGAffineTransformMakeScale(0.1, 0.1)
+            })
+            UIView.addKeyframeWithRelativeStartTime(1/2, relativeDuration: 1/2, animations: {
+                self.circleView.transform = CGAffineTransformMakeScale(1.0, 1.0)
+            })
+            
+            }, completion: {finished in
+                if(self.animating){
+                    self.animate()
+                }else{
+                    self.circleView.removeFromSuperview()
+                    self.animationImageView.removeFromSuperview()
                 }
-            }
+                
+        })
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue.identifier == "toRestaurant") {
+            var svc = segue.destinationViewController as! RestaurantViewController;
+            let cell = sender as! ResultCollectionCell
+            let indexPath = self.collectionView?.indexPathForCell(cell)
+            println(indexPath!.row)
+            println(places[indexPath!.row].plc_id)
+            svc.restId = String(places[indexPath!.row].plc_id)
+            
         }
         
     }
 }
+
+
 
 extension ResultViewController2 : UICollectionViewDataSource {
     
@@ -83,10 +150,27 @@ extension ResultViewController2 : UICollectionViewDataSource {
         cell.nameLabel.text = places[indexPath.row].plc_name as String
         cell.secondLabel.text = places[indexPath.row].plc_address as String
         
-        let url = NSURL(string: "http://berataldemir.com/youbaku/uploads/places_header_images/" + (places[indexPath.row].plc_header_image as String))
+        let urlString = "http://berataldemir.com/youbaku/uploads/places_header_images/" + (places[indexPath.row].plc_header_image as String)
         
-        let data = NSData(contentsOfURL: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check
-        cell.imageView.image = UIImage(data: data!)
+        if let image = imageCache.objectForKey(urlString) as? UIImage { // Use the local cache if possible
+            cell.imageView.image = image
+        } else { // Download from the internet
+            cell.imageView.image = nil
+            
+            cell.request?.cancel()
+            cell.request = request(.GET, urlString).validate(contentType: ["image/*"]).responseImage() {
+                (request, _, image, error) in
+                if error == nil && image != nil {
+                    // The image is downloaded, cache it anyways even if the cell is dequeued and we're not displaying the image
+                    imageCache.setObject(image!, forKey: request.URLString)
+                    
+                    cell.imageView.image = image
+                } else {
+                    
+                }
+            }
+            
+        }
 
         return cell
     }

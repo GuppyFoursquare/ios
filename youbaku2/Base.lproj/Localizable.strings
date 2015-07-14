@@ -1,0 +1,16 @@
+/* 
+  File.strings
+  youbaku2
+
+  Created by ULAKBIM on 09/07/15.
+  Copyright (c) 2015 Beraat. All rights reserved.
+*/
+distance = "DISTANCE: ";
+address = "Address";
+reviews = "Comments";
+photo_gallery = "Photo Gallery";
+no_comment_yet = "No reviews yet.";
+network_error = "A network error occured.";
+sort_by_distance = "SORT BY: DISTANCE";
+sort_by_likes = "SORT BY: LIKES";
+sort_by_rating = "SORT BY: RATING";

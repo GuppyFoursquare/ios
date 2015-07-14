@@ -18,13 +18,17 @@ class MenuViewController: UICollectionViewController {
     private let sectionInsets = UIEdgeInsets(top: 50.0, left: 20.0, bottom: 50.0, right: 20.0)
     var pointer:NSError?
     override func viewWillAppear(animated: Bool) {
+        navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+        navigationController?.navigationBar.barTintColor = UIColor(red: 98/255, green: 178/255, blue: 217/255, alpha: 1)
+        navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         loadPlaces()
         
     }
     override func viewDidAppear(animated: Bool) {
+        
         if(pointer != nil){
             let alertController = UIAlertController(title: "Error", message:
-                "Network error occured!", preferredStyle: UIAlertControllerStyle.Alert)
+                NSLocalizedString("network_error", comment: ""), preferredStyle: UIAlertControllerStyle.Alert)
             alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
             
             self.presentViewController(alertController, animated: true, completion: nil)
@@ -149,7 +153,7 @@ extension MenuViewController : UICollectionViewDataSource {
         //let flickrPhoto = photoForIndexPath(indexPath)
 
         //3
-        let url = NSURL(string: "http://10.10.20.173/youbaku/uploads/category_images/" + (cats[indexPath.row].cat_image as String))
+        let url = NSURL(string: "http://192.168.2.50/youbaku/uploads/category_images/" + (cats[indexPath.row].cat_image as String))
         
         
             var request = NSURLRequest(URL: url!)
@@ -186,30 +190,7 @@ extension MenuViewController : UICollectionViewDataSource {
         let leftRightInset = self.view.frame.size.width / 14.0
         return UIEdgeInsetsMake(0, leftRightInset, 0, leftRightInset)
     }
-    */
-    func startConnection(){
-        let urlPath: String = "http://10.10.20.173/youbaku/api/category.php"
-        var url: NSURL = NSURL(string: urlPath)!
-        var request: NSURLRequest = NSURLRequest(URL: url)
-        var connection: NSURLConnection = NSURLConnection(request: request, delegate: self, startImmediately: false)!
-        connection.start()
-    }
-    
-    func connection(connection: NSURLConnection!, didReceiveData data: NSData!){
-        self.data.appendData(data)
-    }
-    
-    func buttonAction(sender: UIButton!){
-        startConnection()
-    }
-    
-    func connectionDidFinishLoading(connection: NSURLConnection!) {
-        var err: NSError
-        // throwing an error on the line below (can't figure out where the error message is)
-        var jsonResult: NSDictionary = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil) as! NSDictionary
-        println(jsonResult)
-    }
-    
+    */    
     
     
 }

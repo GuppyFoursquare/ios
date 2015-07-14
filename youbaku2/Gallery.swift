@@ -14,11 +14,11 @@ class Gallery:NSObject {
     var plc_gallery_seq = -1
     var plc_is_cover_image = -1
     var plc_gallery_is_active = -1
-    init(media:String, isVideo:Int, seq:Int, isCover:Int, isActive:Int){
+    init(media:String, isVideo:String, seq:String, isCover:String, isActive:String){
         self.plc_gallery_media = media
-        self.plc_gallery_is_video = isVideo
-        self.plc_gallery_seq = seq
-        self.plc_is_cover_image = isCover
-        self.plc_gallery_is_active = isActive
+        self.plc_gallery_is_video = isVideo.toInt()!
+        self.plc_gallery_seq = seq.toInt()!
+        self.plc_is_cover_image = isCover.toInt()!
+        self.plc_gallery_is_active = isActive.toInt()!
     }
 }

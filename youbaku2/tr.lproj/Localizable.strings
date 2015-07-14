@@ -1,0 +1,16 @@
+/* 
+  File.strings
+  youbaku2
+
+  Created by ULAKBIM on 09/07/15.
+  Copyright (c) 2015 Beraat. All rights reserved.
+*/
+distance = "MESAFE: ";
+address = "Adres";
+reviews = "Yorumlar";
+photo_gallery = "Fotoğraflar";
+no_comment_yet = "Henüz hiç yorum yapılmamış.";
+network_error = "Bir ağ hatası meydana geldi.";
+sort_by_distance = "Mesafeye göre sırala";
+sort_by_likes = "Beğenilere göre sırala";
+sort_by_rating = "Puana göre sırala";

@@ -8,8 +8,7 @@
 
 import UIKit
 
-class ImageCell: UICollectionViewCell {
+class ImageCell1: UICollectionViewCell {
 
-    @IBOutlet var imageView1: UIImageView!
-    @IBOutlet var imageView2: UIImageView!
+    @IBOutlet var imageView: UIImageView!
 }
