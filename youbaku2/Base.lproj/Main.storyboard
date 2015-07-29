@@ -1520,6 +1520,12 @@
                                     <action selector="handleDismissedPressed:" destination="7dO-kJ-mrf" eventType="touchUpInside" id="z4i-Pe-xch"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qLd-e1-8Ki">
+                                <rect key="frame" x="258" y="28" width="55" height="30"/>
+                                <state key="normal" title="Sign Up">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -1530,6 +1536,7 @@
                             <constraint firstAttribute="trailingMargin" secondItem="3k4-ff-Bxt" secondAttribute="trailing" constant="-16" id="I7z-fF-jjl"/>
                             <constraint firstItem="Xsc-Bn-l6y" firstAttribute="leading" secondItem="NTz-hX-Z7S" secondAttribute="trailing" id="N9I-tm-tfz"/>
                             <constraint firstAttribute="trailingMargin" secondItem="2BR-gB-vfx" secondAttribute="trailing" constant="-16" id="QEX-Nz-uJf"/>
+                            <constraint firstItem="qLd-e1-8Ki" firstAttribute="top" secondItem="EIa-SA-Onj" secondAttribute="bottom" constant="8" id="TrJ-i9-Ws5"/>
                             <constraint firstItem="2BR-gB-vfx" firstAttribute="leading" secondItem="Pav-i4-lyo" secondAttribute="leadingMargin" constant="-15" id="XnG-X1-jpW"/>
                             <constraint firstItem="FOe-Ht-etd" firstAttribute="top" secondItem="Xsc-Bn-l6y" secondAttribute="bottom" id="fzC-r3-853"/>
                             <constraint firstItem="3k4-ff-Bxt" firstAttribute="leading" secondItem="Pav-i4-lyo" secondAttribute="leadingMargin" constant="-16" id="iIV-ZB-c4m"/>
@@ -1539,6 +1546,7 @@
                             <constraint firstItem="2BR-gB-vfx" firstAttribute="top" secondItem="3k4-ff-Bxt" secondAttribute="bottom" constant="40" id="r8U-IT-9zw"/>
                             <constraint firstItem="NTz-hX-Z7S" firstAttribute="leading" secondItem="41d-uo-VEz" secondAttribute="trailing" id="tUe-Yy-jqP"/>
                             <constraint firstItem="41d-uo-VEz" firstAttribute="top" secondItem="2BR-gB-vfx" secondAttribute="bottom" constant="20" id="u3w-cF-XpU"/>
+                            <constraint firstAttribute="trailing" secondItem="qLd-e1-8Ki" secondAttribute="trailing" constant="7" id="wTu-ZC-F9N"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="7N9-62-450"/>
