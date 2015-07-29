@@ -10,7 +10,8 @@ import UIKit
 
 class MainMenuCell: UICollectionViewCell {
     
-    @IBOutlet var imageView: UIImageView!
+
     
+    @IBOutlet var imageView: UIImageView!
     @IBOutlet var label: UILabel!
 }

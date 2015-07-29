@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="deK-wm-fUY" customClass="MarkerInfoView" customModule="youbaku2" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="9" width="230" height="96"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="buble2" translatesAutoresizingMaskIntoConstraints="NO" id="Rcp-Lq-XN3">
+                    <rect key="frame" x="0.0" y="0.0" width="229" height="96"/>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Name" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" preferredMaxLayoutWidth="134" translatesAutoresizingMaskIntoConstraints="NO" id="Ggu-GN-94s">
+                    <rect key="frame" x="96" y="8" width="126" height="34"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="38" id="3yP-OK-bTC"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="16"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="5.0/5.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tRe-zG-adm">
+                    <rect key="frame" x="159" y="44" width="46" height="21"/>
+                    <color key="backgroundColor" red="0.14717283549999999" green="1" blue="0.42072768649999998" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Rating:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KAL-rg-w3R">
+                    <rect key="frame" x="96" y="44" width="55" height="21"/>
+                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="place_detail_image_placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="Qhb-tQ-t8V">
+                    <rect key="frame" x="8" y="14" width="85" height="58"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="58" id="A9y-vU-VgP"/>
+                        <constraint firstAttribute="width" constant="85" id="HTH-fb-O0h"/>
+                    </constraints>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="Rcp-Lq-XN3" firstAttribute="leading" secondItem="Qhb-tQ-t8V" secondAttribute="trailing" constant="-166" id="0MH-Il-LGp"/>
+                <constraint firstItem="KAL-rg-w3R" firstAttribute="top" secondItem="Ggu-GN-94s" secondAttribute="bottom" constant="7" id="0fV-L6-Ezu"/>
+                <constraint firstItem="Rcp-Lq-XN3" firstAttribute="leading" secondItem="Qhb-tQ-t8V" secondAttribute="trailing" constant="-93" id="2yb-uH-sjK"/>
+                <constraint firstItem="Rcp-Lq-XN3" firstAttribute="top" secondItem="Ggu-GN-94s" secondAttribute="bottom" constant="-47" id="7Ig-GE-i5F"/>
+                <constraint firstItem="Qhb-tQ-t8V" firstAttribute="centerY" secondItem="Rcp-Lq-XN3" secondAttribute="centerY" constant="-5.5" id="96n-Rj-b4u"/>
+                <constraint firstItem="Ggu-GN-94s" firstAttribute="leading" secondItem="deK-wm-fUY" secondAttribute="leading" constant="8" id="DH9-Ub-EOO"/>
+                <constraint firstItem="Ggu-GN-94s" firstAttribute="top" secondItem="deK-wm-fUY" secondAttribute="top" id="GwX-jY-qeK"/>
+                <constraint firstItem="Rcp-Lq-XN3" firstAttribute="top" secondItem="Qhb-tQ-t8V" secondAttribute="bottom" constant="-72" id="H8M-xu-3hV"/>
+                <constraint firstItem="Qhb-tQ-t8V" firstAttribute="top" secondItem="Ggu-GN-94s" secondAttribute="bottom" id="Ifj-Ix-Obn"/>
+                <constraint firstItem="Rcp-Lq-XN3" firstAttribute="top" secondItem="Qhb-tQ-t8V" secondAttribute="bottom" constant="-86" id="ObR-sy-ba6"/>
+                <constraint firstAttribute="centerX" secondItem="Qhb-tQ-t8V" secondAttribute="centerX" id="Uhv-1A-jTX"/>
+                <constraint firstAttribute="trailing" secondItem="Ggu-GN-94s" secondAttribute="trailing" constant="8" id="V0y-lI-b77"/>
+                <constraint firstItem="Ggu-GN-94s" firstAttribute="leading" secondItem="Qhb-tQ-t8V" secondAttribute="trailing" constant="3" id="dnM-0B-c91"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Ggu-GN-94s" secondAttribute="trailing" constant="33" id="fmK-iX-Hx5"/>
+                <constraint firstItem="tRe-zG-adm" firstAttribute="leading" secondItem="KAL-rg-w3R" secondAttribute="trailing" constant="8" id="oaj-Jk-mee"/>
+                <constraint firstItem="KAL-rg-w3R" firstAttribute="leading" secondItem="Qhb-tQ-t8V" secondAttribute="trailing" constant="8" id="xKv-Dz-SnB"/>
+                <constraint firstItem="KAL-rg-w3R" firstAttribute="leading" secondItem="Qhb-tQ-t8V" secondAttribute="trailing" constant="3" id="ysh-0H-0Ns"/>
+                <constraint firstItem="tRe-zG-adm" firstAttribute="top" secondItem="Ggu-GN-94s" secondAttribute="bottom" constant="7" id="zYP-mb-els"/>
+                <constraint firstItem="Ggu-GN-94s" firstAttribute="leading" secondItem="Qhb-tQ-t8V" secondAttribute="trailing" constant="8" id="zqZ-mt-ZJh"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="0MH-Il-LGp"/>
+                    <exclude reference="ObR-sy-ba6"/>
+                    <exclude reference="96n-Rj-b4u"/>
+                    <exclude reference="Ifj-Ix-Obn"/>
+                    <exclude reference="Uhv-1A-jTX"/>
+                    <exclude reference="DH9-Ub-EOO"/>
+                    <exclude reference="zqZ-mt-ZJh"/>
+                    <exclude reference="xKv-Dz-SnB"/>
+                </mask>
+            </variation>
+            <connections>
+                <outlet property="nameLabel" destination="Ggu-GN-94s" id="bSx-yX-VR7"/>
+                <outlet property="placePhoto" destination="Qhb-tQ-t8V" id="tke-mF-GQL"/>
+            </connections>
+            <point key="canvasLocation" x="395" y="409"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="buble2" width="283" height="125"/>
+        <image name="place_detail_image_placeholder" width="480" height="375"/>
+    </resources>
+</document>

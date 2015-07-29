@@ -22,12 +22,19 @@ class RestaurantViewController: UIViewController, UIActionSheetDelegate, UIScrol
     @IBOutlet var fixedButton: UIButton!
     @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var linkContainer: UIView!
-    @IBOutlet var websiteBtn: UIButton!
-    @IBOutlet var facebookBtn: UIButton!
-    @IBOutlet var twitterBtn: UIButton!
-    @IBOutlet var phoneBtn: UIButton!
-    @IBOutlet var locationBtn: UIButton!
-    
+    @IBOutlet var siteButton: UIImageView!
+    @IBOutlet var faceButton: UIImageView!
+    @IBOutlet var twitterButton: UIImageView!
+    @IBOutlet var phoneButton: UIImageView!
+    @IBOutlet var gpsButton: UIImageView!
+    @IBOutlet var descriptionTextView2: UITextView!
+    @IBOutlet var addressTextView2: UITextView!
+    var ratings = [Rating]()
+    var currentPlace:Place!
+    var reviewGesture:UIGestureRecognizer!
+    deinit{
+        scrollView.delegate = nil
+    }
     @IBAction func menuButtonTapped(sender: AnyObject) {
         var sheet: UIActionSheet = UIActionSheet();
         sheet.delegate = self;
@@ -47,16 +54,24 @@ class RestaurantViewController: UIViewController, UIActionSheetDelegate, UIScrol
         sheet.cancelButtonIndex = 0;
         sheet.showInView(self.view);
     }
+    func siteButtonTapped(sender: AnyObject) {
+        UIApplication.tryURL([
+     //       "fb://profile/116374146706", // App
+            "http://www.facebook.com/116374146706" // Website if app fails
+            ])
+    }
     var animationImageView:UIImageView!
     var animating = false;
     var circleView:CircleView!
     var restId:String!
     override func viewDidAppear(animated: Bool)
     {
+        
         var newFrame:CGRect = linkContainer.frame;
         newFrame.origin.x = 0;
         newFrame.origin.y = self.scrollView.contentOffset.y+(self.scrollView.frame.size.height-42);
-        linkContainer.frame = newFrame;
+        linkContainer.frame = newFrame
+
     }
     
     func actionSheet(sheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int) {
@@ -64,19 +79,17 @@ class RestaurantViewController: UIViewController, UIActionSheetDelegate, UIScrol
         if(buttonIndex == 1 ){
         
             var vc = self.storyboard?.instantiateViewControllerWithIdentifier("AddReviewViewController") as! AddReviewViewController
-
             self.navigationController?.pushViewController(vc, animated: true)
         }
         
     }
-    func scrollViewDidZoom(scrollView: UIScrollView) {
-        
-    }
+
+
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        
+  
         var newFrame:CGRect = linkContainer.frame;
         newFrame.origin.x = 0;
-        newFrame.origin.y = self.scrollView.contentOffset.y+(self.scrollView.frame.size.height-43);
+        newFrame.origin.y = self.scrollView.contentOffset.y+(self.scrollView.frame.size.height-42);
         linkContainer.frame = newFrame;
 
         /*
@@ -87,11 +100,43 @@ class RestaurantViewController: UIViewController, UIActionSheetDelegate, UIScrol
         println(fixedButton.bounds.origin.x)
 */
     }
+    func reviewTapped(sender:AnyObject){
+        var vc = self.storyboard?.instantiateViewControllerWithIdentifier("ReviewsViewController") as! ReviewsViewController
+        vc.ratingInfos = ratings
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
     override func viewDidLoad() {
        	 super.viewDidLoad()
-        
         scrollView.delegate = self
         
+        let tapGesture6 = UITapGestureRecognizer(target: self, action: "reviewTapped:")
+        reviewText.addGestureRecognizer(tapGesture6)
+        reviewText.userInteractionEnabled = true
+        
+        let tapGesture7 = UITapGestureRecognizer(target: self, action: "reviewTapped:")
+        reviewImage.addGestureRecognizer(tapGesture7)
+        reviewImage.userInteractionEnabled = true
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: "siteButtonTapped:")
+        siteButton.tag = 0
+        siteButton.addGestureRecognizer(tapGesture)
+        siteButton.userInteractionEnabled = false
+        let tapGesture2 = UITapGestureRecognizer(target: self, action: "siteButtonTapped:")
+        faceButton.tag = 0
+        faceButton.addGestureRecognizer(tapGesture2)
+        faceButton.userInteractionEnabled = false
+        let tapGesture3 = UITapGestureRecognizer(target: self, action: "siteButtonTapped:")
+        twitterButton.tag = 0
+        twitterButton.addGestureRecognizer(tapGesture3)
+        twitterButton.userInteractionEnabled = false
+        let tapGesture4 = UITapGestureRecognizer(target: self, action: "siteButtonTapped:")
+        phoneButton.tag = 0
+        phoneButton.addGestureRecognizer(tapGesture4)
+        phoneButton.userInteractionEnabled = false
+        let tapGesture5 = UITapGestureRecognizer(target: self, action: "siteButtonTapped:")
+        gpsButton.tag = 0
+        gpsButton.addGestureRecognizer(tapGesture5)
+        gpsButton.userInteractionEnabled = false
         
         
         animate()
@@ -104,18 +149,26 @@ class RestaurantViewController: UIViewController, UIActionSheetDelegate, UIScrol
                     let rest_name = (restInfo.valueForKey("plc_name") as! String)
                     let rest_desc = (restInfo.valueForKey("plc_info") as! String)
                     let rest_address = (restInfo.valueForKey("plc_address") as! String)
-                    
-                    
-                    
+                    let rest_site: AnyObject? = restInfo.valueForKey("plc_website")
+                    let rest_contact: AnyObject? = restInfo.valueForKey("plc_contact")
+                    let rest_lat = (restInfo.valueForKey("plc_latitude") as! String)
+                    let rest_lon = (restInfo.valueForKey("plc_longitude") as! String)
                     
                     let photoInfos = (restInfo.valueForKey("gallery") as! [NSDictionary]).map { Gallery( media: $0["plc_gallery_media"] as! String, isVideo: $0["plc_gallery_is_video"] as! String, seq: $0["plc_gallery_seq"] as! String, isCover: $0["plc_is_cover_image"] as! String, isActive: $0["plc_gallery_is_active"] as! String) }
                     var ratingInfos = [Rating]()
-                    if(restInfo.valueForKey("rating") != nil){
-                    ratingInfos = (restInfo.valueForKey("rating") as! [NSDictionary]).map { Rating( id: $0["place_rating_id"] as! String, rating: $0["place_rating_rating"] as! String, comment: $0["place_rating_comment"] as! String, date: $0["places_rating_created_date"] as! String, name: $0["usr_first_name"] as! String, surname: $0["usr_last_name"] as! String, profilePic: $0["usr_profile_picture"] as! String, isActive: $0["places_rating_is_active"] as! String) }
-                    }else{
-                        var rat = Rating(id: "1", rating: "-1", comment: NSLocalizedString("no_comment_yet", comment: ""), date: "", name: "", surname: "", profilePic: "", isActive: "1")
-                        ratingInfos.append(rat)
-                    }
+
+                        if(restInfo.valueForKey("rating") != nil){
+                            
+                        ratingInfos = (restInfo.valueForKey("rating") as! [NSDictionary]).map { Rating( id: $0["place_rating_id"] as! String, rating: $0["place_rating_rating"] as! String, comment: $0["place_rating_comment"] as! String, date: $0["places_rating_created_date"] as! String, name: $0["usr_first_name"] as! String, surname: $0["usr_last_name"] as! String, profilePic: $0["usr_profile_picture"] as! String, isActive: $0["places_rating_is_active"] as! String) }
+                            //test
+                         /*   var rat = Rating(id: "1", rating: "-1", comment: NSLocalizedString("no_comment_yet", comment: ""), date: "", name: "", surname: "", profilePic: "", isActive: "1")
+                            ratingInfos.append(rat)
+*/
+                        }else{
+                            var rat = Rating(id: "1", rating: "-1", comment: NSLocalizedString("no_comment_yet", comment: ""), date: "", name: "", surname: "", profilePic: "", isActive: "1")
+                            ratingInfos.append(rat)
+                        }
+                    self.ratings = ratingInfos
                     let lastItem = self.galleryPhotos.count
                     self.galleryPhotos = photoInfos
                     
@@ -124,11 +177,33 @@ class RestaurantViewController: UIViewController, UIActionSheetDelegate, UIScrol
                     // 11
                     
                     dispatch_async(dispatch_get_main_queue()) {
+                        self.currentPlace = Place()
+                        self.currentPlace.plc_name = rest_name
+                        self.currentPlace.plc_meta_description = rest_desc
+                        self.currentPlace.plc_address = rest_address
+                        self.currentPlace.plc_latitude = rest_lat
+                        self.currentPlace.plc_longitude = rest_lon
+                        if let webSite = (rest_site as? String) {
+                            self.currentPlace.plc_website = webSite
+                            self.siteButton.image = self.siteButton.image!.imageWithColor(UIColor(red: 95/255, green: 165/255, blue: 106/255, alpha: 1)).imageWithRenderingMode(.AlwaysOriginal)
+                            self.siteButton.userInteractionEnabled = true
+                        }
+                        
+                        if let contact = (rest_site as? String) {
+                            self.currentPlace.plc_contact = contact
+                            self.phoneButton.image = self.phoneButton.image!.imageWithColor(UIColor(red: 95/255, green: 165/255, blue: 106/255, alpha: 1)).imageWithRenderingMode(.AlwaysOriginal)
+                            self.phoneButton.userInteractionEnabled = true
+                        }
+                        
+                        self.gpsButton.image = self.gpsButton.image!.imageWithColor(UIColor(red: 95/255, green: 165/255, blue: 106/255, alpha: 1)).imageWithRenderingMode(.AlwaysOriginal)
+                        self.gpsButton.userInteractionEnabled = true
+                        
                         self.title = rest_name
                         self.nameLabel.text = rest_name
-                        self.descriptionTextView.attributedText = rest_desc.html2AttributedString
-                        self.addressTextView.text = rest_address
+                        self.descriptionTextView2.attributedText = rest_desc.html2AttributedString
+                        self.addressTextView2.text = rest_address
                         self.reviewText.text = ratingInfos[0].place_rating_comment
+                        self.reviewImage.image = UIImage(named: "placeholder_user")
                         request(.GET, ratingInfos[0].usr_profile_picture).validate(contentType: ["image/*"]).responseImage() {
                             (request, _, image, error) in
                             if error == nil && image != nil {
@@ -153,6 +228,13 @@ class RestaurantViewController: UIViewController, UIActionSheetDelegate, UIScrol
                     
                     
                 }
+            }else{
+                self.stopAnimation()
+                let alertController = UIAlertController(title: "Error", message:
+                    NSLocalizedString("network_error", comment: ""), preferredStyle: UIAlertControllerStyle.Alert)
+                alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+                
+                self.presentViewController(alertController, animated: true, completion: nil)
             }
             
         }
@@ -260,7 +342,7 @@ extension RestaurantViewController : UICollectionViewDataSource {
     //3
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         //1
-        let urlString = "http://193.140.63.162/youbaku/uploads/places_images/large/" + (galleryPhotos[indexPath.row].plc_gallery_media as String)
+        let urlString = "http://www.youbaku.com/uploads/places_images/large/" + (galleryPhotos[indexPath.row].plc_gallery_media as String)
         let url = NSURL(string: urlString)
 //        let data = NSData(contentsOfURL: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check
 
@@ -268,6 +350,7 @@ extension RestaurantViewController : UICollectionViewDataSource {
 
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! ImageCell1
             var request = NSURLRequest(URL: url!)
+            cell.imageView.image = UIImage(named: "placeholder_list.png")
             SimpleCache.sharedInstance.getImage(url!, completion: { (im:UIImage?, err:NSError?) -> () in
                 if(err == nil){
                     cell.imageView.image = im
@@ -374,6 +457,16 @@ extension RestaurantViewController : UICollectionViewDelegateFlowLayout {
             }
     }*/
 
-    
-}
 
+}
+extension UIApplication {
+    class func tryURL(urls: [String]) {
+        let application = UIApplication.sharedApplication()
+        for url in urls {
+            if application.canOpenURL(NSURL(string: url)!) {
+                application.openURL(NSURL(string: url)!)
+                return
+            }
+        }
+    }
+}

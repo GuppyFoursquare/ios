@@ -19,6 +19,7 @@ class Category:NSObject {
     var cat_seq = -1
     var cat_created_date = NSDate()
     var cat_modified_date = NSDate()
+    var sub_cats = [Category]()
     override init() {
         super.init()
     }

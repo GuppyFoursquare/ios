@@ -16,6 +16,7 @@ class AddReviewViewController: UITableViewController, UITextViewDelegate {
     @IBOutlet var star3Btn: UIButton!
     @IBOutlet var star4Btn: UIButton!
     @IBOutlet var star5Btn: UIButton!
+    
     var stars = [UIButton]()
     var placeholderLabel : UILabel!
     override func viewDidLoad() {

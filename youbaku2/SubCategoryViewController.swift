@@ -22,7 +22,7 @@ class SubCategoryViewController: UICollectionViewController {
     override func viewWillAppear(animated: Bool) {
         animate()
         
-        let url = NSURL(string: "http://193.140.63.162/youbaku/api/category.php?cat_id=" + mainCatId)
+        let url = NSURL(string: "http://www.youbaku.com/api/category.php?cat_id=" + mainCatId)
         var request = NSURLRequest(URL: url!)
         var data = NSURLConnection.sendSynchronousRequest(request, returningResponse: nil, error: nil)
         if(data != nil){
@@ -33,7 +33,7 @@ class SubCategoryViewController: UICollectionViewController {
                     cat.cat_name = appDict["cat_name"].stringValue
                     cat.cat_image = appDict["cat_image"].string!
                     cat.cat_id = appDict["cat_id"].intValue
-                    subCats.append(cat)
+                    
                 }
             }
         }else{

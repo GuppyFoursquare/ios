@@ -9,10 +9,10 @@
 import UIKit
 
 class Place{
-    
+    var coordinate : CLLocationCoordinate2D?
     var plc_id: Int
     var plc_name: NSString
-    var plc_header_image: NSString
+    var plc_header_image: String
     var plc_email: NSString
     var plc_contact: NSString
     var plc_website: NSString
@@ -84,6 +84,43 @@ class Place{
         self.plc_avg_rating = ""
         self.rating = rating
     }
+    
+    init(id:String, name:String, image:String, address:String, rating:String, lat:String, long:String){
+        self.plc_id = id.toInt()!
+        self.plc_name = name
+        self.plc_header_image = image
+        self.plc_email = ""
+        self.plc_contact = ""
+        self.plc_website = ""
+        self.plc_intime = ""
+        self.plc_outtime = ""
+        self.plc_Hours = ""
+        self.plc_country_id = -1
+        self.plc_state_id = -1
+        self.plc_city = ""
+        self.plc_address = address
+        self.plc_meta_description = ""
+        self.plc_keywords = ""
+        self.plc_zip = ""
+        self.plc_latitude = lat
+        self.plc_longitude = long
+        self.plc_menu = ""
+        self.plc_info_title = ""
+        self.plc_info = ""
+        self.plc_is_active = ""
+        self.plc_is_delete = ""
+        self.feature_id = ""
+        self.feature_title = ""
+        self.cat_parent_id = ""
+        self.pcat_name = ""
+        self.plc_gallery_media = ""
+        self.plc_country_name = ""
+        self.plc_state_name = ""
+        self.plc_avg_rating = ""
+        self.rating = rating
+        self.coordinate = CLLocationCoordinate2D(latitude: (lat as NSString).doubleValue, longitude: (long as NSString).doubleValue)
+    }
+    
     init(){
         self.plc_id = -1
         self.plc_name = ""

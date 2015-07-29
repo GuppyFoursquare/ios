@@ -19,18 +19,40 @@ class FilterViewController: UIViewController {
     @IBOutlet var sortRatingImg: UIImageView!
     @IBOutlet var sortDistanceImg: UIImageView!
     @IBOutlet var distanceText: UILabel!
-    @IBOutlet var numberButton50: UITextField!
-    @IBOutlet var numberButton40: UITextField!
-    @IBOutlet var numberButton30: UITextField!
-    @IBOutlet var numberButton20: UITextField!
-    @IBOutlet var numberButton10: UITextField!
+    @IBOutlet var button10: UIButton!
+    @IBOutlet var button20: UIButton!
+    @IBOutlet var button30: UIButton!
+    @IBOutlet var button40: UIButton!
+    @IBOutlet var button50: UIButton!
+
     @IBOutlet var cancelBtn: UIBarButtonItem!
+    let numberButtonTap = UIGestureRecognizer()
     let tapRecDistance = UITapGestureRecognizer()
     let tapRecRating = UITapGestureRecognizer()
     let tapRecLikes = UITapGestureRecognizer()
     
     @IBAction func buttonClicked(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: {});
+    }
+    
+    @IBAction func distanceButtonTapped(sender: UIButton) {
+        button10.backgroundColor = UIColor.whiteColor()
+        button10.setTitleColor(UIColor.blackColor(), forState: .Normal)
+        button20.backgroundColor = UIColor.whiteColor()
+        button20.setTitleColor(UIColor.blackColor(), forState: .Normal)
+        button30.backgroundColor = UIColor.whiteColor()
+        button30.setTitleColor(UIColor.blackColor(), forState: .Normal)
+        button40.backgroundColor = UIColor.whiteColor()
+        button40.setTitleColor(UIColor.blackColor(), forState: .Normal)
+        button50.backgroundColor = UIColor.whiteColor()
+        button50.setTitleColor(UIColor.blackColor(), forState: .Normal)
+        
+        sender.backgroundColor = UIColor(red: 98/255, green: 178/255, blue: 217/255, alpha: 1)
+        sender.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+    }
+    func tapGesture(gesture: UIGestureRecognizer) {
+        println(gesture.view?.tag)
+        
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)//98 178 217
@@ -46,7 +68,19 @@ class FilterViewController: UIViewController {
         sortDistanceLbl.addGestureRecognizer(tapRecDistance)
         sortRatingLbl.addGestureRecognizer(tapRecRating)
         sortLikesLbl.addGestureRecognizer(tapRecLikes)
+        setBorderForButton(&button10!)
+        setBorderForButton(&button20!)
+        setBorderForButton(&button30!)
+        setBorderForButton(&button40!)
+        setBorderForButton(&button50!)
         // Do any additional setup after loading the view.
+    }
+    
+    func setBorderForButton(inout button:UIButton){
+        button.backgroundColor = UIColor.clearColor()
+        button.layer.cornerRadius = 5
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor.blackColor().CGColor
     }
 
     override func didReceiveMemoryWarning() {
