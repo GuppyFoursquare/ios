@@ -18,7 +18,7 @@ class PlaceMarker: GMSMarker {
         self.place = place
         super.init()
         println(place.plc_latitude)
-        position = CLLocationCoordinate2D(latitude: place.plc_latitude.doubleValue, longitude: place.plc_longitude.doubleValue)
+        position = CLLocationCoordinate2D(latitude: (place.plc_latitude as NSString).doubleValue, longitude: (place.plc_longitude as NSString).doubleValue)
         icon = UIImage(named: "ic_yellow_marker")
 
 //        groundAnchor = CGPoint(x: 0.44, y: 0.45)

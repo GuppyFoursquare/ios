@@ -46,15 +46,31 @@ class ReviewsViewController: UIViewController, UITableViewDataSource, UITableVie
 
         return ratingInfos.count
     }
+    func getRatingColor(rating:Int) -> UIColor{
+        var resColor:UIColor
+        if(rating>4){
+            resColor = UIColor(red: 93/255, green: 204/255, blue: 78/255, alpha: 1)
+        }else if(rating > 3){
+            resColor = UIColor(red: 224/255, green: 213/255, blue: 65/255, alpha: 1)
+        }else if(rating>2){
+            resColor = UIColor(red: 232/255, green: 153/255, blue: 58/255, alpha: 1)
+        }else if(rating<=2){
+            resColor = UIColor(red: 240/255, green: 82/255, blue: 51/255, alpha: 1)
+        }else{
+            resColor = UIColor.whiteColor()
+        }
+        return resColor
+    }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("reviewCell", forIndexPath: indexPath) as! ReviewCell
-        
+        cell.ratingLabel.text = String(ratingInfos[indexPath.row].place_rating_rating) + "/5"
+        cell.ratingLabel.backgroundColor = getRatingColor(ratingInfos[indexPath.row].place_rating_rating)
         cell.userImage.image = UIImage(named:"placeholder_user")
         cell.userImage.frame = CGRectMake(cell.userImage.frame.origin.x, cell.userImage.frame.origin.y, 75.0, 75.0)
         println(cell.userImage.frame.width)
         cell.content.text = ratingInfos[indexPath.row].place_rating_comment
-        cell.detailLabel.text = ratingInfos[indexPath.row].places_rating_created_date
+        cell.detailLabel.text = ratingInfos[indexPath.row].places_rating_created_date + ", " + ratingInfos[indexPath.row].usr_username
         request(.GET, ratingInfos[0].usr_profile_picture).validate(contentType: ["image/*"]).responseImage() {
             (request, _, image, error) in
             if error == nil && image != nil {

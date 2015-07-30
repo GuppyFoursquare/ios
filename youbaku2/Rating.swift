@@ -21,14 +21,13 @@ class Rating: NSObject {
     var usr_username = ""
     var usr_profile_picture = ""
     
-    init(id:String, rating:String, comment:String, date:String, name:String, surname:String, profilePic:String, isActive:String){
+    init(id:String, rating:String, comment:String, date:String, username:String, profilePic:String, isActive:String){
         self.place_rating_id = id.toInt()!
         self.place_rating_rating = rating.toInt()!
         self.place_rating_comment = comment
         self.places_rating_created_date = date
         self.places_rating_is_active = isActive.toInt()!
-        self.usr_first_name = name
-        self.usr_last_name = surname
+        self.usr_username = username
         self.usr_profile_picture = profilePic
     }
 }

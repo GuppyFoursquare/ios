@@ -30,7 +30,7 @@ class AddReviewViewController: UITableViewController, UITextViewDelegate {
         
         reviewText.delegate = self
         placeholderLabel = UILabel()
-        placeholderLabel.text = "Enter optional text here..."
+        placeholderLabel.text = "Enter your review here..."
         placeholderLabel.font = UIFont.italicSystemFontOfSize(reviewText.font.pointSize)
         placeholderLabel.sizeToFit()
         reviewText.addSubview(placeholderLabel)

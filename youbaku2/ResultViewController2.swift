@@ -33,7 +33,8 @@ class ResultViewController2: UICollectionViewController {
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
                     // 5, 6, 7
                     if let js = (JSON as! NSDictionary).valueForKey("content") as? [NSDictionary]{
-                        let photoInfos = ((JSON as! NSDictionary).valueForKey("content") as! [NSDictionary]).map { Place( id: $0["plc_id"] as! String, name: $0["plc_name"] as! String, image: $0["plc_header_image"] as! String, address: $0["plc_address"] as! String, rating: $0["plc_address"] as! String) }
+                        println(js)
+                        let photoInfos = ((JSON as! NSDictionary).valueForKey("content") as! [NSDictionary]).map { Place( id: $0["plc_id"] as! String, name: $0["plc_name"] as! String, image: $0["plc_header_image"], address: $0["plc_address"] as! String, rating: $0["plc_address"] as! String) }
                         
                         let lastItem = self.places.count
                         self.places = photoInfos

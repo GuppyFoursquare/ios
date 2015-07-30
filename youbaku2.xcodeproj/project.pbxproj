@@ -202,6 +202,7 @@
 		73C7D0361B3BF14A0028FC76 /* Alamofire.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Alamofire.h; sourceTree = "<group>"; };
 		73C7D0381B3BF2BA0028FC76 /* YouNetworking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YouNetworking.swift; sourceTree = "<group>"; };
 		73C7D03A1B3C0EED0028FC76 /* SimpleImageCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleImageCache.swift; sourceTree = "<group>"; };
+		73C95BDA1B6A275800B0FC32 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		73EC75901B5E330A0048EB09 /* MainMenuCVHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuCVHeader.swift; sourceTree = "<group>"; };
 		73EC75921B5FAD0E0048EB09 /* MarkerInfoView2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MarkerInfoView2.xib; sourceTree = "<group>"; };
 		73EC75941B5FDF1D0048EB09 /* HalfSizePresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HalfSizePresentationController.swift; sourceTree = "<group>"; };
@@ -243,6 +244,7 @@
 		132F793E12D8769C1C7E6F02 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				73C95BDA1B6A275800B0FC32 /* MapKit.framework */,
 				60902DAF0FD8658CF93569BB /* libPods.a */,
 			);
 			name = Frameworks;

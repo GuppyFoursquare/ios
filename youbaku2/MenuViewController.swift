@@ -48,7 +48,13 @@ class MenuViewController: UICollectionViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadTokens()
         loadPlaces()
+        if let title = getLoggedInUser().username{
+            changeLoginTitle(NSLocalizedString("logout_text", comment: ""))
+        }else{
+            changeLoginTitle(NSLocalizedString("login_text", comment: ""))
+        }
         let logo = UIImage(named: "banner_home_2.png")
         let imageView = UIImageView(image:logo)
         self.navigationItem.titleView = imageView
@@ -61,10 +67,30 @@ class MenuViewController: UICollectionViewController {
         println(navigationItem.title)
         navigationItem.leftBarButtonItem?.title = title
     }
-    
+    func saveToken(apikey:String, token:String){
+        let apiData = NSKeyedArchiver.archivedDataWithRootObject(apikey)
+        NSUserDefaults.standardUserDefaults().setObject(apiData, forKey: "apikey")
+        let tokenData = NSKeyedArchiver.archivedDataWithRootObject(token)
+        NSUserDefaults.standardUserDefaults().setObject(tokenData, forKey: "token")
+        loadTokens()
+    }
     func saveLogin(data:NSData){
         let loginData = NSKeyedArchiver.archivedDataWithRootObject(data)
         NSUserDefaults.standardUserDefaults().setObject(loginData, forKey: "login")
+    }
+    func loadTokens(){
+        let tokenData = NSUserDefaults.standardUserDefaults().objectForKey("token") as? NSData
+        if let tokenData = tokenData {
+            YouNetworking.TOKEN = (NSKeyedUnarchiver.unarchiveObjectWithData(tokenData) as? String)!
+        }
+
+        let apiData = NSUserDefaults.standardUserDefaults().objectForKey("apikey") as? NSData
+        if let apiData = apiData {
+            YouNetworking.APIKEY = (NSKeyedUnarchiver.unarchiveObjectWithData(apiData) as? String)!
+        }
+        
+        
+        
     }
     func getLoggedInUser()->UserDetails{
         let loginData = NSUserDefaults.standardUserDefaults().objectForKey("login") as? NSData
@@ -83,9 +109,9 @@ class MenuViewController: UICollectionViewController {
         return user
     }
     @IBAction func signInTapped(sender: AnyObject) {
-        if(getLoggedInUser().username != ""){//logout
+        if let username = getLoggedInUser().username{//logout
             NSUserDefaults.standardUserDefaults().removeObjectForKey("login")
-            changeLoginTitle("Login")
+            changeLoginTitle(NSLocalizedString("login_text", comment: ""))
         }else{
             let overlayVC = storyboard?.instantiateViewControllerWithIdentifier("overlayViewController") as! UIViewController
 
@@ -195,8 +221,25 @@ class MenuViewController: UICollectionViewController {
                     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
                         // 5, 6, 7
                         self.savePlaces(data as! NSData)
+                        var token = YouNetworking.TOKEN
                         var hoge = JSON(data: data! as! NSData)
-                        
+                        if(hoge["status"] == "FAILURE_PERMISSION"){
+                            NSUserDefaults.standardUserDefaults().removeObjectForKey("login")
+                            self.changeLoginTitle(NSLocalizedString("login_text", comment: ""))
+                            request(YouNetworking.Router.Register()).response() {
+                                (_, _, data, error) in
+                                if error == nil {
+                                    var hoge = JSON(data: data! as! NSData)
+                                    var cont:Dictionary = hoge["content"].dictionary!
+                                    var token = cont["token"]!.stringValue
+                                    var apikey = cont["apikey"]!.stringValue
+                                    self.saveToken(apikey, token: token)
+                                    self.loadPlaces()
+                                    return
+                                }
+                            }
+                            
+                        }
                         if let appArray = hoge["content"].array {
                             for appDict in appArray {
                                 var cat:Category = Category()

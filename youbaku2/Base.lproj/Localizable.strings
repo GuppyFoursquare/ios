@@ -15,3 +15,6 @@ sort_by_distance = "SORT BY: DISTANCE";
 sort_by_likes = "SORT BY: LIKES";
 sort_by_rating = "SORT BY: RATING";
 empty_result = "There is no result with your criterias.";
+logout_text = "Logout";
+login_text = "Login";
+gps_denied = "You must allow YOUBAKU to use your location to see nearby places.";

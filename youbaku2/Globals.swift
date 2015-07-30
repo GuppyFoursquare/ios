@@ -8,8 +8,8 @@
 
 import Foundation
 class UserDetails{
-        var username:String = ""
-        var email:String = ""
-        var token:String = ""
-        var apikey:String = ""
+        var username:String!
+        var email:String!
+        var token:String!
+        var apikey:String!
 }

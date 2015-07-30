@@ -10,6 +10,7 @@ import UIKit
 
 class ReviewCell: UITableViewCell {
 
+    @IBOutlet var ratingLabel: UILabel!
     @IBOutlet var userImage: UIImageView!
     @IBOutlet var content: UITextView!
     @IBOutlet var detailLabel: UILabel!

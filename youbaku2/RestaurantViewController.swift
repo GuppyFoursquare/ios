@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import MapKit
+
 let imageCache = NSCache()
 class RestaurantViewController: UIViewController, UIActionSheetDelegate, UIScrollViewDelegate {
     let reuseIdentifier = "Cell"
@@ -55,10 +57,64 @@ class RestaurantViewController: UIViewController, UIActionSheetDelegate, UIScrol
         sheet.showInView(self.view);
     }
     func siteButtonTapped(sender: AnyObject) {
-        UIApplication.tryURL([
-     //       "fb://profile/116374146706", // App
-            "http://www.facebook.com/116374146706" // Website if app fails
-            ])
+        
+        var view:UIView = sender.view!!
+        var tag = view.tag
+        switch(tag){
+        case 1:
+            UIApplication.tryURL([
+                //       "fb://profile/116374146706", // App
+                currentPlace.plc_website
+                ])
+            break
+        case 2:
+            
+            break
+        case 3:
+            
+            break
+        case 4:
+            UIApplication.tryURL([
+                //       "fb://profile/116374146706", // App
+                "tel://" + currentPlace.plc_contact
+                ])
+        case 5:
+            if(UIApplication.sharedApplication().canOpenURL(
+                NSURL(string: "comgooglemapsurl://")!)){
+                    UIApplication.tryURL([
+                        //       "fb://profile/116374146706", // App
+                        "comgooglemaps://?daddr=" + currentPlace.plc_latitude + "," + currentPlace.plc_longitude
+                        ])
+                    
+            }else{
+                var lat1 : NSString = currentPlace.plc_latitude
+                var lng1 : NSString = currentPlace.plc_longitude
+                
+                var latitute:CLLocationDegrees =  lat1.doubleValue
+                var longitute:CLLocationDegrees =  lng1.doubleValue
+                
+                let regionDistance:CLLocationDistance = 10000
+                var coordinates = CLLocationCoordinate2DMake(latitute, longitute)
+                let regionSpan = MKCoordinateRegionMakeWithDistance(coordinates, regionDistance, regionDistance)
+                var options = [
+                    MKLaunchOptionsMapCenterKey: NSValue(MKCoordinate: regionSpan.center),
+                    MKLaunchOptionsMapSpanKey: NSValue(MKCoordinateSpan: regionSpan.span)
+                ]
+                var placemark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
+                var mapItem = MKMapItem(placemark: placemark)
+                mapItem.name = currentPlace.plc_name
+                mapItem.openInMapsWithLaunchOptions(options)
+            }
+            
+            /*
+            
+            */
+
+            break
+        default:
+            break
+        }
+        
     }
     var animationImageView:UIImageView!
     var animating = false;
@@ -118,23 +174,18 @@ class RestaurantViewController: UIViewController, UIActionSheetDelegate, UIScrol
         reviewImage.userInteractionEnabled = true
         
         let tapGesture = UITapGestureRecognizer(target: self, action: "siteButtonTapped:")
-        siteButton.tag = 0
         siteButton.addGestureRecognizer(tapGesture)
         siteButton.userInteractionEnabled = false
         let tapGesture2 = UITapGestureRecognizer(target: self, action: "siteButtonTapped:")
-        faceButton.tag = 0
         faceButton.addGestureRecognizer(tapGesture2)
         faceButton.userInteractionEnabled = false
         let tapGesture3 = UITapGestureRecognizer(target: self, action: "siteButtonTapped:")
-        twitterButton.tag = 0
         twitterButton.addGestureRecognizer(tapGesture3)
         twitterButton.userInteractionEnabled = false
         let tapGesture4 = UITapGestureRecognizer(target: self, action: "siteButtonTapped:")
-        phoneButton.tag = 0
         phoneButton.addGestureRecognizer(tapGesture4)
         phoneButton.userInteractionEnabled = false
         let tapGesture5 = UITapGestureRecognizer(target: self, action: "siteButtonTapped:")
-        gpsButton.tag = 0
         gpsButton.addGestureRecognizer(tapGesture5)
         gpsButton.userInteractionEnabled = false
         
@@ -159,13 +210,13 @@ class RestaurantViewController: UIViewController, UIActionSheetDelegate, UIScrol
 
                         if(restInfo.valueForKey("rating") != nil){
                             
-                        ratingInfos = (restInfo.valueForKey("rating") as! [NSDictionary]).map { Rating( id: $0["place_rating_id"] as! String, rating: $0["place_rating_rating"] as! String, comment: $0["place_rating_comment"] as! String, date: $0["places_rating_created_date"] as! String, name: $0["usr_first_name"] as! String, surname: $0["usr_last_name"] as! String, profilePic: $0["usr_profile_picture"] as! String, isActive: $0["places_rating_is_active"] as! String) }
+                        ratingInfos = (restInfo.valueForKey("rating") as! [NSDictionary]).map { Rating( id: $0["place_rating_id"] as! String, rating: $0["place_rating_rating"] as! String, comment: $0["place_rating_comment"] as! String, date: $0["places_rating_created_date"] as! String, username: $0["usr_username"] as! String, profilePic: $0["usr_profile_picture"] as! String, isActive: $0["places_rating_is_active"] as! String) }
                             //test
                          /*   var rat = Rating(id: "1", rating: "-1", comment: NSLocalizedString("no_comment_yet", comment: ""), date: "", name: "", surname: "", profilePic: "", isActive: "1")
                             ratingInfos.append(rat)
 */
                         }else{
-                            var rat = Rating(id: "1", rating: "-1", comment: NSLocalizedString("no_comment_yet", comment: ""), date: "", name: "", surname: "", profilePic: "", isActive: "1")
+                            var rat = Rating(id: "1", rating: "-1", comment: NSLocalizedString("no_comment_yet", comment: ""), date: "", username: "", profilePic: "", isActive: "1")
                             ratingInfos.append(rat)
                         }
                     self.ratings = ratingInfos
@@ -189,7 +240,7 @@ class RestaurantViewController: UIViewController, UIActionSheetDelegate, UIScrol
                             self.siteButton.userInteractionEnabled = true
                         }
                         
-                        if let contact = (rest_site as? String) {
+                        if let contact = (rest_contact as? String) {
                             self.currentPlace.plc_contact = contact
                             self.phoneButton.image = self.phoneButton.image!.imageWithColor(UIColor(red: 95/255, green: 165/255, blue: 106/255, alpha: 1)).imageWithRenderingMode(.AlwaysOriginal)
                             self.phoneButton.userInteractionEnabled = true

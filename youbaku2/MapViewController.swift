@@ -39,14 +39,14 @@ class MapViewController: UIViewController, TypesTableViewControllerDelegate, CLL
 
   func fetchNearbyPlaces(coordinate: CLLocationCoordinate2D) {
     mapView.clear()
-    request(YouNetworking.Router.NearbyPlaces("", "")).responseJSON() {
+    request(YouNetworking.Router.NearbyPlaces("\(coordinate.latitude)", "\(coordinate.longitude)")).responseJSON() {
         (_, _, JSON, error) in
         if error == nil {
             // 4
             println(JSON as! NSDictionary)
                 // 5, 6, 7
             if let js = (JSON as! NSDictionary).valueForKey("content") as? [NSDictionary]{
-                let placeInfos = ((JSON as! NSDictionary).valueForKey("content") as! [NSDictionary]).map { Place( id: $0["plc_id"] as! String, name: $0["plc_name"] as! String, image: $0["plc_header_image"] as! String, address: $0["plc_address"] as! String, rating: $0["plc_address"] as! String, lat:$0["plc_latitude"] as! String, long:$0["plc_longitude"] as! String ) }
+                let placeInfos = ((JSON as! NSDictionary).valueForKey("content") as! [NSDictionary]).map { Place( id: $0["plc_id"] as! String, name: $0["plc_name"] as! String, image: $0["plc_header_image"], address: $0["plc_address"] as! String, rating: $0["plc_address"] as! String, lat:$0["plc_latitude"] as! String, long:$0["plc_longitude"] as! String ) }
             
                 let lastItem = self.places.count
                 self.places = placeInfos
@@ -86,7 +86,7 @@ class MapViewController: UIViewController, TypesTableViewControllerDelegate, CLL
   }
   
   @IBAction func refreshPlaces(sender: AnyObject) {
-    fetchNearbyPlaces(mapView.camera.target)
+    //fetchNearbyPlaces(mapView.camera.target)
   }
   
   @IBAction func mapTypeSegmentPressed(sender: AnyObject) {
@@ -151,16 +151,24 @@ class MapViewController: UIViewController, TypesTableViewControllerDelegate, CLL
   // 1
   func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
     // 2
+
     if status == .AuthorizedWhenInUse {
-      
-      // 3
-      locationManager.startUpdatingLocation()
+        updateLocation()
+    }else{
+        let alertController = UIAlertController(title: "Error", message:
+            NSLocalizedString("gps_denied", comment: ""), preferredStyle: UIAlertControllerStyle.Alert)
+        alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
         
-      //4
-      mapView.myLocationEnabled = true
-      mapView.settings.myLocationButton = true
+        self.presentViewController(alertController, animated: true, completion: nil)
+        mapView.clear()
     }
+    
   }
+    func updateLocation(){
+        locationManager.startUpdatingLocation()
+        mapView.myLocationEnabled = true
+        mapView.settings.myLocationButton = true
+    }
   
   func mapView(mapView: GMSMapView!, didTapMarker marker: GMSMarker!) -> Bool {
     //mapCenterPinImage.fadeOut(0.25)
@@ -178,6 +186,15 @@ class MapViewController: UIViewController, TypesTableViewControllerDelegate, CLL
       fetchNearbyPlaces(location.coordinate)
     }
   }
+    
+    func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {
+        let alertController = UIAlertController(title: "Error", message:
+            NSLocalizedString("gps_denied", comment: ""), preferredStyle: UIAlertControllerStyle.Alert)
+        alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+        
+        self.presentViewController(alertController, animated: true, completion: nil)
+        mapView.clear()
+    }
   
   func reverseGeocodeCoordinate(coordinate: CLLocationCoordinate2D) {
     /*
@@ -256,9 +273,13 @@ class MapViewController: UIViewController, TypesTableViewControllerDelegate, CLL
     locationManager.delegate = self
     locationManager.requestWhenInUseAuthorization()
     mapView.delegate = self
+    
     mapView.camera = GMSCameraPosition(target: CLLocationCoordinate2D(latitude: 40.381661, longitude: 49.866281), zoom: 12, bearing: 0, viewingAngle: 0)
-    fetchNearbyPlaces(mapView.camera.target)
   }
+    
+    override func viewDidAppear(animated: Bool) {
+        updateLocation()
+    }
   
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
     if segue.identifier == "Types Segue" {
@@ -273,7 +294,8 @@ class MapViewController: UIViewController, TypesTableViewControllerDelegate, CLL
   func typesController(controller: TypesTableViewController, didSelectTypes types: [String]) {
     searchedTypes = sorted(controller.selectedTypes)
     dismissViewControllerAnimated(true, completion: nil)
-    fetchNearbyPlaces(mapView.camera.target)
+    updateLocation()
+    //fetchNearbyPlaces(mapView.camera.target)
   }
 }
 

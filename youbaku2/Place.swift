@@ -11,37 +11,37 @@ import UIKit
 class Place{
     var coordinate : CLLocationCoordinate2D?
     var plc_id: Int
-    var plc_name: NSString
+    var plc_name: String
     var plc_header_image: String
-    var plc_email: NSString
-    var plc_contact: NSString
-    var plc_website: NSString
-    var plc_intime: NSString
-    var plc_outtime: NSString
-    var plc_Hours: NSString
+    var plc_email: String
+    var plc_contact: String
+    var plc_website: String
+    var plc_intime: String
+    var plc_outtime: String
+    var plc_Hours: String
     var plc_country_id: Int
     var plc_state_id: Int
-    var plc_city: NSString
-    var plc_address: NSString
-    var plc_meta_description: NSString
-    var plc_keywords: NSString
-    var plc_zip: NSString
-    var plc_latitude: NSString
-    var plc_longitude: NSString
-    var plc_menu: NSString
-    var plc_info_title: NSString
-    var plc_info: NSString
-    var plc_is_active: NSString
-    var plc_is_delete: NSString
-    var feature_id: NSString
-    var feature_title: NSString
-    var cat_parent_id: NSString
-    var pcat_name: NSString
-    var plc_gallery_media: NSString
-    var plc_country_name: NSString
-    var plc_state_name: NSString
-    var plc_avg_rating: NSString
-    var rating: NSString
+    var plc_city: String
+    var plc_address: String
+    var plc_meta_description: String
+    var plc_keywords: String
+    var plc_zip: String
+    var plc_latitude: String
+    var plc_longitude: String
+    var plc_menu: String
+    var plc_info_title: String
+    var plc_info: String
+    var plc_is_active: String
+    var plc_is_delete: String
+    var feature_id: String
+    var feature_title: String
+    var cat_parent_id: String
+    var pcat_name: String
+    var plc_gallery_media: String
+    var plc_country_name: String
+    var plc_state_name: String
+    var plc_avg_rating: String
+    var rating: String
     
     /*
     cat.plc_id = appDict["plc_id"].intValue
@@ -50,10 +50,14 @@ class Place{
     cat.plc_address = appDict["plc_address"].stringValue
     cat.rating = appDict["rating"].stringValue
 */
-    init(id:String, name:String, image:String, address:String, rating:String){
+    init(id:String, name:String, image:AnyObject!, address:String, rating:String){
         self.plc_id = id.toInt()!
         self.plc_name = name
-        self.plc_header_image = image
+        if(image != nil){
+            self.plc_header_image = image as! String
+        }else{
+            self.plc_header_image = ""
+        }
         self.plc_email = ""
         self.plc_contact = ""
         self.plc_website = ""
@@ -84,11 +88,15 @@ class Place{
         self.plc_avg_rating = ""
         self.rating = rating
     }
-    
-    init(id:String, name:String, image:String, address:String, rating:String, lat:String, long:String){
+     
+    init(id:String, name:String, image:AnyObject!, address:String, rating:String, lat:String, long:String){
         self.plc_id = id.toInt()!
         self.plc_name = name
-        self.plc_header_image = image
+        if(image != nil){
+            self.plc_header_image = image as! String
+        }else{
+            self.plc_header_image = ""
+        }
         self.plc_email = ""
         self.plc_contact = ""
         self.plc_website = ""

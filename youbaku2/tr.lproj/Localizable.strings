@@ -15,3 +15,6 @@ sort_by_distance = "Mesafeye göre sırala";
 sort_by_likes = "Beğenilere göre sırala";
 sort_by_rating = "Puana göre sırala";
 empty_result = "Seçimlerinize uygun mekan bulunamamıştır.";
+logout_text = "Çıkış";
+login_text = "Giriş";
+gps_denied = "Etrafındaki mekanları görebilmek için YOUBAKU'ye konum iznini vermelisin.";

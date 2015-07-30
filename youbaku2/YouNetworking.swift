@@ -10,8 +10,8 @@ import UIKit
 
 
 struct YouNetworking {
-    static let APIKEY = "a781366d1e4e2828bcf5903cc066cb0a"
-    static let TOKEN = "dd4559b59dea172dd922ac2d02128b28"
+    static var APIKEY = ""
+    static var TOKEN = ""
     
     
     enum Router: URLRequestConvertible {
@@ -29,6 +29,8 @@ struct YouNetworking {
         case NearbyPlaces(String, String)
         
         case Login(String, String)
+        
+        case Register()
 
         var URLRequest: NSURLRequest {
             let (path: String, parameters: [String: AnyObject]) = {
@@ -63,6 +65,12 @@ struct YouNetworking {
                 case .Login(let user, let pass):
                     let params = ["name": user, "pass": pass]
                     return ("/api/auth.php?&op=login&token=" + YouNetworking.TOKEN + "&apikey=" + YouNetworking.APIKEY, params )
+                    
+                case .Register():
+                    let params = [:]
+                    return ("/api/register.php", params as! [String:AnyObject])
+                    
+                    
                 }
                 }()
             
@@ -119,19 +127,19 @@ struct YouNetworking {
                     return ("/api/category.php", params)
                     
                 case .NearbyPlaces(let sub_cat_id, let lat, let lon):
-                    let params = ["sub_cat_id": sub_cat_id, "lat": 40.372877, "lon": 49.842825, "op": "nearme","apikey":"93e0e61f3852745d161d78e1796a7e9d"]
+                    let params = ["sub_cat_id": sub_cat_id, "lat": 40.372877, "lon": 49.842825, "op": "nearme"]
                     return ("/api/places.php?token=" + YouNetworking.TOKEN + "&apikey=" + YouNetworking.APIKEY, params as! [String : AnyObject])
                 case .Search(let cats):
-                    let params = ["subcat_list": cats, "op": "search", "token":"341766447c4ab254450c8b7398e3c6b9","apikey":"93e0e61f3852745d161d78e1796a7e9d"]
+                    var op = "op"
+                    let params = ["subcat_list": cats.description, op: "search"]
                     
-                    return ("/api/places.php?token=" + YouNetworking.TOKEN + "&apikey=" + YouNetworking.APIKEY, params as! [String : AnyObject])
+                    return ("/api/places.php?token=" + YouNetworking.TOKEN + "&apikey=" + YouNetworking.APIKEY, params as [String : String])
                 case .Login(let user, let pass):
                     let params = ["name": user, "pass": pass]
                     return ("/api/auth.php?op=login&token=" + YouNetworking.TOKEN + "&apikey=" + YouNetworking.APIKEY, params )
                 }
                 
                 }()
-            
             let URL = NSURL(string: Router2.baseURLString)
             let URLRequest = NSMutableURLRequest(URL: URL!.URLByAppendingPathComponent(path))
             URLRequest.HTTPMethod = "POST"
