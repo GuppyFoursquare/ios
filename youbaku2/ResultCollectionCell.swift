@@ -13,5 +13,7 @@ class ResultCollectionCell: UICollectionViewCell {
     @IBOutlet var secondLabel: UILabel!
     @IBOutlet var ratingLabel: UILabel!
     @IBOutlet var imageView: UIImageView!
+    @IBOutlet var commentButton: UIButton!
+    @IBOutlet var distanceButton: UIButton!
     var request: Request?
 }

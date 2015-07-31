@@ -125,7 +125,8 @@ class RestaurantViewController: UIViewController, UIActionSheetDelegate, UIScrol
         
         var newFrame:CGRect = linkContainer.frame;
         newFrame.origin.x = 0;
-        newFrame.origin.y = self.scrollView.contentOffset.y+(self.scrollView.frame.size.height-42);
+        newFrame.origin.y = self.scrollView.contentOffset.y+(self.scrollView.frame.size.height-45);
+        newFrame.size.height = 45
         linkContainer.frame = newFrame
 
     }
@@ -145,7 +146,7 @@ class RestaurantViewController: UIViewController, UIActionSheetDelegate, UIScrol
   
         var newFrame:CGRect = linkContainer.frame;
         newFrame.origin.x = 0;
-        newFrame.origin.y = self.scrollView.contentOffset.y+(self.scrollView.frame.size.height-42);
+        newFrame.origin.y = self.scrollView.contentOffset.y+(self.scrollView.frame.size.height-45);
         linkContainer.frame = newFrame;
 
         /*
@@ -157,9 +158,11 @@ class RestaurantViewController: UIViewController, UIActionSheetDelegate, UIScrol
 */
     }
     func reviewTapped(sender:AnyObject){
-        var vc = self.storyboard?.instantiateViewControllerWithIdentifier("ReviewsViewController") as! ReviewsViewController
-        vc.ratingInfos = ratings
-        self.navigationController?.pushViewController(vc, animated: true)
+        if(ratings[0].place_rating_rating != -1){
+            var vc = self.storyboard?.instantiateViewControllerWithIdentifier("ReviewsViewController") as! ReviewsViewController
+            vc.ratingInfos = ratings
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
     override func viewDidLoad() {
        	 super.viewDidLoad()
@@ -238,16 +241,23 @@ class RestaurantViewController: UIViewController, UIActionSheetDelegate, UIScrol
                             self.currentPlace.plc_website = webSite
                             self.siteButton.image = self.siteButton.image!.imageWithColor(UIColor(red: 95/255, green: 165/255, blue: 106/255, alpha: 1)).imageWithRenderingMode(.AlwaysOriginal)
                             self.siteButton.userInteractionEnabled = true
+                        }else{
+                            self.siteButton.image = self.siteButton.image!.imageWithColor(UIColor(red: 119/255, green: 119/255, blue: 119/255, alpha: 1)).imageWithRenderingMode(.AlwaysOriginal)
                         }
                         
                         if let contact = (rest_contact as? String) {
                             self.currentPlace.plc_contact = contact
                             self.phoneButton.image = self.phoneButton.image!.imageWithColor(UIColor(red: 95/255, green: 165/255, blue: 106/255, alpha: 1)).imageWithRenderingMode(.AlwaysOriginal)
                             self.phoneButton.userInteractionEnabled = true
+                        }else{
+                            self.phoneButton.image = self.phoneButton.image!.imageWithColor(UIColor(red: 119/255, green: 119/255, blue: 119/255, alpha: 1)).imageWithRenderingMode(.AlwaysOriginal)
                         }
                         
                         self.gpsButton.image = self.gpsButton.image!.imageWithColor(UIColor(red: 95/255, green: 165/255, blue: 106/255, alpha: 1)).imageWithRenderingMode(.AlwaysOriginal)
                         self.gpsButton.userInteractionEnabled = true
+                        
+                        self.faceButton.image = self.faceButton.image!.imageWithColor(UIColor(red: 119/255, green: 119/255, blue: 119/255, alpha: 1)).imageWithRenderingMode(.AlwaysOriginal)
+                        self.twitterButton.image = self.twitterButton.image!.imageWithColor(UIColor(red: 119/255, green: 119/255, blue: 119/255, alpha: 1)).imageWithRenderingMode(.AlwaysOriginal)
                         
                         self.title = rest_name
                         self.nameLabel.text = rest_name

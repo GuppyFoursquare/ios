@@ -264,8 +264,8 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rJe-jM-Ced">
-                                            <rect key="frame" x="93" y="176" width="113" height="34"/>
-                                            <state key="normal" title="Comment" image="comment.png">
+                                            <rect key="frame" x="93" y="176" width="113" height="35"/>
+                                            <state key="normal" title=" 2" image="places_comment">
                                                 <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
@@ -275,7 +275,7 @@
                                         </imageView>
                                         <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iAX-GJ-JTZ">
                                             <rect key="frame" x="214" y="170" width="106" height="47"/>
-                                            <state key="normal" title="Check-In" image="gps.png">
+                                            <state key="normal" title="0.0km" image="places_distance">
                                                 <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
@@ -330,6 +330,8 @@
                                     <constraint firstAttribute="bottomMargin" secondItem="HNM-5Y-YCK" secondAttribute="bottom" constant="26" id="xqf-aT-a90"/>
                                 </constraints>
                                 <connections>
+                                    <outlet property="commentButton" destination="rJe-jM-Ced" id="jlM-oW-iVf"/>
+                                    <outlet property="distanceButton" destination="iAX-GJ-JTZ" id="xc5-q0-m0I"/>
                                     <outlet property="imageView" destination="HNM-5Y-YCK" id="7hJ-wo-aAU"/>
                                     <outlet property="nameLabel" destination="17f-5i-P7N" id="cYr-Ku-bGO"/>
                                     <outlet property="ratingLabel" destination="wMM-f6-z0y" id="MP0-kX-Iei"/>
@@ -1582,19 +1584,19 @@
         <image name="arrow_down" width="48" height="48"/>
         <image name="banner2" width="600" height="68"/>
         <image name="cat_sample" width="150" height="150"/>
-        <image name="comment.png" width="32" height="30"/>
-        <image name="facebook" width="48" height="48"/>
+        <image name="facebook" width="100" height="100"/>
         <image name="filter" width="48" height="48"/>
-        <image name="gps" width="35" height="35"/>
-        <image name="gps.png" width="32" height="32"/>
+        <image name="gps" width="100" height="100"/>
         <image name="home" width="37" height="37"/>
         <image name="ic_yellow_marker" width="37" height="37"/>
         <image name="like.png" width="32" height="32"/>
         <image name="menu.png" width="40" height="40"/>
-        <image name="phone" width="48" height="48"/>
-        <image name="site" width="38" height="38"/>
+        <image name="phone" width="100" height="100"/>
+        <image name="places_comment" width="30" height="30"/>
+        <image name="places_distance" width="30" height="30"/>
+        <image name="site" width="100" height="100"/>
         <image name="star_empty.png" width="48" height="48"/>
-        <image name="twitter" width="48" height="48"/>
+        <image name="twitter" width="100" height="100"/>
         <image name="writereview" width="38" height="38"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

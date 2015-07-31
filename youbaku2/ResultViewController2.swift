@@ -230,7 +230,6 @@ extension ResultViewController2 : UICollectionViewDataSource {
         //2
         cell.nameLabel.text = places[indexPath.row].plc_name as String
         cell.secondLabel.text = places[indexPath.row].plc_address as String
-        
         let urlString = "http://www.youbaku.com/uploads/places_header_images/" + (places[indexPath.row].plc_header_image as String)
         cell.imageView.image = UIImage(named: "placeholder_list.png")
         if let image = imageCache.objectForKey(urlString) as? UIImage { // Use the local cache if possible
