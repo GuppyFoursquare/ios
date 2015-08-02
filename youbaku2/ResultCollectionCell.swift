@@ -16,4 +16,8 @@ class ResultCollectionCell: UICollectionViewCell {
     @IBOutlet var commentButton: UIButton!
     @IBOutlet var distanceButton: UIButton!
     var request: Request?
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.setNeedsDisplay()
+    }
 }

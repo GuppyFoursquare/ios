@@ -30,6 +30,6 @@ class ReviewCell: UITableViewCell {
     }
     override func layoutSubviews() {
         super.layoutSubviews()
-        userImage.frame = CGRectMake(0,0,75.0,75.0)
+        userImage.frame = CGRectMake(8,11,75.0,75.0)
     }
 }

@@ -48,6 +48,7 @@ class MenuViewController: UICollectionViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+
         loadTokens()
         loadPlaces()
         if let title = getLoggedInUser().username{

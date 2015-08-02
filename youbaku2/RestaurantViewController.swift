@@ -201,12 +201,30 @@ class RestaurantViewController: UIViewController, UIActionSheetDelegate, UIScrol
                     
                     let restInfo = ((JSON as! NSDictionary).valueForKey("content") as! NSDictionary)
                     let rest_name = (restInfo.valueForKey("plc_name") as! String)
-                    let rest_desc = (restInfo.valueForKey("plc_info") as! String)
-                    let rest_address = (restInfo.valueForKey("plc_address") as! String)
-                    let rest_site: AnyObject? = restInfo.valueForKey("plc_website")
-                    let rest_contact: AnyObject? = restInfo.valueForKey("plc_contact")
-                    let rest_lat = (restInfo.valueForKey("plc_latitude") as! String)
-                    let rest_lon = (restInfo.valueForKey("plc_longitude") as! String)
+                    var rest_desc2=""
+                    if let rest_desc = (restInfo.valueForKey("plc_info") as? String){
+                        rest_desc2 = rest_desc
+                    }
+                    var rest_address = ""
+                    if let rest_address2 = (restInfo.valueForKey("plc_address") as? String){
+                        rest_address = rest_address2
+                    }
+                    var rest_site = ""
+                    if let rest_site2 = restInfo.valueForKey("plc_website") as? String{
+                        rest_site = rest_site2
+                    }
+                    var rest_contact = ""
+                    if let rest_contact2 = restInfo.valueForKey("plc_contact") as? String{
+                        rest_contact = rest_contact2
+                    }
+                    var rest_lat = ""
+                    if let rest_lat2 = (restInfo.valueForKey("plc_latitude") as? String){
+                        rest_lat = rest_lat2
+                    }
+                    var rest_lon = ""
+                    if let rest_lon2 = (restInfo.valueForKey("plc_longitude") as? String){
+                        rest_lon = rest_lon2
+                    }
                     
                     let photoInfos = (restInfo.valueForKey("gallery") as! [NSDictionary]).map { Gallery( media: $0["plc_gallery_media"] as! String, isVideo: $0["plc_gallery_is_video"] as! String, seq: $0["plc_gallery_seq"] as! String, isCover: $0["plc_is_cover_image"] as! String, isActive: $0["plc_gallery_is_active"] as! String) }
                     var ratingInfos = [Rating]()
@@ -233,7 +251,7 @@ class RestaurantViewController: UIViewController, UIActionSheetDelegate, UIScrol
                     dispatch_async(dispatch_get_main_queue()) {
                         self.currentPlace = Place()
                         self.currentPlace.plc_name = rest_name
-                        self.currentPlace.plc_meta_description = rest_desc
+                        self.currentPlace.plc_meta_description = rest_desc2
                         self.currentPlace.plc_address = rest_address
                         self.currentPlace.plc_latitude = rest_lat
                         self.currentPlace.plc_longitude = rest_lon
@@ -261,7 +279,7 @@ class RestaurantViewController: UIViewController, UIActionSheetDelegate, UIScrol
                         
                         self.title = rest_name
                         self.nameLabel.text = rest_name
-                        self.descriptionTextView2.attributedText = rest_desc.html2AttributedString
+                        self.descriptionTextView2.attributedText = rest_desc2.html2AttributedString
                         self.addressTextView2.text = rest_address
                         self.reviewText.text = ratingInfos[0].place_rating_comment
                         self.reviewImage.image = UIImage(named: "placeholder_user")

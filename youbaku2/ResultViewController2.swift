@@ -10,7 +10,7 @@ import UIKit
 
 
 
-class ResultViewController2: UICollectionViewController {
+class ResultViewController2: UICollectionViewController, CLLocationManagerDelegate {
     let reuseIdentifier = "ResultCollectionCell"
     var places = [Place]()
     var places2 = NSMutableOrderedSet()
@@ -19,11 +19,15 @@ class ResultViewController2: UICollectionViewController {
     var animating = false;
     var circleView:CircleView!
     var selectedCats = Array<Int>()
-    
+    let locationManager = CLLocationManager()
+    var userLocation:CLLocationCoordinate2D!
+    override func viewDidAppear(animated: Bool) {
+        locationManager.startUpdatingLocation()
 
-    
+    }
     override func viewDidLoad() {
         animate()
+        
         self.navigationItem.leftBarButtonItem?.tintColor = UIColor.whiteColor()
 
         
@@ -104,6 +108,12 @@ class ResultViewController2: UICollectionViewController {
 */
         }
         
+        func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
+            if let location = locations.first as? CLLocation {
+                userLocation = location.coordinate
+                self.collectionView?.reloadData()
+            }
+        }
         
         /*
         request(YouNetworking.Router.Places(subCatId)).responseJSON() {
@@ -228,6 +238,11 @@ extension ResultViewController2 : UICollectionViewDataSource {
         //1
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! ResultCollectionCell
         //2
+        if let userLocation = userLocation{
+            cell.distanceButton.setTitle(userLocation.latitude.description, forState: UIControlState.Normal)
+        }else{
+            cell.distanceButton.setTitle(" --", forState: UIControlState.Normal)
+        }
         cell.nameLabel.text = places[indexPath.row].plc_name as String
         cell.secondLabel.text = places[indexPath.row].plc_address as String
         let urlString = "http://www.youbaku.com/uploads/places_header_images/" + (places[indexPath.row].plc_header_image as String)

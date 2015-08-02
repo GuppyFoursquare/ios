@@ -101,6 +101,7 @@ class MapViewController: UIViewController, TypesTableViewControllerDelegate, CLL
     default:
       mapView.mapType = mapView.mapType
     }
+    
   }
     
     func mapView(mapView: GMSMapView!, markerInfoWindow marker: GMSMarker!) -> UIView! {

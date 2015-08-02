@@ -1077,7 +1077,7 @@
         <scene sceneID="dNT-6P-ppb">
             <objects>
                 <tableViewController storyboardIdentifier="ReviewsViewController" id="ixB-96-IFT" customClass="ReviewsViewController" customModule="youbaku2" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="125" sectionHeaderHeight="22" sectionFooterHeight="22" id="Urk-TG-mbj">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="125" sectionHeaderHeight="22" sectionFooterHeight="22" id="Urk-TG-mbj">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="1200"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1088,7 +1088,7 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ydm-y4-kUp" id="Afo-0q-Eyk">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" scrollEnabled="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TzE-Ky-f4E">
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" scrollEnabled="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TzE-Ky-f4E">
                                             <rect key="frame" x="91" y="26" width="221" height="60"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1125,6 +1125,7 @@
                                         <constraint firstItem="sYQ-QX-wpu" firstAttribute="top" secondItem="TzE-Ky-f4E" secondAttribute="bottom" constant="8" id="Q8i-q5-V4L"/>
                                         <constraint firstItem="B9b-bF-crK" firstAttribute="leading" secondItem="Afo-0q-Eyk" secondAttribute="leading" constant="8" id="Uhm-Xe-vLT"/>
                                         <constraint firstItem="TzE-Ky-f4E" firstAttribute="top" secondItem="1Ob-09-XYD" secondAttribute="bottom" constant="-3" id="Vub-V3-GLB"/>
+                                        <constraint firstItem="sYQ-QX-wpu" firstAttribute="top" secondItem="B9b-bF-crK" secondAttribute="bottom" constant="8" id="k5j-xM-4T4"/>
                                         <constraint firstAttribute="trailing" secondItem="1Ob-09-XYD" secondAttribute="trailing" constant="8" id="nLT-Xd-jv4"/>
                                         <constraint firstAttribute="trailing" secondItem="TzE-Ky-f4E" secondAttribute="trailing" constant="8" id="oiz-Ma-OUU"/>
                                         <constraint firstItem="B9b-bF-crK" firstAttribute="top" secondItem="Afo-0q-Eyk" secondAttribute="top" constant="11" id="u4x-cC-UUK"/>
