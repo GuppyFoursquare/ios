@@ -12,6 +12,7 @@ class TabBarController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
 
         for item in self.tabBar.items as! [UITabBarItem] {
             if let image = item.image {
@@ -27,6 +28,8 @@ class TabBarController: UITabBarController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+
     
 
     /*

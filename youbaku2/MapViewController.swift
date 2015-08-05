@@ -150,22 +150,7 @@ class MapViewController: UIViewController, TypesTableViewControllerDelegate, CLL
   }
   */
   // 1
-  func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
-    // 2
-
-    if status == .AuthorizedWhenInUse {
-        updateLocation()
-    }else{
-        let alertController = UIAlertController(title: "Error", message:
-            NSLocalizedString("gps_denied", comment: ""), preferredStyle: UIAlertControllerStyle.Alert)
-        alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
-        
-        self.presentViewController(alertController, animated: true, completion: nil)
-        mapView.clear()
-    }
-    
-  }
-    func updateLocation(){
+      func updateLocation(){
         locationManager.startUpdatingLocation()
         mapView.myLocationEnabled = true
         mapView.settings.myLocationButton = true
@@ -188,14 +173,8 @@ class MapViewController: UIViewController, TypesTableViewControllerDelegate, CLL
     }
   }
     
-    func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {
-        let alertController = UIAlertController(title: "Error", message:
-            NSLocalizedString("gps_denied", comment: ""), preferredStyle: UIAlertControllerStyle.Alert)
-        alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
-        
-        self.presentViewController(alertController, animated: true, completion: nil)
-        mapView.clear()
-    }
+    
+
   
   func reverseGeocodeCoordinate(coordinate: CLLocationCoordinate2D) {
     /*
@@ -271,6 +250,8 @@ class MapViewController: UIViewController, TypesTableViewControllerDelegate, CLL
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    navigationController?.navigationBar.barTintColor = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 1)
+    navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
     locationManager.delegate = self
     locationManager.requestWhenInUseAuthorization()
     mapView.delegate = self

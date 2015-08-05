@@ -8,7 +8,6 @@
 
 import UIKit
 import MapKit
-
 let imageCache = NSCache()
 class RestaurantViewController: UIViewController, UIActionSheetDelegate, UIScrollViewDelegate {
     let reuseIdentifier = "Cell"
@@ -69,6 +68,7 @@ class RestaurantViewController: UIViewController, UIActionSheetDelegate, UIScrol
             break
         case 2:
             
+        
             break
         case 3:
             
@@ -136,7 +136,10 @@ class RestaurantViewController: UIViewController, UIActionSheetDelegate, UIScrol
         if(buttonIndex == 1 ){
         
             var vc = self.storyboard?.instantiateViewControllerWithIdentifier("AddReviewViewController") as! AddReviewViewController
+            vc.place_id = currentPlace.plc_id
             self.navigationController?.pushViewController(vc, animated: true)
+        }else{
+            
         }
         
     }
@@ -147,8 +150,8 @@ class RestaurantViewController: UIViewController, UIActionSheetDelegate, UIScrol
         var newFrame:CGRect = linkContainer.frame;
         newFrame.origin.x = 0;
         newFrame.origin.y = self.scrollView.contentOffset.y+(self.scrollView.frame.size.height-45);
+        newFrame.size.height = 45
         linkContainer.frame = newFrame;
-
         /*
         var newFrame:CGRect = fixedButton.frame;
         newFrame.origin.x = 0;
@@ -161,6 +164,7 @@ class RestaurantViewController: UIViewController, UIActionSheetDelegate, UIScrol
         if(ratings[0].place_rating_rating != -1){
             var vc = self.storyboard?.instantiateViewControllerWithIdentifier("ReviewsViewController") as! ReviewsViewController
             vc.ratingInfos = ratings
+            vc.currentPlace = currentPlace.plc_id
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }
@@ -226,6 +230,15 @@ class RestaurantViewController: UIViewController, UIActionSheetDelegate, UIScrol
                         rest_lon = rest_lon2
                     }
                     
+                    var rest_id = ""
+                    if let rest_id2 = (restInfo.valueForKey("plc_id") as? String){
+                        rest_id = rest_id2
+                    }
+                    var rest_isopen = "0"
+                    if let rest_isopen2 = (restInfo.valueForKey("plc_is_open") as? String){
+                        rest_isopen = rest_isopen2
+                    }
+                    
                     let photoInfos = (restInfo.valueForKey("gallery") as! [NSDictionary]).map { Gallery( media: $0["plc_gallery_media"] as! String, isVideo: $0["plc_gallery_is_video"] as! String, seq: $0["plc_gallery_seq"] as! String, isCover: $0["plc_is_cover_image"] as! String, isActive: $0["plc_gallery_is_active"] as! String) }
                     var ratingInfos = [Rating]()
 
@@ -255,6 +268,8 @@ class RestaurantViewController: UIViewController, UIActionSheetDelegate, UIScrol
                         self.currentPlace.plc_address = rest_address
                         self.currentPlace.plc_latitude = rest_lat
                         self.currentPlace.plc_longitude = rest_lon
+                        self.currentPlace.plc_id = (rest_id as NSString).integerValue
+                        self.currentPlace.plc_is_open = rest_isopen
                         if let webSite = (rest_site as? String) {
                             self.currentPlace.plc_website = webSite
                             self.siteButton.image = self.siteButton.image!.imageWithColor(UIColor(red: 95/255, green: 165/255, blue: 106/255, alpha: 1)).imageWithRenderingMode(.AlwaysOriginal)
@@ -278,8 +293,15 @@ class RestaurantViewController: UIViewController, UIActionSheetDelegate, UIScrol
                         self.twitterButton.image = self.twitterButton.image!.imageWithColor(UIColor(red: 119/255, green: 119/255, blue: 119/255, alpha: 1)).imageWithRenderingMode(.AlwaysOriginal)
                         
                         self.title = rest_name
-                        self.nameLabel.text = rest_name
+                        
+                        if(rest_isopen == "1"){
+                            self.nameLabel.text = rest_name + ": " + NSLocalizedString("open", comment: "")
+                        }else{
+                            self.nameLabel.text = rest_name + ": " + NSLocalizedString("closed", comment: "")
+                        }
                         self.descriptionTextView2.attributedText = rest_desc2.html2AttributedString
+                        
+                        println(rest_desc2.stringByAppendingString(""))
                         self.addressTextView2.text = rest_address
                         self.reviewText.text = ratingInfos[0].place_rating_comment
                         self.reviewImage.image = UIImage(named: "placeholder_user")
@@ -321,7 +343,26 @@ class RestaurantViewController: UIViewController, UIActionSheetDelegate, UIScrol
         
         
     }
-    
+    func convertText(inputText: String) -> NSAttributedString {
+        
+        var html = inputText
+        
+        // Replace newline character by HTML line break
+        while let range = html.rangeOfString("\n") {
+            html.replaceRange(range, with: "<br />")
+        }
+        
+        // Embed in a <span> for font attributes:
+        html = "<span style=\"font-family: Arial; font-size:28pt;\">" + html + "</span>"
+        
+        let data = html.dataUsingEncoding(NSUnicodeStringEncoding, allowLossyConversion: true)!
+        let attrStr = NSAttributedString(
+            data: data,
+            options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType],
+            documentAttributes: nil,
+            error: nil)!
+        return attrStr
+    }
     
     func stopAnimation(){
         animating = false;
@@ -400,8 +441,30 @@ class RestaurantViewController: UIViewController, UIActionSheetDelegate, UIScrol
 }
 
 extension String {
-    var html2AttributedString:NSAttributedString {
-        return NSAttributedString(data: dataUsingEncoding(NSUTF8StringEncoding)!, options:[NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType, NSCharacterEncodingDocumentAttribute: NSUTF8StringEncoding], documentAttributes: nil, error: nil)!
+    var html2AttributedString:NSMutableAttributedString {
+        
+        var tt = NSMutableAttributedString(data: dataUsingEncoding(NSUTF8StringEncoding)!, options:[NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType, NSCharacterEncodingDocumentAttribute: NSUTF8StringEncoding, NSFontAttributeName:UIFont.systemFontOfSize(14)], documentAttributes: nil, error: nil)!
+        tt.addAttribute(NSFontAttributeName, value: UIFont.systemFontOfSize(14), range: NSRange(location: 0,length: tt.length))
+        
+        tt.addAttribute(NSForegroundColorAttributeName, value: UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1), range: NSRange(location: 0,length: tt.length))
+        
+        return tt
+    }
+    
+    func plainTextFromHTML() -> String? {
+        
+        let regexPattern = "<.*?>"
+        var err: NSError?
+        
+        if let stripHTMLRegex = NSRegularExpression(pattern: regexPattern, options: NSRegularExpressionOptions.CaseInsensitive, error: &err) {
+            
+            let plainText = stripHTMLRegex.stringByReplacingMatchesInString(self, options: NSMatchingOptions.ReportProgress, range: NSMakeRange(0, count(self)), withTemplate: "")
+            
+            return err == nil ? plainText : nil
+        } else {
+            println("Warning: failed to create regular expression from pattern: \(regexPattern)")
+            return nil
+        }
     }
 }
 
@@ -465,6 +528,28 @@ extension RestaurantViewController : UICollectionViewDataSource {
             }
             
             return cell
+        }
+    }
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        if (collectionView == self.collectionView2){
+            var browser = MWPhotoBrowser(photos: galleryPhotos)
+            // Set options
+            browser.displayActionButton = true // Show action button to allow sharing, copying, etc (defaults to YES)
+            browser.displayNavArrows = false // Whether to display left and right nav arrows on toolbar (defaults to NO)
+            browser.displaySelectionButtons = false // Whether selection buttons are shown on each image (defaults to NO)
+            browser.zoomPhotosToFill = true // Images that almost fill the screen will be initially zoomed to fill (defaults to YES)
+            browser.alwaysShowControls = false // Allows to control whether the bars and controls are always visible or whether they fade away to show the photo full (defaults to NO)
+            browser.enableGrid = true // Whether to allow the viewing of all the photo thumbnails on a grid (defaults to YES)
+            browser.startOnGrid = true // Whether to start on the grid of thumbnails instead of the first photo (defaults to NO)
+            
+            // Optionally set the current visible photo before displaying
+            if(indexPath.row<0){
+                return
+            }
+            browser.setCurrentPhotoIndex(UInt(indexPath.row))
+            
+            self.navigationController?.pushViewController(browser, animated: true)
         }
     }
 
@@ -549,3 +634,4 @@ extension UIApplication {
         }
     }
 }
+

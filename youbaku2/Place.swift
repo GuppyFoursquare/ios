@@ -40,9 +40,11 @@ class Place{
     var plc_gallery_media: String
     var plc_country_name: String
     var plc_state_name: String
-    var plc_avg_rating: String
+    var rating_avg: Float
+    var rating_count: Int
     var rating: String
-    
+    var plc_is_open: String
+    var plc_distance: Double = -1.0
     /*
     cat.plc_id = appDict["plc_id"].intValue
     cat.plc_name = appDict["plc_name"].stringValue
@@ -50,7 +52,7 @@ class Place{
     cat.plc_address = appDict["plc_address"].stringValue
     cat.rating = appDict["rating"].stringValue
 */
-    init(id:String, name:String, image:AnyObject!, address:String, rating:String){
+    init(id:String, name:String, image:AnyObject!, address:String, rating:String, rating_avg:AnyObject!, rating_count:AnyObject!, plc_latitude:AnyObject!, plc_longitude:AnyObject!){
         self.plc_id = id.toInt()!
         self.plc_name = name
         if(image != nil){
@@ -71,8 +73,6 @@ class Place{
         self.plc_meta_description = ""
         self.plc_keywords = ""
         self.plc_zip = ""
-        self.plc_latitude = ""
-        self.plc_longitude = ""
         self.plc_menu = ""
         self.plc_info_title = ""
         self.plc_info = ""
@@ -85,8 +85,38 @@ class Place{
         self.plc_gallery_media = ""
         self.plc_country_name = ""
         self.plc_state_name = ""
-        self.plc_avg_rating = ""
         self.rating = rating
+        self.plc_is_open = "0"
+        if(rating_avg != nil){
+            if((rating_avg as! Float) <= 0){
+                self.rating_avg = 0
+            }else{
+                self.rating_avg = rating_avg as! Float
+            }
+        }else{
+            self.rating_avg = 0
+        }
+        
+        if(rating_count != nil){
+            if((rating_count as! Float) <= 0){
+                self.rating_count = 0
+            }else{
+                self.rating_count = rating_count as! Int
+            }
+        }else{
+            self.rating_count = 0
+        }
+        
+        if(plc_latitude != nil){
+            self.plc_latitude = plc_latitude as! String
+        }else{
+            self.plc_latitude = ""
+        }
+        if(plc_longitude != nil){
+            self.plc_longitude = plc_longitude as! String
+        }else{
+            self.plc_longitude = ""
+        }
     }
      
     init(id:String, name:String, image:AnyObject!, address:String, rating:String, lat:String, long:String){
@@ -124,9 +154,11 @@ class Place{
         self.plc_gallery_media = ""
         self.plc_country_name = ""
         self.plc_state_name = ""
-        self.plc_avg_rating = ""
         self.rating = rating
         self.coordinate = CLLocationCoordinate2D(latitude: (lat as NSString).doubleValue, longitude: (long as NSString).doubleValue)
+        self.rating_count = 0
+        self.rating_avg = 0
+        self.plc_is_open = "0"
     }
     
     init(){
@@ -160,8 +192,10 @@ class Place{
         self.plc_gallery_media = ""
         self.plc_country_name = ""
         self.plc_state_name = ""
-        self.plc_avg_rating = ""
         self.rating = ""
+        self.rating_count = 0
+        self.rating_avg = 0
+        self.plc_is_open = "0"
     }
     
 }

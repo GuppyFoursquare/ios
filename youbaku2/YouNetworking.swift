@@ -102,6 +102,12 @@ struct YouNetworking {
         
         case Login(String, String)
         
+        case AddReview(String, Int, Int)
+        
+        case Logout()
+        
+        case Popular()
+        
         var URLRequest: NSURLRequest {
             let (path: String, parameters: [String: AnyObject]) = {
                 switch self {
@@ -132,11 +138,20 @@ struct YouNetworking {
                 case .Search(let cats):
                     var op = "op"
                     let params = ["subcat_list": cats.description, op: "search"]
-                    
                     return ("/api/places.php?token=" + YouNetworking.TOKEN + "&apikey=" + YouNetworking.APIKEY, params as [String : String])
                 case .Login(let user, let pass):
                     let params = ["name": user, "pass": pass]
                     return ("/api/auth.php?op=login&token=" + YouNetworking.TOKEN + "&apikey=" + YouNetworking.APIKEY, params )
+                case .AddReview(let comment, let rating, let plc_id):
+                    let params = ["plc_id": plc_id, "message": comment, "score": rating]
+                    return ("/api/auth.php?op=comment&token=" + YouNetworking.TOKEN + "&apikey=" + YouNetworking.APIKEY, params as! [String : AnyObject] )
+                case .Logout():
+                    let op = "op"
+                    let params = [op:"logout"]
+                    return ("/api/auth.php?token=" + YouNetworking.TOKEN + "&apikey=" + YouNetworking.APIKEY, params)
+                case .Popular():
+                    let params = [:]
+                    return ("/api/places.php?op=search&popular=1&token=" + YouNetworking.TOKEN + "&apikey=" + YouNetworking.APIKEY, params as! [String : AnyObject])
                 }
                 
                 }()

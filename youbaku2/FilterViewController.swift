@@ -8,7 +8,9 @@
 
 import UIKit
 
-class FilterViewController: UIViewController {
+class FilterViewController: UIViewController, UITextFieldDelegate {
+    var delegate: InformationDelegate?
+    
 
     @IBOutlet var navigationBar: UINavigationBar!
     @IBOutlet var sortByLbl: UILabel!
@@ -24,17 +26,75 @@ class FilterViewController: UIViewController {
     @IBOutlet var button30: UIButton!
     @IBOutlet var button40: UIButton!
     @IBOutlet var button50: UIButton!
+    @IBOutlet var scrollView: UIScrollView!
+    @IBOutlet var isOpenToggle: UISwitch!
+    @IBOutlet var isPopularToggle: UISwitch!
+    @IBOutlet var keywordTxt: UITextField!
 
     @IBOutlet var cancelBtn: UIBarButtonItem!
     let numberButtonTap = UIGestureRecognizer()
     let tapRecDistance = UITapGestureRecognizer()
     let tapRecRating = UITapGestureRecognizer()
     let tapRecLikes = UITapGestureRecognizer()
+    var places = [Place]()
     
+    var isOpen = false
+    var isPopular = false
+    var placeLimit = 20
+    var distanceLimit = 2.0
+    var sortType = -1
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        view.endEditing(true)
+        return true
+    }
     @IBAction func buttonClicked(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: {});
     }
     
+    @IBAction func filterButtonTapped(sender: AnyObject) {
+        
+        for index in stride(from: places.count - 1, through: 0, by: -1) {
+            if(keywordTxt.text != ""){
+                if (places[index].plc_name.lowercaseString.rangeOfString(keywordTxt.text) == nil) {
+                    places.removeAtIndex(index)
+                    continue
+                }
+            }
+            if(isOpenToggle.on){
+                if(places[index].plc_is_open != "1"){
+                    places.removeAtIndex(index)
+                    continue
+                }
+            }
+            /* //popular?
+            if(isPopularToggle.on){
+                if(places[index].plc_ != "1"){
+                    places.removeAtIndex(index)
+                    continue
+                }
+            }*/
+            /*
+            if(distanceLimit != -1.0 && distanceLimit < places[index].plc_distance){
+                places.removeAtIndex(index)
+                continue
+            }
+*/
+        }
+//        images.sort({ $0.fileID > $1.fileID })
+        if(sortType == 0){
+            places.sort({ $0.plc_distance > $1.plc_distance })
+        }else if(sortType == 1){
+            places.sort({ $0.rating_avg > $1.rating_avg })
+        }
+        if(places.count > placeLimit){
+            places = Array(places[0..<placeLimit])
+        }
+        if let d = self.delegate {
+            d.didPlacesFiltered(places)
+        }
+        self.dismissViewControllerAnimated(true, completion: {});
+    }
     @IBAction func distanceButtonTapped(sender: UIButton) {
         button10.backgroundColor = UIColor.whiteColor()
         button10.setTitleColor(UIColor.blackColor(), forState: .Normal)
@@ -46,7 +106,10 @@ class FilterViewController: UIViewController {
         button40.setTitleColor(UIColor.blackColor(), forState: .Normal)
         button50.backgroundColor = UIColor.whiteColor()
         button50.setTitleColor(UIColor.blackColor(), forState: .Normal)
-        
+        if let buttonText = sender.titleLabel?.text{
+            placeLimit = (buttonText as NSString).integerValue
+        }
+
         sender.backgroundColor = UIColor(red: 98/255, green: 178/255, blue: 217/255, alpha: 1)
         sender.setTitleColor(UIColor.whiteColor(), forState: .Normal)
     }
@@ -73,7 +136,8 @@ class FilterViewController: UIViewController {
         setBorderForButton(&button30!)
         setBorderForButton(&button40!)
         setBorderForButton(&button50!)
-        // Do any additional setup after loading the view.
+        button20.backgroundColor = UIColor(red: 98/255, green: 178/255, blue: 217/255, alpha: 1)
+        button20.setTitleColor(UIColor.whiteColor(), forState: .Normal)
     }
     
     func setBorderForButton(inout button:UIButton){
@@ -94,7 +158,7 @@ class FilterViewController: UIViewController {
 
     @IBAction func distanceChanged(sender: UISlider) {
         let valKm = NSString(format: "%.1f", sender.value)
-        
+        distanceLimit = valKm.doubleValue
         let nf = NSNumberFormatter()
         nf.numberStyle = .DecimalStyle
         // Configure the number formatter to your liking
@@ -109,12 +173,21 @@ class FilterViewController: UIViewController {
     
     
     func tappedViewRating(){
+        sortType = 1
         sortByLbl.text = NSLocalizedString("sort_by_rating", comment: "")
         sortRatingImg.image = UIImage(named: "tick.png")
         sortDistanceImg.image = nil
         sortLikesImg.image = nil
     }
+    func tappedViewDistance(){
+        sortType = 0
+        sortByLbl.text = NSLocalizedString("sort_by_distance", comment: "")
+        sortDistanceImg.image = UIImage(named: "tick.png")
+        sortRatingImg.image = nil
+        sortLikesImg.image = nil
+    }
     func tappedViewLikes(){
+        sortType = 2
         sortByLbl.text = NSLocalizedString("sort_by_likes", comment: "")
         sortDistanceImg.image = nil
         sortRatingImg.image = nil
@@ -130,5 +203,10 @@ class FilterViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
 
+
+}
+protocol InformationDelegate {
+    func didPlacesFiltered(value: [Place])
 }

@@ -10,6 +10,7 @@ import UIKit
 
 class ReviewsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
     var ratingInfos = [Rating]()
+    var currentPlace:Int = -1
     @IBOutlet var tableView2: UITableView!
     @IBOutlet var tableView: UITableView!
     override func viewDidLoad() {
@@ -71,7 +72,7 @@ class ReviewsViewController: UIViewController, UITableViewDataSource, UITableVie
         println(cell.userImage.frame.width)
         cell.content.text = ratingInfos[indexPath.row].place_rating_comment
         cell.detailLabel.text = ratingInfos[indexPath.row].places_rating_created_date + ", " + ratingInfos[indexPath.row].usr_username
-        request(.GET, ratingInfos[0].usr_profile_picture).validate(contentType: ["image/*"]).responseImage() {
+        request(.GET, ratingInfos[indexPath.row].usr_profile_picture).validate(contentType: ["image/*"]).responseImage() {
             (request, _, image, error) in
             if error == nil && image != nil {
                 // The image is downloaded, cache it anyways even if the cell is dequeued and we're not displaying the image
@@ -131,14 +132,16 @@ class ReviewsViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
+        if(segue.identifier == "toAddReview"){
+            var svc = segue.destinationViewController as! AddReviewViewController;
+            svc.place_id = currentPlace
+        }
     }
-    */
+
 
 }

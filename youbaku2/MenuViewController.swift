@@ -26,9 +26,10 @@ class MenuViewController: UICollectionViewController {
     override func viewWillAppear(animated: Bool) {
         //navigationController?.navigationBar.tintColor = UIColor.whiteColor()
 //        navigationController?.navigationBar.barTintColor = UIColor(red: 98/255, green: 178/255, blue: 217/255, alpha: 1)
+        
         navigationController?.navigationBar.barTintColor = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 1)
         navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-        
+
         
         
 
@@ -111,8 +112,24 @@ class MenuViewController: UICollectionViewController {
     }
     @IBAction func signInTapped(sender: AnyObject) {
         if let username = getLoggedInUser().username{//logout
-            NSUserDefaults.standardUserDefaults().removeObjectForKey("login")
-            changeLoginTitle(NSLocalizedString("login_text", comment: ""))
+            
+            request(YouNetworking.Router2.Logout()).response(){
+                (_,_, data, error) in
+                if(error == nil){
+                    var hoge = JSON(data: data! as! NSData)
+                    println(hoge)
+                    if (hoge["status"] == "SUCCESS"){
+                        NSUserDefaults.standardUserDefaults().removeObjectForKey("login")
+                        self.changeLoginTitle(NSLocalizedString("login_text", comment: ""))
+                    }
+                }else{
+                    let alertController = UIAlertController(title: "Error", message:
+                        NSLocalizedString("review_added", comment: ""), preferredStyle: UIAlertControllerStyle.Alert)
+                    alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+                    
+                    self.presentViewController(alertController, animated: true, completion: nil)
+                }
+            }
         }else{
             let overlayVC = storyboard?.instantiateViewControllerWithIdentifier("overlayViewController") as! UIViewController
 

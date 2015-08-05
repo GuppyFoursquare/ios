@@ -10,9 +10,11 @@ import UIKit
 
 
 
-class ResultViewController2: UICollectionViewController, CLLocationManagerDelegate {
+class ResultViewController2: UICollectionViewController, CLLocationManagerDelegate, InformationDelegate {
+    
     let reuseIdentifier = "ResultCollectionCell"
     var places = [Place]()
+    var allPlaces = [Place]()
     var places2 = NSMutableOrderedSet()
     var subCatId:String!
     var animationImageView:UIImageView!
@@ -22,27 +24,39 @@ class ResultViewController2: UICollectionViewController, CLLocationManagerDelega
     let locationManager = CLLocationManager()
     var userLocation:CLLocationCoordinate2D!
     override func viewDidAppear(animated: Bool) {
-        locationManager.startUpdatingLocation()
+        
 
     }
     override func viewDidLoad() {
+        navigationController?.navigationBar.barTintColor = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 1)
+        navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+        
         animate()
-        
+        self.locationManager.delegate = self
+        self.locationManager.requestWhenInUseAuthorization()
+        self.locationManager.startUpdatingLocation()
         self.navigationItem.leftBarButtonItem?.tintColor = UIColor.whiteColor()
-
-        
-        request(YouNetworking.Router2.Search(selectedCats)).responseJSON{ request, response, JSON, error in
+        var req:YouNetworking.Router2
+        if(selectedCats.count > 0){
+            req = YouNetworking.Router2.Search(selectedCats)
+            self.navigationItem.title = "Search Results"
+        }else{
+            self.navigationItem.rightBarButtonItem = nil
+            self.navigationItem.title = "Popular Places"
+            req = YouNetworking.Router2.Popular()
+        }
+        request(req).responseJSON{ request, response, JSON, error in
             if error == nil {
                 // 4
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
                     // 5, 6, 7
                     if let js = (JSON as! NSDictionary).valueForKey("content") as? [NSDictionary]{
                         println(js)
-                        let photoInfos = ((JSON as! NSDictionary).valueForKey("content") as! [NSDictionary]).map { Place( id: $0["plc_id"] as! String, name: $0["plc_name"] as! String, image: $0["plc_header_image"], address: $0["plc_address"] as! String, rating: $0["plc_address"] as! String) }
+                        let photoInfos = ((JSON as! NSDictionary).valueForKey("content") as! [NSDictionary]).map { Place( id: $0["plc_id"] as! String, name: $0["plc_name"] as! String, image: $0["plc_header_image"], address: $0["plc_address"] as! String, rating: $0["plc_address"] as! String,  rating_avg: $0["rating_avg"], rating_count: $0["rating_count"], plc_latitude: $0["plc_latitude"], plc_longitude: $0["plc_longitude"] ) }
                         
                         let lastItem = self.places.count
                         self.places = photoInfos
-                        
+                        self.allPlaces = photoInfos
                         let indexPaths = (lastItem..<self.places.count).map { NSIndexPath(forItem: $0, inSection: 0) }
                         
                         // 11
@@ -108,13 +122,6 @@ class ResultViewController2: UICollectionViewController, CLLocationManagerDelega
 */
         }
         
-        func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
-            if let location = locations.first as? CLLocation {
-                userLocation = location.coordinate
-                self.collectionView?.reloadData()
-            }
-        }
-        
         /*
         request(YouNetworking.Router.Places(subCatId)).responseJSON() {
             (_, _, JSON, error) in
@@ -137,6 +144,27 @@ class ResultViewController2: UICollectionViewController, CLLocationManagerDelega
                 }
             }
         }*/
+    }
+    
+    func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {
+        let alertController = UIAlertController(title: "Error", message:
+            NSLocalizedString("gps_denied", comment: ""), preferredStyle: UIAlertControllerStyle.Alert)
+        alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+        
+        self.presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+        
+    }
+    
+    
+    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
+        if let location = locations.first as? CLLocation {
+            userLocation = location.coordinate
+            self.collectionView?.reloadData()
+            manager.stopUpdatingLocation()
+        }
     }
     override func viewWillAppear(animated: Bool) {
         
@@ -214,8 +242,27 @@ class ResultViewController2: UICollectionViewController, CLLocationManagerDelega
             let indexPath = self.collectionView?.indexPathForCell(cell)
             svc.restId = String(places[indexPath!.row].plc_id)
             
+        }else if(segue.identifier == "toFilter"){
+            var svc = segue.destinationViewController as! FilterViewController
+            svc.places = self.allPlaces
+            svc.delegate = self
         }
         
+    }
+    func getRatingColor(rating:Float) -> UIColor{
+        var resColor:UIColor
+        if(rating>4){
+            resColor = UIColor(red: 93/255, green: 204/255, blue: 78/255, alpha: 1)
+        }else if(rating > 3){
+            resColor = UIColor(red: 224/255, green: 213/255, blue: 65/255, alpha: 1)
+        }else if(rating>2){
+            resColor = UIColor(red: 232/255, green: 153/255, blue: 58/255, alpha: 1)
+        }else if(rating<=2){
+            resColor = UIColor(red: 240/255, green: 82/255, blue: 51/255, alpha: 1)
+        }else{
+            resColor = UIColor.whiteColor()
+        }
+        return resColor
     }
 }
 
@@ -238,11 +285,24 @@ extension ResultViewController2 : UICollectionViewDataSource {
         //1
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! ResultCollectionCell
         //2
+        
+        
+        
         if let userLocation = userLocation{
-            cell.distanceButton.setTitle(userLocation.latitude.description, forState: UIControlState.Normal)
+            var userLoc = CLLocation(latitude: userLocation.latitude, longitude: userLocation.longitude)
+            println(userLoc)
+            var placeLoc = CLLocation(latitude: (places[indexPath.row].plc_latitude as NSString).doubleValue, longitude: (places[indexPath.row].plc_longitude as NSString).doubleValue)
+            println(placeLoc)
+            var dist = userLoc.distanceFromLocation(placeLoc)
+            var dist_km = NSString(format:"%.1f km", (dist.description as NSString).doubleValue / 1000)
+            places[indexPath.row].plc_distance = dist_km.doubleValue
+            cell.distanceButton.setTitle(dist_km as String, forState: UIControlState.Normal)
         }else{
             cell.distanceButton.setTitle(" --", forState: UIControlState.Normal)
         }
+        cell.ratingLabel.text = String(stringInterpolationSegment: places[indexPath.row].rating_avg) + String("/5.0")
+        cell.ratingLabel.backgroundColor = self.getRatingColor(places[indexPath.row].rating_avg)
+        cell.commentButton.setTitle(" " + String(places[indexPath.row].rating_count), forState: .Normal)
         cell.nameLabel.text = places[indexPath.row].plc_name as String
         cell.secondLabel.text = places[indexPath.row].plc_address as String
         let urlString = "http://www.youbaku.com/uploads/places_header_images/" + (places[indexPath.row].plc_header_image as String)
@@ -269,13 +329,27 @@ extension ResultViewController2 : UICollectionViewDataSource {
 
         return cell
     }
+    
+    override func willRotateToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
+        self.collectionView?.reloadData()
+    }
+    
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
 
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         let picDimension = self.view.frame.size.width
-        return CGSizeMake(picDimension, 210)
+        return CGSizeMake(picDimension, 310)
+    }
+    func didPlacesFiltered(value:[Place]){
+        places = value
+        self.collectionView?.reloadData()
+        if(places.count == 0){
+            let alertController = UIAlertController(title: "Error", message:
+                NSLocalizedString("empty_result", comment: ""), preferredStyle: UIAlertControllerStyle.Alert)
+            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+        }
     }
     
 }
