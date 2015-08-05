@@ -15,9 +15,7 @@ class FilterViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var navigationBar: UINavigationBar!
     @IBOutlet var sortByLbl: UILabel!
     @IBOutlet var sortRatingLbl: UILabel!
-    @IBOutlet var sortLikesLbl: UILabel!
     @IBOutlet var sortDistanceLbl: UILabel!
-    @IBOutlet var sortLikesImg: UIImageView!
     @IBOutlet var sortRatingImg: UIImageView!
     @IBOutlet var sortDistanceImg: UIImageView!
     @IBOutlet var distanceText: UILabel!
@@ -35,7 +33,6 @@ class FilterViewController: UIViewController, UITextFieldDelegate {
     let numberButtonTap = UIGestureRecognizer()
     let tapRecDistance = UITapGestureRecognizer()
     let tapRecRating = UITapGestureRecognizer()
-    let tapRecLikes = UITapGestureRecognizer()
     var places = [Place]()
     
     var isOpen = false
@@ -127,10 +124,8 @@ class FilterViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         tapRecDistance.addTarget(self, action: "tappedViewDistance")
         tapRecRating.addTarget(self, action: "tappedViewRating")
-        tapRecLikes.addTarget(self, action: "tappedViewLikes")
         sortDistanceLbl.addGestureRecognizer(tapRecDistance)
         sortRatingLbl.addGestureRecognizer(tapRecRating)
-        sortLikesLbl.addGestureRecognizer(tapRecLikes)
         setBorderForButton(&button10!)
         setBorderForButton(&button20!)
         setBorderForButton(&button30!)
@@ -177,21 +172,12 @@ class FilterViewController: UIViewController, UITextFieldDelegate {
         sortByLbl.text = NSLocalizedString("sort_by_rating", comment: "")
         sortRatingImg.image = UIImage(named: "tick.png")
         sortDistanceImg.image = nil
-        sortLikesImg.image = nil
     }
     func tappedViewDistance(){
         sortType = 0
         sortByLbl.text = NSLocalizedString("sort_by_distance", comment: "")
         sortDistanceImg.image = UIImage(named: "tick.png")
         sortRatingImg.image = nil
-        sortLikesImg.image = nil
-    }
-    func tappedViewLikes(){
-        sortType = 2
-        sortByLbl.text = NSLocalizedString("sort_by_likes", comment: "")
-        sortDistanceImg.image = nil
-        sortRatingImg.image = nil
-        sortLikesImg.image = UIImage(named: "tick.png")
     }
     
     /*
