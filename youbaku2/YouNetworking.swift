@@ -60,7 +60,7 @@ struct YouNetworking {
                     
                     let params = [:]
                     
-                    return ("/api/places.php?op=nearme&lat="+"40.372877"+"&lon="+"49.842825"+"&token=" + YouNetworking.TOKEN + "&apikey=" + YouNetworking.APIKEY, params as! [String : AnyObject])
+                    return ("/api/places.php?op=nearme&lat="+lat+"&lon="+lon+"&token=" + YouNetworking.TOKEN + "&apikey=" + YouNetworking.APIKEY, params as! [String : AnyObject])
                     
                 case .Login(let user, let pass):
                     let params = ["name": user, "pass": pass]
@@ -96,7 +96,7 @@ struct YouNetworking {
         
         case SubCategories(String)
         
-        case NearbyPlaces(String, String, String)
+        case NearbyPlaces(String, Double, Double)
         
         case Search([Int])
         
@@ -133,7 +133,7 @@ struct YouNetworking {
                     return ("/api/category.php", params)
                     
                 case .NearbyPlaces(let sub_cat_id, let lat, let lon):
-                    let params = ["sub_cat_id": sub_cat_id, "lat": 40.372877, "lon": 49.842825, "op": "nearme"]
+                    let params = ["sub_cat_id": sub_cat_id, "lat": lat, "lon": lon, "op": "nearme"]
                     return ("/api/places.php?token=" + YouNetworking.TOKEN + "&apikey=" + YouNetworking.APIKEY, params as! [String : AnyObject])
                 case .Search(let cats):
                     var op = "op"
