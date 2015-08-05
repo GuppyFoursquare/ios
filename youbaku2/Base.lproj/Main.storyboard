@@ -1391,7 +1391,7 @@
         <scene sceneID="QjV-1J-UIW">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="pLc-WO-OwV" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Near Me" image="ic_yellow_marker" id="lUP-XS-BKe"/>
+                    <tabBarItem key="tabBarItem" title="Near Me" image="gps_tab" id="lUP-XS-BKe"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="lfm-nE-rfM">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1428,7 +1428,7 @@
         <scene sceneID="aNi-pw-jFd">
             <objects>
                 <navigationController id="lms-OU-hDX" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Popular" id="a63-4R-vYc"/>
+                    <tabBarItem key="tabBarItem" title="Popular" image="star" id="a63-4R-vYc"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="jHk-Yl-fMX">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1601,6 +1601,7 @@
         <image name="facebook" width="100" height="100"/>
         <image name="filter" width="48" height="48"/>
         <image name="gps" width="100" height="100"/>
+        <image name="gps_tab" width="37" height="37"/>
         <image name="home" width="37" height="37"/>
         <image name="ic_yellow_marker" width="37" height="37"/>
         <image name="menu.png" width="40" height="40"/>
@@ -1608,6 +1609,7 @@
         <image name="places_comment" width="30" height="30"/>
         <image name="places_distance" width="30" height="30"/>
         <image name="site" width="100" height="100"/>
+        <image name="star" width="37" height="37"/>
         <image name="star_empty.png" width="48" height="48"/>
         <image name="twitter" width="100" height="100"/>
         <image name="writereview" width="38" height="38"/>
@@ -1618,7 +1620,7 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="HNw-tq-GvC"/>
+        <segue reference="0AJ-Mb-AIZ"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
 </document>

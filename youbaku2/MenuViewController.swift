@@ -163,7 +163,7 @@ class MenuViewController: UICollectionViewController {
     func tapGesture(gesture: UIGestureRecognizer) {
         let section = gesture.view?.tag
         let header = gesture.view as! MainMenuCVHeader
-        if(header.arrowImage.tag != 1){
+        if(openSections.find{$0 == section} == nil){
             openSections.append(section!)
             header.arrowImage.image = UIImage(named: "arrow_up.png")
             header.arrowImage.tag = 1
