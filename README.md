@@ -19,6 +19,14 @@ Pod yüklendikten sonra Podfile içerisinde bulunun kütüphanelerin pod komutu 
 pod install
 ```
 
+### 3- PodFile
+PodFile ismi ile oluşturulan file içeriği aşağıdaki gibi olmalıdır.
+```
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '7.1'
+pod 'GoogleMaps'
+pod "MWPhotoBrowser"
+```
 Bu aşamadan sonra kütüphanelerin kullanılması sorun olmayacaktır. Proje dosyaları içerisinde <b>youbaku2.xcworkspace</b> ya da genel olarak <b>lorem.xcworkspace</b> gibi bir file oluşacaktır. Bu file ile proje açılmalıdır.
 
 * [Useful link](http://www.raywenderlich.com/64546/introduction-to-cocoapods-2)
