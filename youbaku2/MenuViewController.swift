@@ -464,6 +464,7 @@ extension MenuViewController : UICollectionViewDataSource {
                 //4
                 assert(false, "Unexpected element kind")
             }
+            return MainMenuCVHeader()
     }
     
     /*

@@ -367,6 +367,9 @@ class RestaurantViewController: UIViewController, UIActionSheetDelegate, UIScrol
     func stopAnimation(){
         animating = false;
     }
+    override func willRotateToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
+        self.collectionView1.reloadData()
+    }
     func animate(){
         let screenSize: CGRect = UIScreen.mainScreen().bounds
      

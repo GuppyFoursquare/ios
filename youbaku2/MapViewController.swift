@@ -250,6 +250,7 @@ class MapViewController: UIViewController, TypesTableViewControllerDelegate, CLL
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    self.navigationItem.rightBarButtonItem = nil
     navigationController?.navigationBar.barTintColor = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 1)
     navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
     locationManager.delegate = self

@@ -24,6 +24,7 @@ class TypesTableViewController: UITableViewController {
       return sorted(possibleTypesDictionary.keys)
     }
   }
+    
     override func viewWillAppear(animated: Bool) {
         animate()
 
