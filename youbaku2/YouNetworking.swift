@@ -108,6 +108,8 @@ struct YouNetworking {
         
         case Popular()
         
+        case UserRegister(String, String, String, String, String, String)
+        
         var URLRequest: NSURLRequest {
             let (path: String, parameters: [String: AnyObject]) = {
                 switch self {
@@ -135,23 +137,45 @@ struct YouNetworking {
                 case .NearbyPlaces(let sub_cat_id, let lat, let lon):
                     let params = ["sub_cat_id": sub_cat_id, "lat": lat, "lon": lon, "op": "nearme"]
                     return ("/api/places.php?token=" + YouNetworking.TOKEN + "&apikey=" + YouNetworking.APIKEY, params as! [String : AnyObject])
+                    
                 case .Search(let cats):
                     var op = "op"
                     let params = ["subcat_list": cats.description, op: "search"]
                     return ("/api/places.php?token=" + YouNetworking.TOKEN + "&apikey=" + YouNetworking.APIKEY, params as [String : String])
+                    
                 case .Login(let user, let pass):
                     let params = ["name": user, "pass": pass]
                     return ("/api/auth.php?op=login&token=" + YouNetworking.TOKEN + "&apikey=" + YouNetworking.APIKEY, params )
+                    
                 case .AddReview(let comment, let rating, let plc_id):
                     let params = ["plc_id": plc_id, "message": comment, "score": rating]
                     return ("/api/auth.php?op=comment&token=" + YouNetworking.TOKEN + "&apikey=" + YouNetworking.APIKEY, params as! [String : AnyObject] )
+                    
                 case .Logout():
                     let op = "op"
                     let params = [op:"logout"]
                     return ("/api/auth.php?token=" + YouNetworking.TOKEN + "&apikey=" + YouNetworking.APIKEY, params)
+                    
                 case .Popular():
                     let params = [:]
                     return ("/api/places.php?op=search&popular=1&token=" + YouNetworking.TOKEN + "&apikey=" + YouNetworking.APIKEY, params as! [String : AnyObject])
+                    
+                case .UserRegister(let firstName, let lastName, let userName, let userEmail, let userPass, let userConfirmPass):
+                    let op = "op"
+                    let mem_first_name = "mem_first_name"
+                    let mem_last_name = "mem_last_name"
+                    let mem_user_name = "mem_user_name"
+                    let mem_email = "mem_email"
+                    let mem_password = "mem_password"
+                    let cmem_password = "cmem_password"
+                    let params = [  op: "register",
+                                    mem_first_name: firstName,
+                                    mem_last_name: lastName,
+                                    mem_user_name: userName,
+                                    mem_email: userEmail,
+                                    mem_password: userPass,
+                                    cmem_password: userConfirmPass]
+                    return ("/api/auth.php?token=" + YouNetworking.TOKEN + "&apikey=" + YouNetworking.APIKEY, params)
                 }
                 
                 }()
