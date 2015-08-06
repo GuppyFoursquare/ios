@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A1DE8681B733E9500F31D2E /* ViewControllerRegister.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1DE8671B733E9400F31D2E /* ViewControllerRegister.swift */; };
 		7317F3AB1B550F4100408610 /* GoogleDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7317F3A91B550F4100408610 /* GoogleDataProvider.swift */; };
 		7317F3AC1B550F4100408610 /* GooglePlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7317F3AA1B550F4100408610 /* GooglePlace.swift */; };
 		7317F3B11B550F5800408610 /* MarkerInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7317F3AE1B550F5800408610 /* MarkerInfoView.swift */; };
@@ -114,6 +115,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0A1DE8671B733E9400F31D2E /* ViewControllerRegister.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerRegister.swift; sourceTree = "<group>"; };
 		60902DAF0FD8658CF93569BB /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		7317F3A91B550F4100408610 /* GoogleDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleDataProvider.swift; sourceTree = "<group>"; };
 		7317F3AA1B550F4100408610 /* GooglePlace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GooglePlace.swift; sourceTree = "<group>"; };
@@ -386,6 +388,7 @@
 				73BB3F141B65007000139E4A /* TabBarController.swift */,
 				734145C61B677C2E00530A35 /* ReviewCell.swift */,
 				734145C81B677C6B00530A35 /* ReviewsViewController.swift */,
+				0A1DE8671B733E9400F31D2E /* ViewControllerRegister.swift */,
 			);
 			path = youbaku2;
 			sourceTree = "<group>";
@@ -624,6 +627,7 @@
 				739D88261B3971040097AED3 /* SubCategoryViewController.swift in Sources */,
 				73A88D7D1B61050500996B7F /* OverlayViewController.swift in Sources */,
 				7317F3DA1B551E7900408610 /* PlaceMarker.swift in Sources */,
+				0A1DE8681B733E9500F31D2E /* ViewControllerRegister.swift in Sources */,
 				73C7D02B1B3BF1290028FC76 /* Manager.swift in Sources */,
 				73C7D03B1B3C0EED0028FC76 /* SimpleImageCache.swift in Sources */,
 				73C7D00D1B3997770028FC76 /* ResultViewController2.swift in Sources */,
