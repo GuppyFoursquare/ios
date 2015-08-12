@@ -57,10 +57,10 @@ struct YouNetworking {
                     return ("/api/category.php?token=" + YouNetworking.TOKEN + "&apikey=" + YouNetworking.APIKEY + "&cat_id="+cat_id, params)
                     
                 case .NearbyPlaces(let lat, let lon):
-                    
                     let params = [:]
-                    
-                    return ("/api/places.php?op=nearme&lat="+lat+"&lon="+lon+"&token=" + YouNetworking.TOKEN + "&apikey=" + YouNetworking.APIKEY, params as! [String : AnyObject])
+                    let lat2 = "40.372877"
+                    let lon2 = "49.842825"
+                    return ("/api/places.php?op=nearme&lat="+lat2+"&lon="+lon2+"&token=" + YouNetworking.TOKEN + "&apikey=" + YouNetworking.APIKEY, params as! [String : AnyObject])
                     
                 case .Login(let user, let pass):
                     let params = ["name": user, "pass": pass]

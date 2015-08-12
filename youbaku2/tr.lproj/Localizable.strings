@@ -25,3 +25,4 @@ review_added = "Yorumunuz eklendi, teşekkürler.";
 open = "AÇIK";
 closed = "KAPALI";
 login_required_error = "Bu işlem için giriş yapmalısınız.";
+login_failed = "Kullanıcı adı ve şifrenizi kontrol ediniz.";

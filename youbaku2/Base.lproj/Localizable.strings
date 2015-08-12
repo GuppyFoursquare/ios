@@ -25,3 +25,4 @@ review_added = "Thanks, your review added successfully.";
 open = "OPEN";
 closed = "CLOSED";
 login_required_error = "You must login to do this.";
+login_failed = "Check your username and password.";

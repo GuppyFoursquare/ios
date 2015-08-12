@@ -15,7 +15,7 @@ class MapViewController: UIViewController, TypesTableViewControllerDelegate, CLL
   @IBOutlet weak var pinImageVerticalConstraint: NSLayoutConstraint!
   var searchedTypes = ["bakery", "bar", "cafe", "grocery_or_supermarket", "restaurant"]
   var places = [Place]()
-  
+    var rest_images = Dictionary<String, UIImage>()
   let locationManager = CLLocationManager()
   let dataProvider = GoogleDataProvider()
   
@@ -46,7 +46,9 @@ class MapViewController: UIViewController, TypesTableViewControllerDelegate, CLL
             println(JSON as! NSDictionary)
                 // 5, 6, 7
             if let js = (JSON as! NSDictionary).valueForKey("content") as? [NSDictionary]{
-                let placeInfos = ((JSON as! NSDictionary).valueForKey("content") as! [NSDictionary]).map { Place( id: $0["plc_id"] as! String, name: $0["plc_name"] as! String, image: $0["plc_header_image"], address: $0["plc_address"] as! String, rating: $0["plc_address"] as! String, lat:$0["plc_latitude"] as! String, long:$0["plc_longitude"] as! String ) }
+//                let placeInfos = ((JSON as! NSDictionary).valueForKey("content") as! [NSDictionary]).map { Place( id: $0["plc_id"] as! String, name: $0["plc_name"] as! String, image: $0["plc_header_image"], address: $0["plc_address"] as! String, rating: $0["plc_address"] as! String, lat:$0["plc_latitude"] as! String, long:$0["plc_longitude"] as! String ) }
+                
+                let placeInfos = ((JSON as! NSDictionary).valueForKey("content") as! [NSDictionary]).map { Place( id: $0["plc_id"] as! String, name: $0["plc_name"] as! String, image: $0["plc_header_image"], address: $0["plc_address"] as! String, rating: $0["plc_address"] as! String,  rating_avg: $0["rating_avg"], rating_count: $0["rating_count"], plc_latitude: $0["plc_latitude"], plc_longitude: $0["plc_longitude"] ) }
             
                 let lastItem = self.places.count
                 self.places = placeInfos
@@ -103,7 +105,22 @@ class MapViewController: UIViewController, TypesTableViewControllerDelegate, CLL
     }
     
   }
-    
+    func getRatingColor(rating:Float) -> UIColor{
+        var resColor:UIColor
+        if(rating>4){
+            resColor = UIColor(red: 93/255, green: 204/255, blue: 78/255, alpha: 1)
+        }else if(rating > 3){
+            resColor = UIColor(red: 224/255, green: 213/255, blue: 65/255, alpha: 1)
+        }else if(rating>2){
+            resColor = UIColor(red: 232/255, green: 153/255, blue: 58/255, alpha: 1)
+        }else if(rating<=2){
+            resColor = UIColor(red: 240/255, green: 82/255, blue: 51/255, alpha: 1)
+        }else{
+            resColor = UIColor.whiteColor()
+        }
+        return resColor
+    }
+   
     func mapView(mapView: GMSMapView!, markerInfoWindow marker: GMSMarker!) -> UIView! {
         let placeMarker = marker as! PlaceMarker
         
@@ -111,13 +128,40 @@ class MapViewController: UIViewController, TypesTableViewControllerDelegate, CLL
         if let infoView = UIView.viewFromNibName("MarkerInfoView2") as? MarkerInfoView {
             // 3
             infoView.nameLabel.text = placeMarker.place.plc_name as String
-            
+            infoView.ratingLabel.text = (NSString(format: "%.1f", placeMarker.place.rating_avg) as String) + "/5.0"
+            infoView.ratingLabel.backgroundColor = self.getRatingColor(placeMarker.place.rating_avg)
             // 4
             var photo = placeMarker.place.plc_header_image
+            infoView.placePhoto.image = UIImage(named: "place_detail_image_placeholder")
             if(photo != ""){
-                infoView.placePhoto.image = UIImage(named: "18.jpg")
-            } else {
-                infoView.placePhoto.image = UIImage(named: "generic")
+
+                
+                let url = NSURL(string: "http://www.youbaku.com/uploads/places_header_images/" + (placeMarker.place.plc_header_image as String))
+                
+                
+                var request = NSURLRequest(URL: url!)
+                if(rest_images[request.URLString] != nil){
+                    infoView.placePhoto.image = rest_images[request.URLString]
+                }else{
+                    SimpleCache.sharedInstance.getImage(url!, completion: { (im:UIImage?, err:NSError?) -> () in
+                        if(err == nil){
+                            self.rest_images[request.URLString] = im
+
+                            if let mkr = mapView.selectedMarker {
+                                if(mapView.selectedMarker.position.latitude == marker.position.latitude){
+                                    mapView.selectedMarker = nil
+                                    mapView.selectedMarker = marker
+                                }
+                            }else{
+                                mapView.selectedMarker = nil
+                                mapView.selectedMarker = marker
+                            }
+                        }else{
+                        
+                        }
+                    })
+                }
+
             }
             
             return infoView

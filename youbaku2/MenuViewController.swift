@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MenuViewController: UICollectionViewController {
+class MenuViewController: UICollectionViewController, InformationDelegate2 {
     let imageCache = NSCache()
     var cats = [Category]()
     lazy var data = NSMutableData()
@@ -18,6 +18,7 @@ class MenuViewController: UICollectionViewController {
     var cellCounts = Array<Int>()
     var selectedCats = Array<Int>()
     var openSections = Array<Int>()
+    var firstSection:MainMenuCVHeader!
     private let reuseIdentifier = "MenuCell"
     let overlayTransitioningDelegate = OverlayTransitioningDelegate()
 //    private let sectionInsets = UIEdgeInsets(top: 50.0, left: 20.0, bottom: 50.0, right: 20.0)
@@ -112,7 +113,7 @@ class MenuViewController: UICollectionViewController {
     }
     @IBAction func signInTapped(sender: AnyObject) {
         if let username = getLoggedInUser().username{//logout
-            
+            animate()
             request(YouNetworking.Router2.Logout()).response(){
                 (_,_, data, error) in
                 if(error == nil){
@@ -129,11 +130,13 @@ class MenuViewController: UICollectionViewController {
                     
                     self.presentViewController(alertController, animated: true, completion: nil)
                 }
+                self.stopAnimation()
             }
         }else{
-            let overlayVC = storyboard?.instantiateViewControllerWithIdentifier("overlayViewController") as! UIViewController
+            let overlayVC = storyboard?.instantiateViewControllerWithIdentifier("overlayViewController") as! OverlayViewController
 
             prepareOverlayVC(overlayVC)
+            overlayVC.delegate = self
             presentViewController(overlayVC, animated: true, completion: nil)
         }
     }
@@ -163,23 +166,27 @@ class MenuViewController: UICollectionViewController {
     func tapGesture(gesture: UIGestureRecognizer) {
         let section = gesture.view?.tag
         let header = gesture.view as! MainMenuCVHeader
+        toggleSection(section!, header: header)
+    }
+    func toggleSection(section:Int, header:MainMenuCVHeader){
+        
         if(openSections.find{$0 == section} == nil){
-            openSections.append(section!)
+            openSections.append(section)
             header.arrowImage.image = UIImage(named: "arrow_up.png")
             header.arrowImage.tag = 1
         }else{
-            openSections.removeObject(section!)
+            openSections.removeObject(section)
             header.arrowImage.image = UIImage(named: "arrow_down.png")
             header.arrowImage.tag = 0
         }
-        var indexPathsToDelete = indexPathsForRowsInSectionAtIndex(section!)
-        if(cellCounts[section!] != 0){
-            cellCounts[section!] = 0
+        var indexPathsToDelete = indexPathsForRowsInSectionAtIndex(section)
+        if(cellCounts[section] != 0){
+            cellCounts[section] = 0
             self.collectionView!.performBatchUpdates({
                 self.collectionView!.deleteItemsAtIndexPaths(indexPathsToDelete as [AnyObject])
                 }, completion: nil)
         }else{
-            cellCounts[section!] = cats[section!].sub_cats.count
+            cellCounts[section] = cats[section].sub_cats.count
             self.collectionView!.performBatchUpdates({
                 self.collectionView!.insertItemsAtIndexPaths(indexPathsToDelete as [AnyObject])
                 }, completion: nil)
@@ -202,6 +209,8 @@ class MenuViewController: UICollectionViewController {
         }else if segue.identifier == "bouncySegue" {
             let overlayVC = segue.destinationViewController as! UIViewController
             prepareOverlayVC(overlayVC)
+        }else if (segue.identifier == "toLogin"){
+            
         }
 
     }
@@ -212,6 +221,7 @@ class MenuViewController: UICollectionViewController {
     }
     
     func loadPlaces(){
+        animate()
         let catsData = NSUserDefaults.standardUserDefaults().objectForKey("cats") as? NSData
         /*
         if let catsData = catsData {
@@ -302,6 +312,7 @@ class MenuViewController: UICollectionViewController {
                                     // 11
                                     dispatch_async(dispatch_get_main_queue()) {
                                         self.collectionView!.insertItemsAtIndexPaths(indexPaths)
+                                        self.stopAnimation()
                                     }
                                 }
                             }
@@ -312,6 +323,54 @@ class MenuViewController: UICollectionViewController {
             }
       //  }
 
+    }
+    var animationImageView:UIImageView!
+    var animating = false;
+    var circleView:CircleView!
+    func stopAnimation(){
+        animating = false;
+    }
+    func animate(){
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        
+        if(animating == false)
+        {
+            circleView = CircleView(frame: CGRectMake(0, 0, screenSize.width, screenSize.height))
+            animationImageView = UIImageView()
+            animationImageView.frame = CGRect(x: 0, y: 0, width: screenSize.width, height: screenSize.height)
+            animationImageView.backgroundColor = UIColor.whiteColor()
+            circleView = CircleView(frame: CGRectMake(0, 0, screenSize.width, screenSize.height))
+            animationImageView.addSubview(circleView)
+            view.addSubview(animationImageView)
+        }
+        animating = true
+        
+        
+        
+        let duration = 0.5
+        let delay = 0.0
+        let options = UIViewKeyframeAnimationOptions.CalculationModeLinear
+        
+        let fullRotation = CGFloat(M_PI * 2)
+        
+        UIView.animateKeyframesWithDuration(duration, delay: delay, options: options, animations: {
+            UIView.addKeyframeWithRelativeStartTime(0, relativeDuration: 1/2, animations: {
+                
+                self.circleView.transform = CGAffineTransformMakeScale(0.1, 0.1)
+            })
+            UIView.addKeyframeWithRelativeStartTime(1/2, relativeDuration: 1/2, animations: {
+                self.circleView.transform = CGAffineTransformMakeScale(1.0, 1.0)
+            })
+            
+            }, completion: {finished in
+                if(self.animating){
+                    self.animate()
+                }else{
+                    self.circleView.removeFromSuperview()
+                    self.animationImageView.removeFromSuperview()
+                }
+                
+        })
     }
 }
 
@@ -400,7 +459,11 @@ extension MenuViewController : UICollectionViewDataSource {
         cell.label.text=cats[indexPath.row].cat_name as String
         */
         
-        
+        if(selectedCats.find{$0 == self.cats[indexPath.section].sub_cats[indexPath.row].cat_id} != nil){
+            cell.imageView.image = UIImage(named: "tick.png")
+        }else{
+            cell.imageView.image = nil
+        }
         cell.label.text = cats[indexPath.section].sub_cats[indexPath.row].cat_name
         return cell
     }
@@ -458,7 +521,9 @@ extension MenuViewController : UICollectionViewDataSource {
                 headerView.addGestureRecognizer(tapGesture)
                 // make sure imageView can be interacted with by user
                 headerView.userInteractionEnabled = true
-                
+                if(firstSection == nil){
+                    firstSection = headerView
+                }
                 return headerView
             default:
                 //4
@@ -466,13 +531,19 @@ extension MenuViewController : UICollectionViewDataSource {
             }
             return MainMenuCVHeader()
     }
-    
+
     /*
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
         let leftRightInset = self.view.frame.size.width / 14.0
         return UIEdgeInsetsMake(0, leftRightInset, 0, leftRightInset)
     }
-    */    
+    */
+    
+    func didSignUp() {
+        let vc = storyboard?.instantiateViewControllerWithIdentifier("RegisterViewController") as! ViewControllerRegister
+        
+        presentViewController(vc, animated: true, completion: nil)
+    }
     
     
 }

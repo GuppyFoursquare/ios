@@ -43,13 +43,13 @@ class CircleView: UIView {
         let center = CGPointMake(self.frame.size.width / 2, self.frame.size.height / 2)
         
         // Set the stroke color
-        CGContextSetStrokeColorWithColor(context, UIColor.blueColor().CGColor)
+        CGContextSetStrokeColorWithColor(context, UIColor(red: 233/255, green: 203/255, blue: 73/255, alpha: 1).CGColor)
         
         // Set the line width
         CGContextSetLineWidth(context, CGFloat(strokeWidth))
         
         // Set the fill color (if you are filling the circle)
-        CGContextSetFillColorWithColor(context, UIColor.blueColor().CGColor)
+        CGContextSetFillColorWithColor(context, UIColor(red: 233/255, green: 203/255, blue: 73/255, alpha: 1).CGColor)
         
         // Rotate the angles so that the inputted angles are intuitive like the clock face: the top is 0 (or 2π), the right is π/2, the bottom is π and the left is 3π/2.
         // In essence, this appears like a unit circle rotated π/2 anti clockwise.

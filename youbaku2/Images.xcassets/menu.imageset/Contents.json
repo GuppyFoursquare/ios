@@ -2,16 +2,18 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x"
+      "scale" : "1x",
+      "filename" : "menu-2.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "coffee@2x.png"
+      "filename" : "menu-1.png"
     },
     {
       "idiom" : "universal",
-      "scale" : "3x"
+      "scale" : "3x",
+      "filename" : "menu.png"
     }
   ],
   "info" : {

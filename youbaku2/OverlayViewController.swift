@@ -17,10 +17,12 @@
 import UIKit
 
 class OverlayViewController: UIViewController, UITextFieldDelegate {
+    var delegate:InformationDelegate2!
     var originWithKeyboard:CGFloat!
     var originWithoutKeyboard:CGFloat!
     @IBOutlet var txtUsername: UITextField!
     @IBOutlet var txtPassword: UITextField!
+    @IBOutlet weak var loginBtn: UIButton!
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -58,7 +60,7 @@ class OverlayViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func loginTapped(sender: AnyObject) {
-        
+        loginBtn.enabled = false
         request(YouNetworking.Router2.Login(txtUsername.text, txtPassword.text)).response() {
             (_, _, data, error) in
             if error == nil {
@@ -71,15 +73,35 @@ class OverlayViewController: UIViewController, UITextFieldDelegate {
                         xxx.changeLoginTitle("Logout")
                         xxx.saveLogin(data as! NSData)
                         self.presentingViewController!.dismissViewControllerAnimated(true, completion: nil)
+                    }else{
+                        let alertController = UIAlertController(title: "Error", message:
+                            NSLocalizedString("login_failed", comment: ""), preferredStyle: UIAlertControllerStyle.Alert)
+                        alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+                        self.loginBtn.enabled = true
+                        self.presentViewController(alertController, animated: true, completion: nil)
                     }
+                }else{
+                    let alertController = UIAlertController(title: "Error", message:
+                        NSLocalizedString("login_failed", comment: ""), preferredStyle: UIAlertControllerStyle.Alert)
+                    alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+                    self.loginBtn.enabled = true
+                    self.presentViewController(alertController, animated: true, completion: nil)
                 }
+                
             }
         }
         
         
     }
     
+    @IBAction func signUpTapped(sender: AnyObject) {
+        presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+        if let d = self.delegate {
 
+            d.didSignUp()
+        }
+        
+    }
   @IBAction func handleDismissedPressed(sender: AnyObject) {
     presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
   }
