@@ -123,15 +123,15 @@ class ViewControllerRegister: UIViewController, UITextFieldDelegate {
         }
         */
         if(userFirstName.text.isEmpty || userSurname.text.isEmpty || username.text.isEmpty || userEmail.text.isEmpty || userPass.text.isEmpty || userPassConfirm.text.isEmpty){
-            let alertController = UIAlertController(title: "Error", message:
+            let alertController = UIAlertController(title: NSLocalizedString("error_title", comment: ""), message:
                 NSLocalizedString("signup_all_fields_requires", comment: ""), preferredStyle: UIAlertControllerStyle.Alert)
-            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+            alertController.addAction(UIAlertAction(title: NSLocalizedString("ok_title", comment: ""), style: UIAlertActionStyle.Default,handler: nil))
             self.presentViewController(alertController, animated: true, completion: nil)
         }
         if(userPass.text != userPassConfirm.text){
-                let alertController = UIAlertController(title: "Error", message:
+                let alertController = UIAlertController(title: NSLocalizedString("error_title", comment: ""), message:
                     NSLocalizedString("signup_password_not_match", comment: ""), preferredStyle: UIAlertControllerStyle.Alert)
-                alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+                alertController.addAction(UIAlertAction(title: NSLocalizedString("ok_title", comment: ""), style: UIAlertActionStyle.Default,handler: nil))
                 self.presentViewController(alertController, animated: true, completion: nil)
         }
         else{
@@ -147,7 +147,11 @@ class ViewControllerRegister: UIViewController, UITextFieldDelegate {
                     if status=="SUCCESS" {
                         
                         if let content = hoge["content"].dictionary {
-                            println(content);
+                            var xxx = self.presentingViewController?.childViewControllers[0].childViewControllers[0] as! MenuViewController
+                            
+                            xxx.changeLoginTitle("Logout")
+                            xxx.saveLogin(data as! NSData)
+                            self.presentingViewController!.dismissViewControllerAnimated(true, completion: nil)
                         }
                         
                         println("İşlem başarılı geri dönebilirsin")

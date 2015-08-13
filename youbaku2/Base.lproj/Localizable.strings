@@ -26,3 +26,6 @@ open = "OPEN";
 closed = "CLOSED";
 login_required_error = "You must login to do this.";
 login_failed = "Check your username and password.";
+done_title = "SUCCESS";
+error_title = "ERROR";
+ok_title = "OK";

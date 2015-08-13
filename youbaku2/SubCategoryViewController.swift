@@ -37,9 +37,9 @@ class SubCategoryViewController: UICollectionViewController {
                 }
             }
         }else{
-            let alertController = UIAlertController(title: "Error", message:
+            let alertController = UIAlertController(title: NSLocalizedString("error_title", comment: ""), message:
                 "Network error occured!", preferredStyle: UIAlertControllerStyle.Alert)
-            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+            alertController.addAction(UIAlertAction(title: NSLocalizedString("ok_title", comment: ""), style: UIAlertActionStyle.Default,handler: nil))
             
             self.presentViewController(alertController, animated: true, completion: nil)
         }

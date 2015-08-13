@@ -699,6 +699,7 @@
                         <outlet property="button40" destination="xnm-Nq-BE9" id="KXq-bS-0YX"/>
                         <outlet property="button50" destination="IsT-jt-lpW" id="cRg-5l-e1T"/>
                         <outlet property="cancelBtn" destination="q4r-N7-ltd" id="edp-mc-DNg"/>
+                        <outlet property="distanceSlider" destination="uDJ-h0-SMt" id="6ub-up-1Di"/>
                         <outlet property="distanceText" destination="b6N-oW-yd4" id="92G-7r-YhP"/>
                         <outlet property="isOpenToggle" destination="D73-eR-ae1" id="eqF-Am-cmc"/>
                         <outlet property="isPopularToggle" destination="kRV-gH-0i0" id="CGK-Ed-Pdd"/>
@@ -1652,7 +1653,7 @@
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="User Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ed1-TI-8bN">
                                                 <rect key="frame" x="8" y="160" width="304" height="30"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                                 <connections>
                                                     <outlet property="delegate" destination="Tpa-jt-LtR" id="nQG-wS-wbg"/>
                                                 </connections>
@@ -1660,7 +1661,7 @@
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="User Confirm Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oE6-DT-5Yq">
                                                 <rect key="frame" x="8" y="198" width="304" height="30"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                                 <connections>
                                                     <outlet property="delegate" destination="Tpa-jt-LtR" id="pFk-9o-niE"/>
                                                 </connections>

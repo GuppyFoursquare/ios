@@ -60,7 +60,7 @@ struct YouNetworking {
                     let params = [:]
                     let lat2 = "40.372877"
                     let lon2 = "49.842825"
-                    return ("/api/places.php?op=nearme&lat="+lat2+"&lon="+lon2+"&token=" + YouNetworking.TOKEN + "&apikey=" + YouNetworking.APIKEY, params as! [String : AnyObject])
+                    return ("/api/places.php?op=nearme&lat="+lat+"&lon="+lon+"&token=" + YouNetworking.TOKEN + "&apikey=" + YouNetworking.APIKEY, params as! [String : AnyObject])
                     
                 case .Login(let user, let pass):
                     let params = ["name": user, "pass": pass]

@@ -38,6 +38,7 @@ class MapViewController: UIViewController, TypesTableViewControllerDelegate, CLL
   }
 
   func fetchNearbyPlaces(coordinate: CLLocationCoordinate2D) {
+    animate()
     mapView.clear()
     request(YouNetworking.Router.NearbyPlaces("\(coordinate.latitude)", "\(coordinate.longitude)")).responseJSON() {
         (_, _, JSON, error) in
@@ -48,7 +49,7 @@ class MapViewController: UIViewController, TypesTableViewControllerDelegate, CLL
             if let js = (JSON as! NSDictionary).valueForKey("content") as? [NSDictionary]{
 //                let placeInfos = ((JSON as! NSDictionary).valueForKey("content") as! [NSDictionary]).map { Place( id: $0["plc_id"] as! String, name: $0["plc_name"] as! String, image: $0["plc_header_image"], address: $0["plc_address"] as! String, rating: $0["plc_address"] as! String, lat:$0["plc_latitude"] as! String, long:$0["plc_longitude"] as! String ) }
                 
-                let placeInfos = ((JSON as! NSDictionary).valueForKey("content") as! [NSDictionary]).map { Place( id: $0["plc_id"] as! String, name: $0["plc_name"] as! String, image: $0["plc_header_image"], address: $0["plc_address"] as! String, rating: $0["plc_address"] as! String,  rating_avg: $0["rating_avg"], rating_count: $0["rating_count"], plc_latitude: $0["plc_latitude"], plc_longitude: $0["plc_longitude"] ) }
+                let placeInfos = ((JSON as! NSDictionary).valueForKey("content") as! [NSDictionary]).map { Place( id: $0["plc_id"] as! String, name: $0["plc_name"] as! String, image: $0["plc_header_image"], address: $0["plc_address"] as! String, rating: $0["plc_address"] as! String,  rating_avg: $0["rating_avg"], rating_count: $0["rating_count"], plc_latitude: $0["plc_latitude"], plc_longitude: $0["plc_longitude"], is_open: $0["plc_is_open"] ) }
             
                 let lastItem = self.places.count
                 self.places = placeInfos
@@ -62,12 +63,13 @@ class MapViewController: UIViewController, TypesTableViewControllerDelegate, CLL
             
             }
         }else{
-            let alertController = UIAlertController(title: "Error", message:
+            let alertController = UIAlertController(title: NSLocalizedString("error_title", comment: ""), message:
                 NSLocalizedString("empty_result", comment: ""), preferredStyle: UIAlertControllerStyle.Alert)
-            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+            alertController.addAction(UIAlertAction(title: NSLocalizedString("ok_title", comment: ""), style: UIAlertActionStyle.Default,handler: nil))
             
             self.presentViewController(alertController, animated: true, completion: nil)
         }
+        self.stopAnimation()
         
     }
 
@@ -113,6 +115,8 @@ class MapViewController: UIViewController, TypesTableViewControllerDelegate, CLL
             resColor = UIColor(red: 224/255, green: 213/255, blue: 65/255, alpha: 1)
         }else if(rating>2){
             resColor = UIColor(red: 232/255, green: 153/255, blue: 58/255, alpha: 1)
+        }else if(rating==0){
+            resColor = UIColor(red: 119/255, green: 119/255, blue: 119/255, alpha: 1)
         }else if(rating<=2){
             resColor = UIColor(red: 240/255, green: 82/255, blue: 51/255, alpha: 1)
         }else{
@@ -241,7 +245,54 @@ class MapViewController: UIViewController, TypesTableViewControllerDelegate, CLL
     }
 */
   }
-  
+    var animationImageView:UIImageView!
+    var animating = false;
+    var circleView:CircleView!
+    func stopAnimation(){
+        animating = false;
+    }
+    func animate(){
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        
+        if(animating == false)
+        {
+            circleView = CircleView(frame: CGRectMake(0, 0, screenSize.width, screenSize.height))
+            animationImageView = UIImageView()
+            animationImageView.frame = CGRect(x: 0, y: 0, width: screenSize.width, height: screenSize.height)
+            animationImageView.backgroundColor = UIColor.whiteColor()
+            circleView = CircleView(frame: CGRectMake(0, 0, screenSize.width, screenSize.height))
+            animationImageView.addSubview(circleView)
+            view.addSubview(animationImageView)
+        }
+        animating = true
+        
+        
+        
+        let duration = 0.5
+        let delay = 0.0
+        let options = UIViewKeyframeAnimationOptions.CalculationModeLinear
+        
+        let fullRotation = CGFloat(M_PI * 2)
+        
+        UIView.animateKeyframesWithDuration(duration, delay: delay, options: options, animations: {
+            UIView.addKeyframeWithRelativeStartTime(0, relativeDuration: 1/2, animations: {
+                
+                self.circleView.transform = CGAffineTransformMakeScale(0.1, 0.1)
+            })
+            UIView.addKeyframeWithRelativeStartTime(1/2, relativeDuration: 1/2, animations: {
+                self.circleView.transform = CGAffineTransformMakeScale(1.0, 1.0)
+            })
+            
+            }, completion: {finished in
+                if(self.animating){
+                    self.animate()
+                }else{
+                    self.circleView.removeFromSuperview()
+                    self.animationImageView.removeFromSuperview()
+                }
+                
+        })
+    }
   func mapView(mapView: GMSMapView!, didTapInfoWindowOfMarker marker: GMSMarker!) {
 
     let googleMarker = mapView.selectedMarker as! PlaceMarker

@@ -55,6 +55,8 @@ class ReviewsViewController: UIViewController, UITableViewDataSource, UITableVie
             resColor = UIColor(red: 224/255, green: 213/255, blue: 65/255, alpha: 1)
         }else if(rating>2){
             resColor = UIColor(red: 232/255, green: 153/255, blue: 58/255, alpha: 1)
+        }else if(rating==0){
+            resColor = UIColor(red: 119/255, green: 119/255, blue: 119/255, alpha: 1)
         }else if(rating<=2){
             resColor = UIColor(red: 240/255, green: 82/255, blue: 51/255, alpha: 1)
         }else{

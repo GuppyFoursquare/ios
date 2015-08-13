@@ -26,3 +26,6 @@ open = "AÇIK";
 closed = "KAPALI";
 login_required_error = "Bu işlem için giriş yapmalısınız.";
 login_failed = "Kullanıcı adı ve şifrenizi kontrol ediniz.";
+done_title = "BAŞARILI";
+error_title = "HATA";
+ok_title = "Tamam";

@@ -28,6 +28,7 @@ class FilterViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var isOpenToggle: UISwitch!
     @IBOutlet var isPopularToggle: UISwitch!
     @IBOutlet var keywordTxt: UITextField!
+    @IBOutlet weak var distanceSlider: UISlider!
 
     @IBOutlet var cancelBtn: UIBarButtonItem!
     let numberButtonTap = UIGestureRecognizer()
@@ -38,7 +39,7 @@ class FilterViewController: UIViewController, UITextFieldDelegate {
     var isOpen = false
     var isPopular = false
     var placeLimit = 20
-    var distanceLimit = 2.0
+    var distanceLimit:Float = -1
     var sortType = -1
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
@@ -51,40 +52,47 @@ class FilterViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func filterButtonTapped(sender: AnyObject) {
         
+        Globals.filterKeyWord = keywordTxt.text
+        Globals.filterOpen = isOpenToggle.on
+        Globals.filterPopular = isPopularToggle.on
+        Globals.filterDistance = distanceLimit
+        Globals.filterSort = sortType
+        Globals.filterCount = placeLimit
         for index in stride(from: places.count - 1, through: 0, by: -1) {
-            if(keywordTxt.text != ""){
-                if (places[index].plc_name.lowercaseString.rangeOfString(keywordTxt.text) == nil) {
+            
+            if(keywordTxt.text != "" && places[index].plc_name.lowercaseString.rangeOfString(keywordTxt.text) == nil && places[index].plc_info.lowercaseString.rangeOfString(keywordTxt.text) == nil) {
                     places.removeAtIndex(index)
                     continue
                 }
-            }
+            
             if(isOpenToggle.on){
                 if(places[index].plc_is_open != "1"){
                     places.removeAtIndex(index)
                     continue
                 }
             }
-            /* //popular?
+            
+             //popular?
             if(isPopularToggle.on){
-                if(places[index].plc_ != "1"){
+                if(places[index].rating_count == 0){
                     places.removeAtIndex(index)
                     continue
                 }
-            }*/
-            /*
+            }
+            
             if(distanceLimit != -1.0 && distanceLimit < places[index].plc_distance){
                 places.removeAtIndex(index)
                 continue
             }
-*/
+
         }
 //        images.sort({ $0.fileID > $1.fileID })
         if(sortType == 0){
-            places.sort({ $0.plc_distance > $1.plc_distance })
+            places.sort({ $0.plc_distance < $1.plc_distance})
         }else if(sortType == 1){
             places.sort({ $0.rating_avg > $1.rating_avg })
         }
-        if(places.count > placeLimit){
+        if(places.count > placeLimit && placeLimit != -1){
             places = Array(places[0..<placeLimit])
         }
         if let d = self.delegate {
@@ -131,8 +139,69 @@ class FilterViewController: UIViewController, UITextFieldDelegate {
         setBorderForButton(&button30!)
         setBorderForButton(&button40!)
         setBorderForButton(&button50!)
-        button20.backgroundColor = UIColor(red: 98/255, green: 178/255, blue: 217/255, alpha: 1)
-        button20.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+        
+        keywordTxt.text = Globals.filterKeyWord
+        isOpenToggle.on = Globals.filterOpen
+        isPopularToggle.on = Globals.filterPopular
+
+        switch(Globals.filterCount){
+        case 10:
+            placeLimit = 10
+            button10.backgroundColor = UIColor(red: 98/255, green: 178/255, blue: 217/255, alpha: 1)
+            button10.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+            break
+        case 20:
+            placeLimit = 20
+            button20.backgroundColor = UIColor(red: 98/255, green: 178/255, blue: 217/255, alpha: 1)
+            button20.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+            break
+        case 30:
+            placeLimit = 30
+            button30.backgroundColor = UIColor(red: 98/255, green: 178/255, blue: 217/255, alpha: 1)
+            button30.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+            break
+        case 40:
+            placeLimit = 40
+            button40.backgroundColor = UIColor(red: 98/255, green: 178/255, blue: 217/255, alpha: 1)
+            button40.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+            break
+        case 50:
+            placeLimit = 50
+            button50.backgroundColor = UIColor(red: 98/255, green: 178/255, blue: 217/255, alpha: 1)
+            button50.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+            break
+        default:
+            placeLimit = -1
+            break
+        }
+        if(Globals.filterSort != -1){
+            if(Globals.filterSort == 0){
+                sortType = 0
+                sortByLbl.text = NSLocalizedString("sort_by_distance", comment: "")
+                sortDistanceImg.image = UIImage(named: "tick.png")
+                sortRatingImg.image = nil
+            }else if(Globals.filterSort == 1){
+                sortType = 1
+                sortByLbl.text = NSLocalizedString("sort_by_rating", comment: "")
+                sortRatingImg.image = UIImage(named: "tick.png")
+                sortDistanceImg.image = nil
+            }
+        }
+        if(Globals.filterDistance != -1){
+            distanceSlider.value = Globals.filterDistance
+            let valKm = NSString(format: "%.1f", Globals.filterDistance)
+            distanceLimit = valKm.floatValue
+            let nf = NSNumberFormatter()
+            nf.numberStyle = .DecimalStyle
+            // Configure the number formatter to your liking
+            let val = nf.stringFromNumber(Globals.filterDistance)
+            if(Globals.filterDistance >= 1){
+                distanceText.text =  NSLocalizedString("distance", comment: "") + (valKm as String) + " km"
+            }else{
+                let valMeter = NSString(format: "%.0f", Globals.filterDistance * 1000)
+                distanceText.text = NSLocalizedString("distance", comment: "") + (valMeter as String) + " m"
+            }
+        }
     }
     
     func setBorderForButton(inout button:UIButton){
@@ -153,7 +222,7 @@ class FilterViewController: UIViewController, UITextFieldDelegate {
 
     @IBAction func distanceChanged(sender: UISlider) {
         let valKm = NSString(format: "%.1f", sender.value)
-        distanceLimit = valKm.doubleValue
+        distanceLimit = valKm.floatValue
         let nf = NSNumberFormatter()
         nf.numberStyle = .DecimalStyle
         // Configure the number formatter to your liking

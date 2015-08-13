@@ -44,7 +44,7 @@ class Place{
     var rating_count: Int
     var rating: String
     var plc_is_open: String
-    var plc_distance: Double = -1.0
+    var plc_distance: Float = -1.0
     /*
     cat.plc_id = appDict["plc_id"].intValue
     cat.plc_name = appDict["plc_name"].stringValue
@@ -52,7 +52,7 @@ class Place{
     cat.plc_address = appDict["plc_address"].stringValue
     cat.rating = appDict["rating"].stringValue
 */
-    init(id:String, name:String, image:AnyObject!, address:String, rating:String, rating_avg:AnyObject!, rating_count:AnyObject!, plc_latitude:AnyObject!, plc_longitude:AnyObject!){
+    init(id:String, name:String, image:AnyObject!, address:String, rating:String, rating_avg:AnyObject!, rating_count:AnyObject!, plc_latitude:AnyObject!, plc_longitude:AnyObject!, is_open:AnyObject!){
         self.plc_id = id.toInt()!
         self.plc_name = name
         if(image != nil){
@@ -86,7 +86,6 @@ class Place{
         self.plc_country_name = ""
         self.plc_state_name = ""
         self.rating = rating
-        self.plc_is_open = "0"
         if(rating_avg != nil){
             if((rating_avg as! Float) <= 0){
                 self.rating_avg = 0
@@ -116,6 +115,11 @@ class Place{
             self.plc_longitude = plc_longitude as! String
         }else{
             self.plc_longitude = ""
+        }
+        if(is_open != nil){
+            self.plc_is_open = is_open as! String
+        }else{
+            self.plc_is_open = "0"
         }
     }
      

@@ -40,9 +40,9 @@ class MenuViewController: UICollectionViewController, InformationDelegate2 {
     override func viewDidAppear(animated: Bool) {
         
         if(pointer != nil){
-            let alertController = UIAlertController(title: "Error", message:
+            let alertController = UIAlertController(title: NSLocalizedString("error_title", comment: ""), message:
                 NSLocalizedString("network_error", comment: ""), preferredStyle: UIAlertControllerStyle.Alert)
-            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+            alertController.addAction(UIAlertAction(title: NSLocalizedString("ok_title", comment: ""), style: UIAlertActionStyle.Default,handler: nil))
             
             self.presentViewController(alertController, animated: true, completion: nil)
         }
@@ -124,9 +124,9 @@ class MenuViewController: UICollectionViewController, InformationDelegate2 {
                         self.changeLoginTitle(NSLocalizedString("login_text", comment: ""))
                     }
                 }else{
-                    let alertController = UIAlertController(title: "Error", message:
-                        NSLocalizedString("review_added", comment: ""), preferredStyle: UIAlertControllerStyle.Alert)
-                    alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+                    let alertController = UIAlertController(title: NSLocalizedString("error_title", comment: ""), message:
+                        NSLocalizedString("network_error", comment: ""), preferredStyle: UIAlertControllerStyle.Alert)
+                    alertController.addAction(UIAlertAction(title: NSLocalizedString("ok_title", comment: ""), style: UIAlertActionStyle.Default,handler: nil))
                     
                     self.presentViewController(alertController, animated: true, completion: nil)
                 }
@@ -204,6 +204,13 @@ class MenuViewController: UICollectionViewController, InformationDelegate2 {
             svc.mainCatId = String(cats[indexPath!.row].cat_id)
             
         }else if(segue.identifier == "toResults"){
+            Globals.filterKeyWord = ""
+            Globals.filterOpen = false
+            Globals.filterPopular = false
+            Globals.filterDistance = -1
+            Globals.filterSort = -1
+            Globals.filterCount = -1
+            
             var svc = segue.destinationViewController as! ResultViewController2;
             svc.selectedCats = self.selectedCats
         }else if segue.identifier == "bouncySegue" {

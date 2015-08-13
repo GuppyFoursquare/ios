@@ -121,25 +121,25 @@ class AddReviewViewController: UITableViewController, UITextViewDelegate {
                 if(error == nil){
                     var hoge = JSON(data: data! as! NSData)
                     if (hoge["status"] == "SUCCESS"){
-                        let alertController = UIAlertController(title: "Error", message:
+                        let alertController = UIAlertController(title: NSLocalizedString("done_title", comment: ""), message:
                             NSLocalizedString("review_added", comment: ""), preferredStyle: UIAlertControllerStyle.Alert)
-                        alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: {(alert: UIAlertAction!) in self.navigationController?.popViewControllerAnimated(true)}))
+                        alertController.addAction(UIAlertAction(title: NSLocalizedString("ok_title", comment: ""), style: UIAlertActionStyle.Default,handler: {(alert: UIAlertAction!) in self.navigationController?.popViewControllerAnimated(true)}))
                         
                         self.presentViewController(alertController, animated: true, completion: nil)
                         
                     }else if(hoge["status"] ==  "FAILURE_COMMENT_MULTIPLE"){
-                        let alertController = UIAlertController(title: "Error", message:
+                        let alertController = UIAlertController(title: NSLocalizedString("error_title", comment: ""), message:
                             NSLocalizedString("review_multiple", comment: ""), preferredStyle: UIAlertControllerStyle.Alert)
                         
-                        alertController.addAction(UIAlertAction(title: "Dismiss",
+                        alertController.addAction(UIAlertAction(title: NSLocalizedString("ok_title", comment: ""),
                             style: UIAlertActionStyle.Default,
                             handler: nil))
                         self.presentViewController(alertController, animated: true, completion: nil)
                     }else if (hoge["status"] ==  "FAILURE_AUTH"){
                         println(hoge)
-                        let alertController = UIAlertController(title: "Error", message:
+                        let alertController = UIAlertController(title: NSLocalizedString("error_title", comment: ""), message:
                             NSLocalizedString("login_required_error", comment: ""), preferredStyle: UIAlertControllerStyle.Alert)
-                        alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+                        alertController.addAction(UIAlertAction(title: NSLocalizedString("ok_title", comment: ""), style: UIAlertActionStyle.Default,handler: nil))
                         alertController.addAction(UIAlertAction(title: "Login", style: UIAlertActionStyle.Default,handler: {(alert: UIAlertAction!) in let overlayVC = self.storyboard?.instantiateViewControllerWithIdentifier("overlayViewController") as! UIViewController
                             
                             self.prepareOverlayVC(overlayVC)
@@ -148,9 +148,9 @@ class AddReviewViewController: UITableViewController, UITextViewDelegate {
                         self.presentViewController(alertController, animated: true, completion: nil)
                     }else{
                         println(hoge)
-                        let alertController = UIAlertController(title: "Error", message:
+                        let alertController = UIAlertController(title: NSLocalizedString("error_title", comment: ""), message:
                             NSLocalizedString("review_error", comment: ""), preferredStyle: UIAlertControllerStyle.Alert)
-                        alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+                        alertController.addAction(UIAlertAction(title: NSLocalizedString("ok_title", comment: ""), style: UIAlertActionStyle.Default,handler: nil))
                         alertController.addAction(UIAlertAction(title: "Login", style: UIAlertActionStyle.Default,handler: {(alert: UIAlertAction!) in let overlayVC = self.storyboard?.instantiateViewControllerWithIdentifier("overlayViewController") as! UIViewController
                             
                             self.prepareOverlayVC(overlayVC)
@@ -160,9 +160,9 @@ class AddReviewViewController: UITableViewController, UITextViewDelegate {
                 }
             }
         }else{
-            let alertController = UIAlertController(title: "Error", message:
+            let alertController = UIAlertController(title: NSLocalizedString("error_title", comment: ""), message:
                 NSLocalizedString("empty_rating", comment: ""), preferredStyle: UIAlertControllerStyle.Alert)
-            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+            alertController.addAction(UIAlertAction(title: NSLocalizedString("ok_title", comment: ""), style: UIAlertActionStyle.Default,handler: nil))
             
             self.presentViewController(alertController, animated: true, completion: nil)
         }

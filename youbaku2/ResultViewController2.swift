@@ -52,10 +52,23 @@ class ResultViewController2: UICollectionViewController, CLLocationManagerDelega
                     // 5, 6, 7
                     if let js = (JSON as! NSDictionary).valueForKey("content") as? [NSDictionary]{
                         println(js)
-                        let photoInfos = ((JSON as! NSDictionary).valueForKey("content") as! [NSDictionary]).map { Place( id: $0["plc_id"] as! String, name: $0["plc_name"] as! String, image: $0["plc_header_image"], address: $0["plc_address"] as! String, rating: $0["plc_address"] as! String,  rating_avg: $0["rating_avg"], rating_count: $0["rating_count"], plc_latitude: $0["plc_latitude"], plc_longitude: $0["plc_longitude"] ) }
+                        let photoInfos = ((JSON as! NSDictionary).valueForKey("content") as! [NSDictionary]).map { Place( id: $0["plc_id"] as! String, name: $0["plc_name"] as! String, image: $0["plc_header_image"], address: $0["plc_address"] as! String, rating: $0["plc_address"] as! String,  rating_avg: $0["rating_avg"], rating_count: $0["rating_count"], plc_latitude: $0["plc_latitude"], plc_longitude: $0["plc_longitude"], is_open: $0["plc_is_open"] ) }
                         
                         let lastItem = self.places.count
                         self.places = photoInfos
+                        
+                        for index in 0...self.places.count-1{
+                                if let userLocation = self.userLocation{
+                                    var userLoc = CLLocation(latitude: userLocation.latitude, longitude: userLocation.longitude)
+                                    var placeLoc = CLLocation(latitude: (self.places[index].plc_latitude as NSString).doubleValue, longitude: (self.places[index].plc_longitude as NSString).doubleValue)
+
+                                    var dist = userLoc.distanceFromLocation(placeLoc)
+                                    var dist_km = NSString(format:"%.1f km", (dist.description as NSString).doubleValue / 1000)
+                                    self.places[index].plc_distance = dist_km.floatValue
+                                }else{
+                                    self.places[index].plc_distance = -1
+                                }
+                        }
                         self.allPlaces = photoInfos
                         let indexPaths = (lastItem..<self.places.count).map { NSIndexPath(forItem: $0, inSection: 0) }
                         
@@ -66,9 +79,9 @@ class ResultViewController2: UICollectionViewController, CLLocationManagerDelega
                         }
                     }else{
                         self.stopAnimation()
-                        let alertController = UIAlertController(title: "Error", message:
+                        let alertController = UIAlertController(title: NSLocalizedString("error_title", comment: ""), message:
                             NSLocalizedString("empty_result", comment: ""), preferredStyle: UIAlertControllerStyle.Alert)
-                        alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+                        alertController.addAction(UIAlertAction(title: NSLocalizedString("ok_title", comment: ""), style: UIAlertActionStyle.Default,handler: nil))
                         
                         self.presentViewController(alertController, animated: true, completion: nil)
                     }
@@ -147,9 +160,9 @@ class ResultViewController2: UICollectionViewController, CLLocationManagerDelega
     }
     
     func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {
-        let alertController = UIAlertController(title: "Error", message:
+        let alertController = UIAlertController(title: NSLocalizedString("error_title", comment: ""), message:
             NSLocalizedString("gps_denied", comment: ""), preferredStyle: UIAlertControllerStyle.Alert)
-        alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+        alertController.addAction(UIAlertAction(title: NSLocalizedString("ok_title", comment: ""), style: UIAlertActionStyle.Default,handler: nil))
         
         self.presentViewController(alertController, animated: true, completion: nil)
     }
@@ -257,6 +270,8 @@ class ResultViewController2: UICollectionViewController, CLLocationManagerDelega
             resColor = UIColor(red: 224/255, green: 213/255, blue: 65/255, alpha: 1)
         }else if(rating>2){
             resColor = UIColor(red: 232/255, green: 153/255, blue: 58/255, alpha: 1)
+        }else if(rating==0){
+            resColor = UIColor(red: 119/255, green: 119/255, blue: 119/255, alpha: 1)
         }else if(rating<=2){
             resColor = UIColor(red: 240/255, green: 82/255, blue: 51/255, alpha: 1)
         }else{
@@ -288,19 +303,9 @@ extension ResultViewController2 : UICollectionViewDataSource {
         
         
         
-        if let userLocation = userLocation{
-            var userLoc = CLLocation(latitude: userLocation.latitude, longitude: userLocation.longitude)
-            println(userLoc)
-            var placeLoc = CLLocation(latitude: (places[indexPath.row].plc_latitude as NSString).doubleValue, longitude: (places[indexPath.row].plc_longitude as NSString).doubleValue)
-            println(placeLoc)
-            var dist = userLoc.distanceFromLocation(placeLoc)
-            var dist_km = NSString(format:"%.1f km", (dist.description as NSString).doubleValue / 1000)
-            places[indexPath.row].plc_distance = dist_km.doubleValue
-            cell.distanceButton.setTitle(dist_km as String, forState: UIControlState.Normal)
-        }else{
-            cell.distanceButton.setTitle(" --", forState: UIControlState.Normal)
-        }
-        cell.ratingLabel.text = String(stringInterpolationSegment: places[indexPath.row].rating_avg) + String("/5.0")
+        
+        cell.distanceButton.setTitle(NSString(format: "%.1f", places[indexPath.row].plc_distance) as String, forState: UIControlState.Normal)
+        cell.ratingLabel.text = NSString(format: "%.1f", places[indexPath.row].rating_avg) as String + String("/5.0")
         cell.ratingLabel.backgroundColor = self.getRatingColor(places[indexPath.row].rating_avg)
         cell.commentButton.setTitle(" " + String(places[indexPath.row].rating_count), forState: .Normal)
         cell.nameLabel.text = places[indexPath.row].plc_name as String
@@ -346,9 +351,9 @@ extension ResultViewController2 : UICollectionViewDataSource {
         places = value
         self.collectionView?.reloadData()
         if(places.count == 0){
-            let alertController = UIAlertController(title: "Error", message:
+            let alertController = UIAlertController(title: NSLocalizedString("error_title", comment: ""), message:
                 NSLocalizedString("empty_result", comment: ""), preferredStyle: UIAlertControllerStyle.Alert)
-            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+            alertController.addAction(UIAlertAction(title: NSLocalizedString("ok_title", comment: ""), style: UIAlertActionStyle.Default,handler: nil))
         }
     }
     

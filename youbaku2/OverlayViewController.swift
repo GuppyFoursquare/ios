@@ -74,16 +74,16 @@ class OverlayViewController: UIViewController, UITextFieldDelegate {
                         xxx.saveLogin(data as! NSData)
                         self.presentingViewController!.dismissViewControllerAnimated(true, completion: nil)
                     }else{
-                        let alertController = UIAlertController(title: "Error", message:
+                        let alertController = UIAlertController(title: NSLocalizedString("error_title", comment: ""), message:
                             NSLocalizedString("login_failed", comment: ""), preferredStyle: UIAlertControllerStyle.Alert)
-                        alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+                        alertController.addAction(UIAlertAction(title: NSLocalizedString("ok_title", comment: ""), style: UIAlertActionStyle.Default,handler: nil))
                         self.loginBtn.enabled = true
                         self.presentViewController(alertController, animated: true, completion: nil)
                     }
                 }else{
-                    let alertController = UIAlertController(title: "Error", message:
+                    let alertController = UIAlertController(title: NSLocalizedString("error_title", comment: ""), message:
                         NSLocalizedString("login_failed", comment: ""), preferredStyle: UIAlertControllerStyle.Alert)
-                    alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+                    alertController.addAction(UIAlertAction(title: NSLocalizedString("ok_title", comment: ""), style: UIAlertActionStyle.Default,handler: nil))
                     self.loginBtn.enabled = true
                     self.presentViewController(alertController, animated: true, completion: nil)
                 }

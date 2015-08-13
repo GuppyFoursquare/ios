@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0A1DE8681B733E9500F31D2E /* ViewControllerRegister.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1DE8671B733E9400F31D2E /* ViewControllerRegister.swift */; };
+		7317E8041B7C824A008ACC0A /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7317E8031B7C824A008ACC0A /* Globals.swift */; };
 		7317F3AB1B550F4100408610 /* GoogleDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7317F3A91B550F4100408610 /* GoogleDataProvider.swift */; };
 		7317F3AC1B550F4100408610 /* GooglePlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7317F3AA1B550F4100408610 /* GooglePlace.swift */; };
 		7317F3B11B550F5800408610 /* MarkerInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7317F3AE1B550F5800408610 /* MarkerInfoView.swift */; };
@@ -61,7 +62,7 @@
 		73A88D821B6105E400996B7F /* OverlayPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A88D811B6105E400996B7F /* OverlayPresentationController.swift */; };
 		73A88D841B6105FB00996B7F /* BouncyViewControllerAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A88D831B6105FB00996B7F /* BouncyViewControllerAnimator.swift */; };
 		73A88D861B612A8A00996B7F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A88D851B612A8900996B7F /* LoginViewController.swift */; };
-		73A88D881B62548500996B7F /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A88D871B62548500996B7F /* Globals.swift */; };
+		73A88D881B62548500996B7F /* UserDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A88D871B62548500996B7F /* UserDetails.swift */; };
 		73A88D8A1B625B3C00996B7F /* DataEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A88D891B625B3C00996B7F /* DataEncoder.swift */; };
 		73BB3F151B65007000139E4A /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BB3F141B65007000139E4A /* TabBarController.swift */; };
 		73BF7ADF1B3C3AEF00B1A2D4 /* like.png in Resources */ = {isa = PBXBuildFile; fileRef = 73BF7ADE1B3C3AEF00B1A2D4 /* like.png */; };
@@ -117,6 +118,7 @@
 /* Begin PBXFileReference section */
 		0A1DE8671B733E9400F31D2E /* ViewControllerRegister.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerRegister.swift; sourceTree = "<group>"; };
 		60902DAF0FD8658CF93569BB /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		7317E8031B7C824A008ACC0A /* Globals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Globals.swift; sourceTree = "<group>"; };
 		7317F3A91B550F4100408610 /* GoogleDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleDataProvider.swift; sourceTree = "<group>"; };
 		7317F3AA1B550F4100408610 /* GooglePlace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GooglePlace.swift; sourceTree = "<group>"; };
 		7317F3AE1B550F5800408610 /* MarkerInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkerInfoView.swift; sourceTree = "<group>"; };
@@ -178,7 +180,7 @@
 		73A88D811B6105E400996B7F /* OverlayPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlayPresentationController.swift; sourceTree = "<group>"; };
 		73A88D831B6105FB00996B7F /* BouncyViewControllerAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BouncyViewControllerAnimator.swift; sourceTree = "<group>"; };
 		73A88D851B612A8900996B7F /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		73A88D871B62548500996B7F /* Globals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Globals.swift; sourceTree = "<group>"; };
+		73A88D871B62548500996B7F /* UserDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDetails.swift; sourceTree = "<group>"; };
 		73A88D891B625B3C00996B7F /* DataEncoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataEncoder.swift; sourceTree = "<group>"; };
 		73BB3F141B65007000139E4A /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		73BF7ADE1B3C3AEF00B1A2D4 /* like.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = like.png; sourceTree = "<group>"; };
@@ -383,12 +385,13 @@
 				73EC75901B5E330A0048EB09 /* MainMenuCVHeader.swift */,
 				73EC75941B5FDF1D0048EB09 /* HalfSizePresentationController.swift */,
 				73A88D851B612A8900996B7F /* LoginViewController.swift */,
-				73A88D871B62548500996B7F /* Globals.swift */,
+				73A88D871B62548500996B7F /* UserDetails.swift */,
 				73A88D891B625B3C00996B7F /* DataEncoder.swift */,
 				73BB3F141B65007000139E4A /* TabBarController.swift */,
 				734145C61B677C2E00530A35 /* ReviewCell.swift */,
 				734145C81B677C6B00530A35 /* ReviewsViewController.swift */,
 				0A1DE8671B733E9400F31D2E /* ViewControllerRegister.swift */,
+				7317E8031B7C824A008ACC0A /* Globals.swift */,
 			);
 			path = youbaku2;
 			sourceTree = "<group>";
@@ -621,7 +624,7 @@
 				73A88D821B6105E400996B7F /* OverlayPresentationController.swift in Sources */,
 				739265A31B4FACF0002D6000 /* AddReviewViewController.swift in Sources */,
 				733155601B452DF600D0D50E /* ImageCell2.swift in Sources */,
-				73A88D881B62548500996B7F /* Globals.swift in Sources */,
+				73A88D881B62548500996B7F /* UserDetails.swift in Sources */,
 				7317F3B31B550F5800408610 /* UIViewExtension.swift in Sources */,
 				73C7D0111B39A1090028FC76 /* Place.swift in Sources */,
 				739D88261B3971040097AED3 /* SubCategoryViewController.swift in Sources */,
@@ -661,6 +664,7 @@
 				73C7D0331B3BF1400028FC76 /* Upload.swift in Sources */,
 				73C7D0311B3BF13A0028FC76 /* ResponseSerialization.swift in Sources */,
 				73C7D0091B398DC50028FC76 /* ResultCell.swift in Sources */,
+				7317E8041B7C824A008ACC0A /* Globals.swift in Sources */,
 				73EC75951B5FDF1D0048EB09 /* HalfSizePresentationController.swift in Sources */,
 				734145C91B677C6B00530A35 /* ReviewsViewController.swift in Sources */,
 				739D880B1B380C480097AED3 /* MainMenuCell.swift in Sources */,
