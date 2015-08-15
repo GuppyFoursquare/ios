@@ -138,7 +138,13 @@ class RestaurantViewController: UIViewController, UIActionSheetDelegate, UIScrol
             var vc = self.storyboard?.instantiateViewControllerWithIdentifier("AddReviewViewController") as! AddReviewViewController
             vc.place_id = currentPlace.plc_id
             self.navigationController?.pushViewController(vc, animated: true)
-        }else{
+            
+        }else if(buttonIndex == 2 ){
+            
+            print("Sample navigation")
+            var vc = self.storyboard?.instantiateViewControllerWithIdentifier("ViewControllerReservation") as! ViewControllerReservation
+            vc.place_id = currentPlace.plc_id
+            self.navigationController?.pushViewController(vc, animated: true)
             
         }
         

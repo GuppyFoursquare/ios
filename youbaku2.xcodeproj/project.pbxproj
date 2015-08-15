@@ -90,6 +90,7 @@
 		73EC75911B5E330A0048EB09 /* MainMenuCVHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EC75901B5E330A0048EB09 /* MainMenuCVHeader.swift */; };
 		73EC75931B5FAD0E0048EB09 /* MarkerInfoView2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73EC75921B5FAD0E0048EB09 /* MarkerInfoView2.xib */; };
 		73EC75951B5FDF1D0048EB09 /* HalfSizePresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EC75941B5FDF1D0048EB09 /* HalfSizePresentationController.swift */; };
+		8BDFC3291B7F4CF200BC23DF /* ViewControllerReservation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDFC3281B7F4CF200BC23DF /* ViewControllerReservation.swift */; };
 		B146F10E56192ABF6F3B6370 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 60902DAF0FD8658CF93569BB /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -211,6 +212,7 @@
 		73EC75921B5FAD0E0048EB09 /* MarkerInfoView2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MarkerInfoView2.xib; sourceTree = "<group>"; };
 		73EC75941B5FDF1D0048EB09 /* HalfSizePresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HalfSizePresentationController.swift; sourceTree = "<group>"; };
 		7B14D1787BC8176266E3EE79 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		8BDFC3281B7F4CF200BC23DF /* ViewControllerReservation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerReservation.swift; sourceTree = "<group>"; };
 		EF1ACD0C97A450D688768261 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -392,6 +394,7 @@
 				734145C81B677C6B00530A35 /* ReviewsViewController.swift */,
 				0A1DE8671B733E9400F31D2E /* ViewControllerRegister.swift */,
 				7317E8031B7C824A008ACC0A /* Globals.swift */,
+				8BDFC3281B7F4CF200BC23DF /* ViewControllerReservation.swift */,
 			);
 			path = youbaku2;
 			sourceTree = "<group>";
@@ -666,6 +669,7 @@
 				73C7D0091B398DC50028FC76 /* ResultCell.swift in Sources */,
 				7317E8041B7C824A008ACC0A /* Globals.swift in Sources */,
 				73EC75951B5FDF1D0048EB09 /* HalfSizePresentationController.swift in Sources */,
+				8BDFC3291B7F4CF200BC23DF /* ViewControllerReservation.swift in Sources */,
 				734145C91B677C6B00530A35 /* ReviewsViewController.swift in Sources */,
 				739D880B1B380C480097AED3 /* MainMenuCell.swift in Sources */,
 			);

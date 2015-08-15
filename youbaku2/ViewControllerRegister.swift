@@ -109,7 +109,6 @@ class ViewControllerRegister: UIViewController, UITextFieldDelegate {
 
     
     @IBAction func RegisterTapped(sender: AnyObject) {
-        println("Sample click test");
         /*
         var contentInsets = UIEdgeInsetsMake(0.0, 0.0, 50, 0.0)
         self.scrollView.contentInset = contentInsets

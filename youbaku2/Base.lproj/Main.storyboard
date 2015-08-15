@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="cGW-mi-zbY">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Yhk-rM-Pjf">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
@@ -1755,13 +1755,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qfH-u6-LNc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1536" y="-959"/>
+            <point key="canvasLocation" x="1404" y="-970"/>
         </scene>
-        <!--View Controller-->
+        <!--View Controller Reservation-->
         <scene sceneID="qRU-hG-LZ2">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="K5i-FP-fAC" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="cGW-mi-zbY" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ViewControllerReservation" id="cGW-mi-zbY" customClass="ViewControllerReservation" customModule="youbaku2" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="HF0-Gg-7mF"/>
                         <viewControllerLayoutGuide type="bottom" id="Wpg-ue-wO9"/>
@@ -1771,10 +1770,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vKz-Ph-d6j">
-                                <rect key="frame" x="0.0" y="64" width="320" height="800"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="864"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w7H-x4-cbu">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="800"/>
+                                        <rect key="frame" x="0.0" y="-48" width="320" height="800"/>
                                         <subviews>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BAp-oy-yZP">
                                                 <rect key="frame" x="0.0" y="44" width="320" height="40"/>
@@ -1785,15 +1784,6 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Your Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3T5-Fb-2VL">
-                                                <rect key="frame" x="8" y="15" width="304" height="21"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="21" id="Kfv-Dg-EO4"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lbz-E1-9hZ">
                                                 <rect key="frame" x="0.0" y="121" width="320" height="40"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1822,7 +1812,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <datePicker contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="Ydp-b0-gLw">
-                                                <rect key="frame" x="0.0" y="198" width="320" height="99"/>
+                                                <rect key="frame" x="0.0" y="198" width="320" height="162"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="99" id="uuW-wr-69p"/>
                                                 </constraints>
@@ -1869,9 +1859,21 @@
                                                 <state key="normal" title="SEND">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="ReserveTapped:" destination="cGW-mi-zbY" eventType="touchUpInside" id="DSj-3a-9Bu"/>
+                                                </connections>
                                             </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Your Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3T5-Fb-2VL">
+                                                <rect key="frame" x="8" y="15" width="304" height="21"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="21" id="Kfv-Dg-EO4"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <color key="highlightedColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                            </label>
                                         </subviews>
-                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" red="0.63890861742424243" green="0.63890861742424243" blue="0.63890861742424243" alpha="0.37" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="Vy3-rj-ZLY" secondAttribute="trailing" id="6ro-iL-Nh0"/>
                                             <constraint firstItem="Ydp-b0-gLw" firstAttribute="top" secondItem="UE9-Dq-NsM" secondAttribute="bottom" constant="8" id="7Ek-UY-Wah"/>
@@ -1901,17 +1903,17 @@
                                     <constraint firstAttribute="bottom" secondItem="w7H-x4-cbu" secondAttribute="bottom" id="052-51-m1h"/>
                                     <constraint firstItem="w7H-x4-cbu" firstAttribute="leading" secondItem="vKz-Ph-d6j" secondAttribute="leading" id="3pl-jh-PaQ"/>
                                     <constraint firstAttribute="trailing" secondItem="w7H-x4-cbu" secondAttribute="trailing" id="gUk-iv-zxg"/>
-                                    <constraint firstItem="w7H-x4-cbu" firstAttribute="top" secondItem="vKz-Ph-d6j" secondAttribute="top" id="jFq-qb-xuz"/>
+                                    <constraint firstItem="w7H-x4-cbu" firstAttribute="topMargin" secondItem="vKz-Ph-d6j" secondAttribute="top" constant="-40" id="jFq-qb-xuz"/>
                                 </constraints>
                             </scrollView>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k3L-om-3uM">
-                                <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="-44" width="320" height="44"/>
                                 <color key="barTintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <textAttributes key="titleTextAttributes">
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </textAttributes>
                                 <items>
-                                    <navigationItem title="Register" id="ZlS-lc-Y6B">
+                                    <navigationItem title="Reservation" id="ZlS-lc-Y6B">
                                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="PMa-33-hFM">
                                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <connections>
@@ -1931,15 +1933,24 @@
                             <constraint firstItem="vKz-Ph-d6j" firstAttribute="top" secondItem="k3L-om-3uM" secondAttribute="bottom" id="e0X-zc-ofT"/>
                             <constraint firstItem="k3L-om-3uM" firstAttribute="leading" secondItem="CUG-b8-Nja" secondAttribute="leadingMargin" constant="-16" id="giq-vR-oG0"/>
                             <constraint firstItem="vKz-Ph-d6j" firstAttribute="leading" secondItem="CUG-b8-Nja" secondAttribute="leadingMargin" constant="-16" id="hz6-aq-eQq"/>
-                            <constraint firstItem="k3L-om-3uM" firstAttribute="top" secondItem="HF0-Gg-7mF" secondAttribute="bottom" id="nmy-B5-PK3"/>
+                            <constraint firstItem="k3L-om-3uM" firstAttribute="top" secondItem="HF0-Gg-7mF" secondAttribute="bottom" constant="-64" id="nmy-B5-PK3"/>
                             <constraint firstAttribute="trailingMargin" secondItem="k3L-om-3uM" secondAttribute="trailing" constant="-16" id="qrI-vN-0UQ"/>
                         </constraints>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="800"/>
+                    <connections>
+                        <outlet property="reserveContact" destination="ST3-6l-bJ2" id="qpI-Sd-IcV"/>
+                        <outlet property="reserveDate" destination="Ydp-b0-gLw" id="Wcn-kD-xE5"/>
+                        <outlet property="reserveDetail" destination="Vy3-rj-ZLY" id="edO-pC-9YS"/>
+                        <outlet property="reserveName" destination="BAp-oy-yZP" id="AFe-pw-bw9"/>
+                        <outlet property="reservePersonCount" destination="lbz-E1-9hZ" id="lhY-iG-1AV"/>
+                        <outlet property="scrollView" destination="vKz-Ph-d6j" id="pZI-vP-jWK"/>
+                    </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="K5i-FP-fAC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2002" y="-961"/>
+            <point key="canvasLocation" x="3538" y="617"/>
         </scene>
     </scenes>
     <resources>

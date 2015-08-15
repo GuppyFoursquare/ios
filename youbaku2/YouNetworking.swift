@@ -110,6 +110,8 @@ struct YouNetworking {
         
         case UserRegister(String, String, String, String, String, String)
         
+        case Reservation(String, String, String, String, String, String)
+        
         var URLRequest: NSURLRequest {
             let (path: String, parameters: [String: AnyObject]) = {
                 switch self {
@@ -175,6 +177,24 @@ struct YouNetworking {
                                     mem_email: userEmail,
                                     mem_password: userPass,
                                     cmem_password: userConfirmPass]
+                    return ("/api/auth.php?token=" + YouNetworking.TOKEN + "&apikey=" + YouNetworking.APIKEY, params)
+                    
+                case .Reservation(let place_id, let personCount , let reserveDate, let reserveTime, let reserveContact, let reserveDetail):
+                    let op = "op"
+                    let plc_id = "plc_id"
+                    let book_comer_number = "book_comer_number"
+                    let book_date = "book_date"
+                    let book_time = "book_time"
+                    let book_contact = "book_contact"
+                    let book_detail = "book_detail"
+                    let params = [
+                                    op: "book",
+                                    plc_id: place_id,
+                                    book_comer_number: personCount,
+                                    book_date: reserveDate,
+                                    book_time: reserveTime,
+                                    book_contact: reserveContact,
+                                    book_detail: reserveDetail ]
                     return ("/api/auth.php?token=" + YouNetworking.TOKEN + "&apikey=" + YouNetworking.APIKEY, params)
                 }
                 
