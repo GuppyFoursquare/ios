@@ -28,7 +28,7 @@ Buradaki setup komutunda verbose çağırılmasının sebebi işlemi izlemek iç
 Ayrıca utf-8 kullanıldığından emin olunması gerekmektedir. Emin olunamıyorsa export utf-8 komutu çağırılmalıdır.
 ```
 export LC_ALL=en_US.UTF-8  
-export LANG=en_US.UTF-8:
+export LANG=en_US.UTF-8
 ```
 
 ### 2- Install dependencies
