@@ -22,8 +22,12 @@ pod setup --verbose
 
 Buradaki setup komutunda verbose çağırılmasının sebebi işlemi izlemek içindir. 
 
-İlgili link <br>
-http://stackoverflow.com/questions/21680573/cocoapods-setup-stuck-on-pod-setup-command-on-terminal#answer-23447657
+* [İlgili link](http://stackoverflow.com/questions/21680573/cocoapods-setup-stuck-on-pod-setup-command-on-terminal#answer-23447657)
+
+### 1.2- Setup Pod ERROR
+Ayrıca utf-8 kullanıldığından emin olunması gerekmektedir. Emin olunamıyorsa export utf-8 komutu çağırılmalıdır.
+```
+```
 
 ### 2- Install dependencies
 Pod yüklendikten sonra Podfile içerisinde bulunun kütüphanelerin pod komutu ile yüklenmesi gerekilmektedir. Bunun için PodFile'ın bulunduğu directory'e gidilip aşağıdaki komut çağırılır.
