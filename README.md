@@ -1,6 +1,6 @@
 #POD configuration
 
-### 1- Install Pod
+### 1- Setup Pod
 Öncelikle makinamızda pod yüklü değilse yüklenilmesi gerekilmektedir. Bunun için aşağıdaki komutlar çağırılır.
 ```
 sudo gem update --system
@@ -12,6 +12,18 @@ pod setup
 ```
 
 NOTE :: Bu aşamada ```pod init``` kullanılmasına gerek yoktur. Bu komut Podfile'ın oluşmasını sağlamaktadır. Ancak bulunduğumuz repository içerisinde Podfile bulunduğundan bu işlem gerekmemektedir.
+
+### 1.1- Setup Pod ERROR
+Bazı durumlarda pod setup etme işleminde Cloning into `master` hatası vermektedir. Bunun engellemek ve setup işlemini düzgün yapabilmek için aşağıdaki komutlar çağırılır.
+``` 
+pod repo remove master
+pod setup --verbose
+```
+
+Buradaki setup komutunda verbose çağırılmasının sebebi işlemi izlemek içindir. 
+
+İlgili link <br>
+http://stackoverflow.com/questions/21680573/cocoapods-setup-stuck-on-pod-setup-command-on-terminal#answer-23447657
 
 ### 2- Install dependencies
 Pod yüklendikten sonra Podfile içerisinde bulunun kütüphanelerin pod komutu ile yüklenmesi gerekilmektedir. Bunun için PodFile'ın bulunduğu directory'e gidilip aşağıdaki komut çağırılır.
