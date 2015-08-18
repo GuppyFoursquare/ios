@@ -74,10 +74,19 @@ class RestaurantViewController: UIViewController, UIActionSheetDelegate, UIScrol
             
             break
         case 4:
-            UIApplication.tryURL([
-                //       "fb://profile/116374146706", // App
-                "tel://" + currentPlace.plc_contact
-                ])
+            var callAlert = UIAlertController(title: NSLocalizedString("confirm", comment: ""), message: NSLocalizedString("call", comment: "") + ": "+self.currentPlace.plc_contact, preferredStyle: UIAlertControllerStyle.Alert)
+            
+            callAlert.addAction(UIAlertAction(title: NSLocalizedString("ok_title", comment: ""), style: .Default, handler: { (action: UIAlertAction!) in
+                UIApplication.tryURL([
+                    //       "fb://profile/116374146706", // App
+                    "tel://" + self.currentPlace.plc_contact
+                    ])
+            }))
+            callAlert.addAction(UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .Default, handler: { (action: UIAlertAction!) in
+            }))
+            self.presentViewController(callAlert, animated: true, completion: nil)
+            
+            
         case 5:
             if(UIApplication.sharedApplication().canOpenURL(
                 NSURL(string: "comgooglemapsurl://")!)){
@@ -122,13 +131,13 @@ class RestaurantViewController: UIViewController, UIActionSheetDelegate, UIScrol
     var restId:String!
     override func viewDidAppear(animated: Bool)
     {
-        
+        /*
         var newFrame:CGRect = linkContainer.frame;
         newFrame.origin.x = 0;
         newFrame.origin.y = self.scrollView.contentOffset.y+(self.scrollView.frame.size.height-45);
         newFrame.size.height = 45
         linkContainer.frame = newFrame
-
+*/
     }
     
     func actionSheet(sheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int) {
@@ -158,6 +167,7 @@ class RestaurantViewController: UIViewController, UIActionSheetDelegate, UIScrol
         newFrame.origin.y = self.scrollView.contentOffset.y+(self.scrollView.frame.size.height-45);
         newFrame.size.height = 45
         linkContainer.frame = newFrame;
+        
         /*
         var newFrame:CGRect = fixedButton.frame;
         newFrame.origin.x = 0;

@@ -1014,7 +1014,7 @@
                                     </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="Pog-U5-erJ" secondAttribute="bottom" id="4jZ-n4-kYu"/>
+                                    <constraint firstAttribute="bottom" secondItem="Pog-U5-erJ" secondAttribute="bottom" constant="-40" id="4jZ-n4-kYu"/>
                                     <constraint firstAttribute="trailing" secondItem="Pog-U5-erJ" secondAttribute="trailing" id="HdE-Oz-brU"/>
                                     <constraint firstItem="Pog-U5-erJ" firstAttribute="leading" secondItem="buT-yF-PIb" secondAttribute="leading" id="Pz3-mn-Krh"/>
                                     <constraint firstItem="Pog-U5-erJ" firstAttribute="top" secondItem="buT-yF-PIb" secondAttribute="top" id="Yor-rg-FlW"/>

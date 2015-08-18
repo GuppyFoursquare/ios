@@ -204,15 +204,24 @@ class MenuViewController: UICollectionViewController, InformationDelegate2 {
             svc.mainCatId = String(cats[indexPath!.row].cat_id)
             
         }else if(segue.identifier == "toResults"){
-            Globals.filterKeyWord = ""
-            Globals.filterOpen = false
-            Globals.filterPopular = false
-            Globals.filterDistance = -1
-            Globals.filterSort = -1
-            Globals.filterCount = -1
+            if(self.selectedCats.count > 0){
+                Globals.filterKeyWord = ""
+                Globals.filterOpen = false
+                Globals.filterPopular = false
+                Globals.filterDistance = -1
+                Globals.filterSort = -1
+                Globals.filterCount = -1
             
-            var svc = segue.destinationViewController as! ResultViewController2;
-            svc.selectedCats = self.selectedCats
+                var svc = segue.destinationViewController as! ResultViewController2;
+                svc.selectedCats = self.selectedCats
+            }else{
+                var selectAlert = UIAlertController(title: NSLocalizedString("error_title", comment: ""), message: NSLocalizedString("select_category", comment: ""), preferredStyle: UIAlertControllerStyle.Alert)
+                
+                selectAlert.addAction(UIAlertAction(title: NSLocalizedString("ok_title", comment: ""), style: .Default, handler: { (action: UIAlertAction!) in
+                   
+                }))
+                self.presentViewController(selectAlert, animated: true, completion: nil)
+            }
         }else if segue.identifier == "bouncySegue" {
             let overlayVC = segue.destinationViewController as! UIViewController
             prepareOverlayVC(overlayVC)
