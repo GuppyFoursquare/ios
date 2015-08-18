@@ -9,14 +9,19 @@
 import UIKit
 
 class ViewControllerReservation: UIViewController, UITextFieldDelegate, UITextViewDelegate{
-    
+    /*
     @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var reserveName: UITextField!
     @IBOutlet weak var reservePersonCount: UITextField!
     @IBOutlet weak var reserveContact: UITextField!
     @IBOutlet weak var reserveDetail: UITextView!
     @IBOutlet weak var reserveDate: UIDatePicker!
-
+*/
+    @IBOutlet weak var reservePersonCount: UITextField!
+    @IBOutlet weak var reserveDate: UIDatePicker!
+    @IBOutlet weak var reserveContact: UITextField!
+    @IBOutlet weak var reserveDetail: UITextView!
+    @IBOutlet weak var scrollView: UIScrollView!
+    
     var activeTextField = UITextField()
     
     var place_id:Int = -1
@@ -32,7 +37,6 @@ class ViewControllerReservation: UIViewController, UITextFieldDelegate, UITextVi
     // ----------------------------------------------
     override func viewDidLoad() {
         super.viewDidLoad();
-        reserveName.delegate = self;
         reservePersonCount.delegate = self;
         reserveContact.delegate = self;
         reserveDetail.delegate = self;
@@ -46,7 +50,7 @@ class ViewControllerReservation: UIViewController, UITextFieldDelegate, UITextVi
             selector:Selector("keyboardWillHide:"),
             name:UIKeyboardWillHideNotification,
             object:nil)
-        
+
         //Looks for single or multiple taps.
         var tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "DismissKeyboard")
         view.addGestureRecognizer(tap)
@@ -118,13 +122,15 @@ class ViewControllerReservation: UIViewController, UITextFieldDelegate, UITextVi
             if let keyboardSize: CGSize = userInfo[UIKeyboardFrameEndUserInfoKey]?.CGRectValue().size {
                 let contentInset = UIEdgeInsetsMake(0.0, 0.0, keyboardSize.height, 0.0);
                 self.scrollView.contentInset = contentInset
-                self.scrollView.scrollIndicatorInsets = contentInset
+/*                self.scrollView.scrollIndicatorInsets = contentInset
+
                 var aRect = self.view.frame;
                 aRect.size.height -= keyboardSize.height;
                 if (!CGRectContainsPoint(aRect, activeTextField.frame.origin) ) {
                     var scrollPoint = CGPointMake(0.0, activeTextField.frame.origin.y - keyboardSize.height)
                     self.scrollView.setContentOffset(scrollPoint, animated: true)
                 }
+                */
             }
         }
     }
@@ -174,7 +180,7 @@ class ViewControllerReservation: UIViewController, UITextFieldDelegate, UITextVi
                         // SUCCESS ALERT
                         var authAlert = UIAlertController(title: "SUCCESS", message: "Reservation Request Taken Successfully", preferredStyle: UIAlertControllerStyle.Alert)
                         
-                        authAlert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: { (action: UIAlertAction!) in
+                        authAlert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (action: UIAlertAction!) in
                             println("SUCCESS RESERVATION")
                             self.navigationController?.popViewControllerAnimated(true)
                         }))
@@ -186,16 +192,16 @@ class ViewControllerReservation: UIViewController, UITextFieldDelegate, UITextVi
                     }else if status=="FAILURE_AUTH" {
                         
                         // AUTH FAILURE ALERT
-                        var authAlert = UIAlertController(title: "Login ERROR", message: "You should login before reservation request.", preferredStyle: UIAlertControllerStyle.Alert)
+                        var authAlert = UIAlertController(title: "ERROR", message: "You should login before reservation request.", preferredStyle: UIAlertControllerStyle.Alert)
                         
-                        authAlert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: { (action: UIAlertAction!) in
+                        authAlert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (action: UIAlertAction!) in
                             println("Handle Ok logic here")
                         }))
-                        
+/*
                         authAlert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: { (action: UIAlertAction!) in
                             println("Handle Cancel Logic here")
                         }))
-                        
+  */
                         self.presentViewController(authAlert, animated: true, completion: nil)
                         
                     
@@ -209,7 +215,7 @@ class ViewControllerReservation: UIViewController, UITextFieldDelegate, UITextVi
                         
                         var authAlert = UIAlertController(title: "Parameter ERROR", message: message, preferredStyle: UIAlertControllerStyle.Alert)
                         
-                        authAlert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: { (action: UIAlertAction!) in
+                        authAlert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (action: UIAlertAction!) in
                             print("FAILURE_PARAM_MISMATCH - Handle Ok logic here");
                         }))
                         
@@ -228,6 +234,9 @@ class ViewControllerReservation: UIViewController, UITextFieldDelegate, UITextVi
             }
         
         }
+    }
+    @IBAction func cancelTapped(sender: AnyObject) {
+        presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
     }
     
 }

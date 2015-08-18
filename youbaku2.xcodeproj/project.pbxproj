@@ -87,6 +87,7 @@
 		73C7D0351B3BF1430028FC76 /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C7D0341B3BF1430028FC76 /* Validation.swift */; };
 		73C7D0391B3BF2BA0028FC76 /* YouNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C7D0381B3BF2BA0028FC76 /* YouNetworking.swift */; };
 		73C7D03B1B3C0EED0028FC76 /* SimpleImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C7D03A1B3C0EED0028FC76 /* SimpleImageCache.swift */; };
+		73E83BEE1B8319D5002C14E3 /* BookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E83BED1B8319D5002C14E3 /* BookViewController.swift */; };
 		73EC75911B5E330A0048EB09 /* MainMenuCVHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EC75901B5E330A0048EB09 /* MainMenuCVHeader.swift */; };
 		73EC75931B5FAD0E0048EB09 /* MarkerInfoView2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73EC75921B5FAD0E0048EB09 /* MarkerInfoView2.xib */; };
 		73EC75951B5FDF1D0048EB09 /* HalfSizePresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EC75941B5FDF1D0048EB09 /* HalfSizePresentationController.swift */; };
@@ -208,6 +209,7 @@
 		73C7D0381B3BF2BA0028FC76 /* YouNetworking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YouNetworking.swift; sourceTree = "<group>"; };
 		73C7D03A1B3C0EED0028FC76 /* SimpleImageCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleImageCache.swift; sourceTree = "<group>"; };
 		73C95BDA1B6A275800B0FC32 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		73E83BED1B8319D5002C14E3 /* BookViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BookViewController.swift; path = ../BookViewController.swift; sourceTree = "<group>"; };
 		73EC75901B5E330A0048EB09 /* MainMenuCVHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuCVHeader.swift; sourceTree = "<group>"; };
 		73EC75921B5FAD0E0048EB09 /* MarkerInfoView2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MarkerInfoView2.xib; sourceTree = "<group>"; };
 		73EC75941B5FDF1D0048EB09 /* HalfSizePresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HalfSizePresentationController.swift; sourceTree = "<group>"; };
@@ -395,6 +397,7 @@
 				0A1DE8671B733E9400F31D2E /* ViewControllerRegister.swift */,
 				7317E8031B7C824A008ACC0A /* Globals.swift */,
 				8BDFC3281B7F4CF200BC23DF /* ViewControllerReservation.swift */,
+				73E83BED1B8319D5002C14E3 /* BookViewController.swift */,
 			);
 			path = youbaku2;
 			sourceTree = "<group>";
@@ -665,6 +668,7 @@
 				739D87E91B38064A0097AED3 /* AppDelegate.swift in Sources */,
 				7317F3AB1B550F4100408610 /* GoogleDataProvider.swift in Sources */,
 				73C7D0331B3BF1400028FC76 /* Upload.swift in Sources */,
+				73E83BEE1B8319D5002C14E3 /* BookViewController.swift in Sources */,
 				73C7D0311B3BF13A0028FC76 /* ResponseSerialization.swift in Sources */,
 				73C7D0091B398DC50028FC76 /* ResultCell.swift in Sources */,
 				7317E8041B7C824A008ACC0A /* Globals.swift in Sources */,
