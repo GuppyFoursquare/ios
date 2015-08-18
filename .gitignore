@@ -2,3 +2,5 @@ PodFile
 PodFile.lock
 Pods/
 youbaku2.xcworkspace/
+
+.DS_Store
