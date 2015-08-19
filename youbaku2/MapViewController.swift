@@ -140,7 +140,7 @@ class MapViewController: UIViewController, TypesTableViewControllerDelegate, CLL
             if(photo != ""){
 
                 
-                let url = NSURL(string: "http://www.youbaku.com/uploads/places_header_images/" + (placeMarker.place.plc_header_image as String))
+                let url = NSURL(string: YouNetworking.BASEURL + "/uploads/places_header_images/" + (placeMarker.place.plc_header_image as String))
                 
                 
                 var request = NSURLRequest(URL: url!)

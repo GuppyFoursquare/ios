@@ -3,17 +3,16 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "banner_home_2.png"
+      "filename" : "baku_logo_padded1x.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "baku_logo.png"
+      "filename" : "baku_logo_padded2x.png"
     },
     {
       "idiom" : "universal",
-      "scale" : "3x",
-      "filename" : "baku_logo-1.png"
+      "scale" : "3x"
     }
   ],
   "info" : {

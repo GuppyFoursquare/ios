@@ -23,6 +23,7 @@ class ResultViewController2: UICollectionViewController, CLLocationManagerDelega
     var selectedCats = Array<Int>()
     let locationManager = CLLocationManager()
     var userLocation:CLLocationCoordinate2D!
+    var zeroOffset:CGPoint!
     override func viewDidAppear(animated: Bool) {
         
 
@@ -30,7 +31,7 @@ class ResultViewController2: UICollectionViewController, CLLocationManagerDelega
     override func viewDidLoad() {
         navigationController?.navigationBar.barTintColor = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 1)
         navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-        
+        zeroOffset = self.collectionView?.contentOffset
         animate()
         self.locationManager.delegate = self
         self.locationManager.requestWhenInUseAuthorization()
@@ -39,7 +40,7 @@ class ResultViewController2: UICollectionViewController, CLLocationManagerDelega
         var req:YouNetworking.Router2
         if(selectedCats.count > 0){
             req = YouNetworking.Router2.Search(selectedCats)
-            self.navigationItem.title = "Search Results"
+            self.navigationItem.title = NSLocalizedString("search_results", comment: "")
         }else{
             self.navigationItem.rightBarButtonItem = nil
             self.navigationItem.title = "Popular Places"
@@ -79,6 +80,7 @@ class ResultViewController2: UICollectionViewController, CLLocationManagerDelega
                         }
                     }else{
                         self.stopAnimation()
+                        
                         let alertController = UIAlertController(title: NSLocalizedString("error_title", comment: ""), message:
                             NSLocalizedString("empty_result", comment: ""), preferredStyle: UIAlertControllerStyle.Alert)
                         alertController.addAction(UIAlertAction(title: NSLocalizedString("ok_title", comment: ""), style: UIAlertActionStyle.Default,handler: nil))
@@ -87,76 +89,8 @@ class ResultViewController2: UICollectionViewController, CLLocationManagerDelega
                     }
                 }
             }
-        /*
-            subCatId = "17"
-            let url = NSURL(string: "http://www.youbaku.com/api/places.php")
-            let req = NSMutableURLRequest(URL: url!)
-            req.HTTPMethod = "POST"
-            req.setValue("application/json", forHTTPHeaderField: "Content-Type")
-            
-            let values = "{\"op\":\"search\", \"subcat_list\":[37]}"
-            var dict = [ "op" : "search", "subcat_list" :selectedCats, "token":"341766447c4ab254450c8b7398e3c6b9","apikey":"160950eb93bc9af51e2b9a79eab53335" ] // dict is Dictionary<Int, String>
-            
-            let nsDict = dict as NSDictionary
-            
-            
-            var error: NSError?
-            req.HTTPBody = NSJSONSerialization.dataWithJSONObject(nsDict, options: nil, error: &error)
-
-        request(req)
-            .responseJSON { request, response, JSON, error in
-                if error == nil {
-                    // 4
-                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
-                        // 5, 6, 7
-                        if let js = (JSON as! NSDictionary).valueForKey("content") as? [NSDictionary]{
-                        let photoInfos = ((JSON as! NSDictionary).valueForKey("content") as! [NSDictionary]).map { Place( id: $0["plc_id"] as! String, name: $0["plc_name"] as! String, image: $0["plc_header_image"] as! String, address: $0["plc_address"] as! String, rating: $0["plc_address"] as! String) }
-                        
-                        let lastItem = self.places.count
-                        self.places = photoInfos
-                        
-                        let indexPaths = (lastItem..<self.places.count).map { NSIndexPath(forItem: $0, inSection: 0) }
-                        
-                        // 11
-                        dispatch_async(dispatch_get_main_queue()) {
-                            self.collectionView!.insertItemsAtIndexPaths(indexPaths)
-                            self.stopAnimation()
-                        }
-                        }else{
-                            self.stopAnimation()
-                            let alertController = UIAlertController(title: "Error", message:
-                                NSLocalizedString("empty_result", comment: ""), preferredStyle: UIAlertControllerStyle.Alert)
-                            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
-                            
-                            self.presentViewController(alertController, animated: true, completion: nil)
-                        }
-                    }
-                }
-*/
+      
         }
-        
-        /*
-        request(YouNetworking.Router.Places(subCatId)).responseJSON() {
-            (_, _, JSON, error) in
-            if error == nil {
-                // 4
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
-                    // 5, 6, 7
-                    let photoInfos = ((JSON as! NSDictionary).valueForKey("content") as! [NSDictionary]).map { Place( id: $0["plc_id"] as! String, name: $0["plc_name"] as! String, image: $0["plc_header_image"] as! String, address: $0["plc_address"] as! String, rating: $0["plc_address"] as! String) }
-                    
-                    let lastItem = self.places.count
-                    self.places = photoInfos
-                    
-                    let indexPaths = (lastItem..<self.places.count).map { NSIndexPath(forItem: $0, inSection: 0) }
-                    
-                    // 11
-                    dispatch_async(dispatch_get_main_queue()) {
-                        self.collectionView!.insertItemsAtIndexPaths(indexPaths)
-                        self.stopAnimation()
-                    }
-                }
-            }
-        }*/
     }
     
     func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {
@@ -304,13 +238,13 @@ extension ResultViewController2 : UICollectionViewDataSource {
         
         
         
-        cell.distanceButton.setTitle(NSString(format: "%.1f", places[indexPath.row].plc_distance) as String, forState: UIControlState.Normal)
+        cell.distanceButton.setTitle(NSString(format: "%.1f km", places[indexPath.row].plc_distance) as String, forState: UIControlState.Normal)
         cell.ratingLabel.text = NSString(format: "%.1f", places[indexPath.row].rating_avg) as String + String("/5.0")
         cell.ratingLabel.backgroundColor = self.getRatingColor(places[indexPath.row].rating_avg)
         cell.commentButton.setTitle(" " + String(places[indexPath.row].rating_count), forState: .Normal)
         cell.nameLabel.text = places[indexPath.row].plc_name as String
         cell.secondLabel.text = places[indexPath.row].plc_address as String
-        let urlString = "http://www.youbaku.com/uploads/places_header_images/" + (places[indexPath.row].plc_header_image as String)
+        let urlString = YouNetworking.BASEURL + "/uploads/places_header_images/" + (places[indexPath.row].plc_header_image as String)
         cell.imageView.image = UIImage(named: "placeholder_list.png")
         if let image = imageCache.objectForKey(urlString) as? UIImage { // Use the local cache if possible
             cell.imageView.image = image
@@ -350,11 +284,16 @@ extension ResultViewController2 : UICollectionViewDataSource {
     func didPlacesFiltered(value:[Place]){
         places = value
         self.collectionView?.reloadData()
+        
+        var rect = self.collectionView?.contentInset.top
+        self.collectionView?.setContentOffset(CGPointMake(0, -rect!), animated: true)
         if(places.count == 0){
             let alertController = UIAlertController(title: NSLocalizedString("error_title", comment: ""), message:
                 NSLocalizedString("empty_result", comment: ""), preferredStyle: UIAlertControllerStyle.Alert)
             alertController.addAction(UIAlertAction(title: NSLocalizedString("ok_title", comment: ""), style: UIAlertActionStyle.Default,handler: nil))
+            self.presentViewController(alertController, animated: true, completion: nil)
         }
+        
     }
     
 }

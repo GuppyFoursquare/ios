@@ -22,7 +22,7 @@ class SubCategoryViewController: UICollectionViewController {
     override func viewWillAppear(animated: Bool) {
         animate()
         
-        let url = NSURL(string: "http://www.youbaku.com/api/category.php?cat_id=" + mainCatId)
+        let url = NSURL(string: YouNetworking.BASEURL + "/api/category.php?cat_id=" + mainCatId)
         var request = NSURLRequest(URL: url!)
         var data = NSURLConnection.sendSynchronousRequest(request, returningResponse: nil, error: nil)
         if(data != nil){

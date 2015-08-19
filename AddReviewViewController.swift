@@ -36,7 +36,7 @@ class AddReviewViewController: UITableViewController, UITextViewDelegate {
         
         reviewText.delegate = self
         placeholderLabel = UILabel()
-        placeholderLabel.text = "Enter your review here..."
+        placeholderLabel.text = "..."
         placeholderLabel.font = UIFont.italicSystemFontOfSize(reviewText.font.pointSize)
         placeholderLabel.sizeToFit()
         reviewText.addSubview(placeholderLabel)
@@ -178,7 +178,7 @@ class AddReviewViewController: UITableViewController, UITextViewDelegate {
     }
     
     override func viewWillAppear(animated: Bool) {
-        let backButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: "back:")
+        let backButton = UIBarButtonItem(title: NSLocalizedString("cancel", comment: ""), style: UIBarButtonItemStyle.Plain, target: self, action: "back:")
         navigationItem.leftBarButtonItem = backButton
     }
     func back(sender: UIBarButtonItem) {

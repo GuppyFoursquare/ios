@@ -33,3 +33,4 @@ call = "Call";
 confirm = "Confirm";
 cancel = "Cancel";
 select_category = "You should select minimum one category.";
+search_results = "Search Results";

@@ -131,13 +131,13 @@ class RestaurantViewController: UIViewController, UIActionSheetDelegate, UIScrol
     var restId:String!
     override func viewDidAppear(animated: Bool)
     {
-        /*
+        
         var newFrame:CGRect = linkContainer.frame;
         newFrame.origin.x = 0;
         newFrame.origin.y = self.scrollView.contentOffset.y+(self.scrollView.frame.size.height-45);
         newFrame.size.height = 45
         linkContainer.frame = newFrame
-*/
+
     }
     
     func actionSheet(sheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int) {
@@ -503,7 +503,7 @@ extension RestaurantViewController : UICollectionViewDataSource {
     //3
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         //1
-        let urlString = "http://www.youbaku.com/uploads/places_images/large/" + (galleryPhotos[indexPath.row].plc_gallery_media as String)
+        let urlString = YouNetworking.BASEURL + "/uploads/places_images/large/" + (galleryPhotos[indexPath.row].plc_gallery_media as String)
         let url = NSURL(string: urlString)
 //        let data = NSData(contentsOfURL: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check
 

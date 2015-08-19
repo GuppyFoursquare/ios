@@ -33,3 +33,4 @@ call = "Ara";
 confirm = "Doğrula";
 cancel = "İptal";
 select_category = "En az bir kategori seçiniz.";
+search_results = "Arama Sonuçları";

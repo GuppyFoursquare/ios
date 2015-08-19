@@ -28,7 +28,7 @@ class TypesTableViewController: UITableViewController {
     override func viewWillAppear(animated: Bool) {
         animate()
 
-        let url = NSURL(string: "http://www.youbaku.com/api/category.php")
+        let url = NSURL(string: YouNetworking.BASEURL + "/api/category.php")
         var request = NSURLRequest(URL: url!)
         var data = NSURLConnection.sendSynchronousRequest(request, returningResponse: nil, error: nil)
         if(data != nil){
@@ -37,7 +37,7 @@ class TypesTableViewController: UITableViewController {
                 for appDict in appArray {
                     
                     var pot:Dictionary<String, String> = Dictionary()
-                    pot["img"] = "http://www.youbaku.com/uploads/category_images/" + appDict["cat_image"].stringValue
+                    pot["img"] = YouNetworking.BASEURL + "/uploads/category_images/" + appDict["cat_image"].stringValue
                     pot["name"] = appDict["cat_name"].stringValue
                         //
                     possibleTypesDictionary[appDict["cat_id"].stringValue] = pot

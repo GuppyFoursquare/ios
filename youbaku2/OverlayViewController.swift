@@ -61,6 +61,7 @@ class OverlayViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func loginTapped(sender: AnyObject) {
         loginBtn.enabled = false
+        println(YouNetworking.TOKEN)
         request(YouNetworking.Router2.Login(txtUsername.text, txtPassword.text)).response() {
             (_, _, data, error) in
             if error == nil {

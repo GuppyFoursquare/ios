@@ -12,11 +12,10 @@ import UIKit
 struct YouNetworking {
     static var APIKEY = ""
     static var TOKEN = ""
+    static var BASEURL = "http://youbaku.com"
     
     
     enum Router: URLRequestConvertible {
-        
-        static let baseURLString = "http://www.youbaku.com"
         
         case Places(String)
         
@@ -43,7 +42,8 @@ struct YouNetworking {
                     
                 case .Categories():
                     let params = [:]
-
+                    println(YouNetworking.TOKEN)
+                    println(YouNetworking.APIKEY)
                     return ("/api/category.php?token=" + YouNetworking.TOKEN + "&apikey=" + YouNetworking.APIKEY, params as! [String : AnyObject])
                     
                 case .Place(let place_id):
@@ -74,7 +74,7 @@ struct YouNetworking {
                 }
                 }()
             
-            let URL = NSURL(string: Router.baseURLString)
+            let URL = NSURL(string: YouNetworking.BASEURL)
             let URLRequest = NSURLRequest(URL: URL!.URLByAppendingPathComponent(path))
          
             let encoding = ParameterEncoding.URL
@@ -86,7 +86,6 @@ struct YouNetworking {
     }
     
     enum Router2: URLRequestConvertible {
-        static let baseURLString = "http://www.youbaku.com"
         
         case Places(String)
         
@@ -199,7 +198,7 @@ struct YouNetworking {
                 }
                 
                 }()
-            let URL = NSURL(string: Router2.baseURLString)
+            let URL = NSURL(string: YouNetworking.BASEURL)
             let URLRequest = NSMutableURLRequest(URL: URL!.URLByAppendingPathComponent(path))
             URLRequest.HTTPMethod = "POST"
             URLRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")

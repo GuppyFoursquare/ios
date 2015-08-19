@@ -260,6 +260,7 @@ class MenuViewController: UICollectionViewController, InformationDelegate2 {
                 (_, _, data, error) in
                 if error == nil {
                     // 4
+                    println(data)
                     self.cellCounts = []
                     self.cats = []
                     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
@@ -284,6 +285,7 @@ class MenuViewController: UICollectionViewController, InformationDelegate2 {
                             }
                             
                         }
+                        println(hoge)
                         if let appArray = hoge["content"].array {
                             for appDict in appArray {
                                 var cat:Category = Category()
@@ -441,39 +443,6 @@ extension MenuViewController : UICollectionViewDataSource {
         
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! MainMenuCell
-        //2
-        
-        //let flickrPhoto = photoForIndexPath(indexPath)
-
-        //3
-        /*
-        let url = NSURL(string: "http://www.youbaku.com/uploads/category_images/" + (cats[indexPath.row].cat_image as String))
-        
-        
-            var request = NSURLRequest(URL: url!)
-            SimpleCache.sharedInstance.getImage(url!, completion: { (im:UIImage?, err:NSError?) -> () in
-                if(err == nil){
-                    cell.imageView.image = im
-                }else{
-                    
-                }
-            })
-            /*
-        
-            let data = NSData(contentsOfURL: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check
-            if data != nil {
-
-                var image = UIImage(data: data!)
-                cell.imageView.image = image
-                self.imageCache.setObject(image!, forKey: url!.URLString)
-            }
-*/
-        
-//        cell.imageView.image = UIImage(named: "cinema.jpg")
-        cell.label.lineBreakMode = NSLineBreakMode.ByWordWrapping // or NSLineBreakMode.ByWordWrapping
-        cell.label.numberOfLines = 0
-        cell.label.text=cats[indexPath.row].cat_name as String
-        */
         
         if(selectedCats.find{$0 == self.cats[indexPath.section].sub_cats[indexPath.row].cat_id} != nil){
             cell.imageView.image = UIImage(named: "tick.png")
@@ -518,7 +487,7 @@ extension MenuViewController : UICollectionViewDataSource {
                     headerView.arrowImage.image = UIImage(named: "arrow_down.png")
                 }
 
-                let url = NSURL(string: "http://www.youbaku.com/uploads/category_images/" + (cats[indexPath.section].cat_image as String))
+                let url = NSURL(string: YouNetworking.BASEURL + "/uploads/category_images/" + (cats[indexPath.section].cat_image as String))
                 
                 
                 var request = NSURLRequest(URL: url!)

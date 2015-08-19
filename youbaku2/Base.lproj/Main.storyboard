@@ -525,7 +525,7 @@
                                                     <outlet property="delegate" destination="czo-gX-k7I" id="Iam-k7-neV"/>
                                                 </connections>
                                             </textField>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="NUMBER OF BEST PLACES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H8Z-lF-Yb6">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="NUMBER OF PLACES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H8Z-lF-Yb6">
                                                 <rect key="frame" x="8" y="221" width="304" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1718,7 +1718,7 @@
                                     <action selector="handleDismissedPressed:" destination="7dO-kJ-mrf" eventType="touchUpInside" id="z4i-Pe-xch"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="banner_home_2" translatesAutoresizingMaskIntoConstraints="NO" id="3k4-ff-Bxt">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="baku_logo_padded" translatesAutoresizingMaskIntoConstraints="NO" id="3k4-ff-Bxt">
                                 <rect key="frame" x="0.0" y="28" width="320" height="38"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -1932,7 +1932,7 @@
     <resources>
         <image name="18.jpg" width="1280" height="746"/>
         <image name="arrow_down" width="48" height="48"/>
-        <image name="banner_home_2" width="127" height="32"/>
+        <image name="baku_logo_padded" width="127" height="32"/>
         <image name="cat_sample" width="150" height="150"/>
         <image name="facebook" width="100" height="100"/>
         <image name="filter" width="22" height="22"/>
@@ -1956,7 +1956,7 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="0AJ-Mb-AIZ"/>
+        <segue reference="HNw-tq-GvC"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
 </document>

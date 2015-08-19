@@ -152,7 +152,6 @@
 		738A61FD1B4E577A00AA139E /* tick.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tick.png; sourceTree = "<group>"; };
 		738A61FF1B4EA13900AA139E /* menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu.png; sourceTree = "<group>"; };
 		738A62061B4EAA4700AA139E /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
-		7392659B1B4FA016002D6000 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Main.strings; sourceTree = "<group>"; };
 		7392659C1B4FA016002D6000 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		7392659D1B4FA06D002D6000 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7392659E1B4FA414002D6000 /* Info2.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info2.plist; sourceTree = "<group>"; };
@@ -160,13 +159,13 @@
 		739265A41B4FB3F6002D6000 /* PlayerDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerDetailsViewController.swift; sourceTree = "<group>"; };
 		739265A61B4FBF30002D6000 /* star_empty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star_empty.png; sourceTree = "<group>"; };
 		739265A71B4FBF30002D6000 /* star_filled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star_filled.png; sourceTree = "<group>"; };
-		739D87E31B38064A0097AED3 /* youbaku2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = youbaku2.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		739D87E31B38064A0097AED3 /* YouBaku.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YouBaku.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		739D87E71B38064A0097AED3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		739D87E81B38064A0097AED3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		739D87EA1B38064A0097AED3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		739D87ED1B38064A0097AED3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		739D87F21B38064A0097AED3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		739D87F81B38064A0097AED3 /* youbaku2Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = youbaku2Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		739D87F81B38064A0097AED3 /* YouBakuTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YouBakuTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		739D87FD1B38064A0097AED3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		739D87FE1B38064A0097AED3 /* youbaku2Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = youbaku2Tests.swift; sourceTree = "<group>"; };
 		739D88081B3807B70097AED3 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
@@ -210,6 +209,7 @@
 		73C7D03A1B3C0EED0028FC76 /* SimpleImageCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleImageCache.swift; sourceTree = "<group>"; };
 		73C95BDA1B6A275800B0FC32 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		73E83BED1B8319D5002C14E3 /* BookViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BookViewController.swift; path = ../BookViewController.swift; sourceTree = "<group>"; };
+		73E83BF01B846AA5002C14E3 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Main.strings; sourceTree = "<group>"; };
 		73EC75901B5E330A0048EB09 /* MainMenuCVHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuCVHeader.swift; sourceTree = "<group>"; };
 		73EC75921B5FAD0E0048EB09 /* MarkerInfoView2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MarkerInfoView2.xib; sourceTree = "<group>"; };
 		73EC75941B5FDF1D0048EB09 /* HalfSizePresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HalfSizePresentationController.swift; sourceTree = "<group>"; };
@@ -340,8 +340,8 @@
 		739D87E41B38064A0097AED3 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				739D87E31B38064A0097AED3 /* youbaku2.app */,
-				739D87F81B38064A0097AED3 /* youbaku2Tests.xctest */,
+				739D87E31B38064A0097AED3 /* YouBaku.app */,
+				739D87F81B38064A0097AED3 /* YouBakuTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -473,9 +473,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		739D87E21B38064A0097AED3 /* youbaku2 */ = {
+		739D87E21B38064A0097AED3 /* YouBaku */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 739D88021B38064A0097AED3 /* Build configuration list for PBXNativeTarget "youbaku2" */;
+			buildConfigurationList = 739D88021B38064A0097AED3 /* Build configuration list for PBXNativeTarget "YouBaku" */;
 			buildPhases = (
 				23217B127D43DEC994928804 /* Check Pods Manifest.lock */,
 				739D87DF1B38064A0097AED3 /* Sources */,
@@ -488,14 +488,14 @@
 			);
 			dependencies = (
 			);
-			name = youbaku2;
+			name = YouBaku;
 			productName = youbaku2;
-			productReference = 739D87E31B38064A0097AED3 /* youbaku2.app */;
+			productReference = 739D87E31B38064A0097AED3 /* YouBaku.app */;
 			productType = "com.apple.product-type.application";
 		};
-		739D87F71B38064A0097AED3 /* youbaku2Tests */ = {
+		739D87F71B38064A0097AED3 /* YouBakuTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 739D88051B38064A0097AED3 /* Build configuration list for PBXNativeTarget "youbaku2Tests" */;
+			buildConfigurationList = 739D88051B38064A0097AED3 /* Build configuration list for PBXNativeTarget "YouBakuTests" */;
 			buildPhases = (
 				739D87F41B38064A0097AED3 /* Sources */,
 				739D87F51B38064A0097AED3 /* Frameworks */,
@@ -506,9 +506,9 @@
 			dependencies = (
 				739D87FA1B38064A0097AED3 /* PBXTargetDependency */,
 			);
-			name = youbaku2Tests;
+			name = YouBakuTests;
 			productName = youbaku2Tests;
-			productReference = 739D87F81B38064A0097AED3 /* youbaku2Tests.xctest */;
+			productReference = 739D87F81B38064A0097AED3 /* YouBakuTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -530,7 +530,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 739D87DE1B38064A0097AED3 /* Build configuration list for PBXProject "youbaku2" */;
+			buildConfigurationList = 739D87DE1B38064A0097AED3 /* Build configuration list for PBXProject "YouBaku" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -543,8 +543,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				739D87E21B38064A0097AED3 /* youbaku2 */,
-				739D87F71B38064A0097AED3 /* youbaku2Tests */,
+				739D87E21B38064A0097AED3 /* YouBaku */,
+				739D87F71B38064A0097AED3 /* YouBakuTests */,
 			);
 		};
 /* End PBXProject section */
@@ -692,7 +692,7 @@
 /* Begin PBXTargetDependency section */
 		739D87FA1B38064A0097AED3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 739D87E21B38064A0097AED3 /* youbaku2 */;
+			target = 739D87E21B38064A0097AED3 /* YouBaku */;
 			targetProxy = 739D87F91B38064A0097AED3 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -711,7 +711,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				739D87ED1B38064A0097AED3 /* Base */,
-				7392659B1B4FA016002D6000 /* tr */,
+				73E83BF01B846AA5002C14E3 /* tr */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -827,7 +827,7 @@
 				INFOPLIST_FILE = youbaku2/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = YouBaku;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "youbaku2/youbaku2-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -850,7 +850,7 @@
 				INFOPLIST_FILE = youbaku2/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = YouBaku;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "youbaku2/youbaku2-Bridging-Header.h";
 			};
@@ -870,7 +870,7 @@
 				);
 				INFOPLIST_FILE = youbaku2Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = YouBakuTests;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/youbaku2.app/youbaku2";
 			};
 			name = Debug;
@@ -885,7 +885,7 @@
 				);
 				INFOPLIST_FILE = youbaku2Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = YouBakuTests;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/youbaku2.app/youbaku2";
 			};
 			name = Release;
@@ -893,7 +893,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		739D87DE1B38064A0097AED3 /* Build configuration list for PBXProject "youbaku2" */ = {
+		739D87DE1B38064A0097AED3 /* Build configuration list for PBXProject "YouBaku" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				739D88001B38064A0097AED3 /* Debug */,
@@ -902,7 +902,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		739D88021B38064A0097AED3 /* Build configuration list for PBXNativeTarget "youbaku2" */ = {
+		739D88021B38064A0097AED3 /* Build configuration list for PBXNativeTarget "YouBaku" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				739D88031B38064A0097AED3 /* Debug */,
@@ -911,7 +911,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		739D88051B38064A0097AED3 /* Build configuration list for PBXNativeTarget "youbaku2Tests" */ = {
+		739D88051B38064A0097AED3 /* Build configuration list for PBXNativeTarget "YouBakuTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				739D88061B38064A0097AED3 /* Debug */,

@@ -23,7 +23,7 @@ class Gallery:MWPhoto {
         self.plc_gallery_seq = seq.toInt()!
         self.plc_is_cover_image = isCover.toInt()!
         self.plc_gallery_is_active = isActive.toInt()!
-        let urlString = "http://www.youbaku.com/uploads/places_images/large/" + self.plc_gallery_media
+        let urlString = YouNetworking.BASEURL + "/uploads/places_images/large/" + self.plc_gallery_media
         let url = NSURL(string: urlString)
         var request = NSURLRequest(URL: url!)
         super.init(URL: url)
